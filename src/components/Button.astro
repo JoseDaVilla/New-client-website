@@ -1,0 +1,10 @@
+---
+import Icon from './Icon.astro';
+interface Props { href?: string; variant?: 'primary' | 'dark' | 'ghost' | 'ghost-light'; class?: string; type?: 'button' | 'submit'; arrow?: boolean; [key: string]: any }
+const { href, variant = 'primary', class: cls = '', type = 'button', arrow = true, ...rest } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+<Tag href={href} type={href ? undefined : type} class:list={['btn', `btn-${variant}`, cls]} {...rest}>
+  <span><slot /></span>
+  {arrow && <span class="btn-arrow"><Icon name="arrow" class="size-3.5" /></span>}
+</Tag>

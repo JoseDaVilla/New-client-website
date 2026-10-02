@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import PageHero from '@/components/PageHero.astro';
+import Media from '@/components/Media.astro';
+import VideoFacade from '@/components/VideoFacade.astro';
+import Lightbox from '@/components/Lightbox.astro';
+import Icon from '@/components/Icon.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import SplitText from '@/components/SplitText.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+// Galería global: se arma a partir de las galerías de los proyectos.
+const photos = projects.flatMap((p) =>
+  p.data.gallery.slice(0, 3).map((g, i) => ({ ...g, seed: `${p.id}-${i}`, project: p.data.title, sector: p.data.sector, href: `/projects/${p.id}` })),
+);
+
+// TODO: reemplazar VIDEO_ID por los vídeos reales del cliente (YouTube / Vimeo embed URLs)
+const videos = [
+  { title: 'Company film — Building with purpose', duration: '02:14', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'tower' as const },
+  { title: 'Fraser River Crossing — Time-lapse', duration: '01:32', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'bridge' as const },
+  { title: 'Safety week 2026', duration: '03:05', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'midrise' as const },
+];
+const sectorsUsed = [...new Set(photos.map((p) => p.sector))];
+---
+
+<Base title="Photos & Videos" description="Photography and video from our projects, people and communities.">
+  <PageHero index="06" eyebrow="Media" title="Seen from|the site." lead="Photography, time-lapses and films from our projects. For press kits and high-resolution assets, contact our communications team." />
+
+  <!-- Vídeos -->
+  <section class="py-20 md:py-28">
+    <div class="container-x">
+      <Eyebrow index="01" class="mb-8 text-mute">Videos</Eyebrow>
+      <SplitText text="In motion." class="font-wide text-title font-extrabold uppercase" />
+      <div class="mt-14 grid gap-6 lg:grid-cols-2">
+        <div class="lg:row-span-2" data-reveal="mask"><VideoFacade {...videos[0]} seed="v0" class="h-full lg:aspect-auto lg:min-h-full" /></div>
+        {videos.slice(1).map((v, i) => <div data-reveal="mask" style={`--d:${i + 1}`}><VideoFacade {...v} seed={`v${i + 1}`} /></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Fotos -->
+  <section class="bg-ink py-20 text-bone md:py-28">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <Eyebrow index="02" class="mb-8 text-bone/50">Photography</Eyebrow>
+          <SplitText text="Project gallery." class="font-wide text-title font-extrabold uppercase" />
+        </div>
+        <div class="flex flex-wrap gap-2" data-filter-group="photo-grid" role="toolbar" aria-label="Filter photos">
+          <button type="button" class="chip border-white/20 aria-pressed:!bg-bone aria-pressed:!text-ink" data-filter="all" aria-pressed="true">All</button>
+          {sectorsUsed.map((s) => <button type="button" class="chip border-white/20 aria-pressed:!bg-bone aria-pressed:!text-ink" data-filter={s} aria-pressed="false">{s}</button>)}
+        </div>
+      </div>
+
+      <div id="photo-grid" class="mt-14 columns-1 gap-4 sm:columns-2 lg:columns-3">
+        {
+          photos.map((ph, i) => (
+            <div class="mb-4 break-inside-avoid" data-tags={ph.sector}>
+              <button type="button" class="group relative block w-full overflow-hidden rounded-sm text-left" data-lightbox="photos" data-caption={`${ph.project} — ${ph.caption}`} data-reveal style={`--d:${i % 3}`}>
+                <Media src={ph.src} alt={`${ph.project} — ${ph.caption}`} seed={ph.seed} variant={ph.variant} label={false} class:list={[['aspect-[4/5]', 'aspect-[4/3]', 'aspect-square'][i % 3]]} imgClass="transition-transform duration-[1.2s] ease-(--ease-expo) group-hover:scale-105" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
+                <span class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-ink/85 via-transparent p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <span class="eyebrow text-signal">{ph.sector}</span>
+                  <span class="mt-1 font-semibold">{ph.project}</span>
+                  <span class="text-sm text-bone/70">{ph.caption}</span>
+                </span>
+                <span class="absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-bone text-ink opacity-0 transition-all duration-500 group-hover:opacity-100"><Icon name="plus" class="size-4" /></span>
+              </button>
+            </div>
+          ))
+        }
+      </div>
+      <p class="py-20 text-center text-bone/50" data-filter-empty hidden>No photos in this category yet.</p>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28">
+    <div class="container-x flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+      <div>
+        <Eyebrow class="mb-6 text-mute">Press & media kit</Eyebrow>
+        <h2 class="max-w-2xl font-wide text-title font-extrabold uppercase" data-reveal>Need logos or high-res images?</h2>
+      </div>
+      <a href="/contact" class="btn btn-dark" data-reveal style="--d:2">
+        <span>Contact communications</span><span class="btn-arrow"><Icon name="download" class="size-3.5" /></span>
+      </a>
+    </div>
+  </section>
+
+  <Lightbox />
+</Base>

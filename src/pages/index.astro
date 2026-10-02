@@ -1,0 +1,183 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import SplitText from '@/components/SplitText.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Button from '@/components/Button.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import NewsCard from '@/components/NewsCard.astro';
+import ServiceIcon from '@/components/ServiceIcon.astro';
+import Marquee from '@/components/Marquee.astro';
+import EstimatingCTA from '@/components/EstimatingCTA.astro';
+import LocationsMap from '@/components/LocationsMap.astro';
+import VideoFacade from '@/components/VideoFacade.astro';
+import Icon from '@/components/Icon.astro';
+import { stats, offices, sectors } from '@/site.config';
+import { services } from '@/data/services';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.filter((p) => p.data.featured).slice(0, 4);
+const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const statement =
+  'For nearly four decades we have delivered hospitals, bridges, towers and plants that communities depend on — safely, on schedule and built to outlast us.';
+const lead = featured[0];
+---
+
+<Base intro>
+  <Hero featured={lead && { title: lead.data.title, href: `/projects/${lead.id}`, meta: `${lead.data.location} · ${lead.data.year}` }} />
+
+  <!-- Statement + cifras -->
+  <section id="discover" class="relative py-24 md:py-40">
+    <div class="container-x">
+      <Eyebrow index="01" class="mb-10 text-mute">Who we are</Eyebrow>
+      <p class="max-w-6xl font-semiwide text-[clamp(1.75rem,3.6vw,3.6rem)] font-semibold leading-[1.08] tracking-[-0.02em]">
+        {statement.split(' ').map((w) => <span class="scrub-word">{w} </span>)}
+      </p>
+      <div class="mt-12 flex flex-wrap items-center gap-6" data-reveal>
+        <Button href="/about" variant="dark">About the company</Button>
+        <a href="/services" class="link-u font-semibold">What we do</a>
+      </div>
+
+      <dl class="mt-24 grid grid-cols-2 border-t border-ink/12 lg:grid-cols-4">
+        {
+          stats.map((s, i) => (
+            <div class="relative border-b border-ink/12 py-8 pr-6 lg:border-b-0 [&:not(:last-child)]:lg:border-r lg:px-8 lg:first:pl-0" data-reveal style={`--d:${i}`}>
+              <dt class="eyebrow text-mute">{s.label}</dt>
+              <dd class="mt-4 font-wide text-[clamp(2.6rem,5vw,4.6rem)] font-extrabold leading-none tracking-tight">
+                {'prefix' in s && s.prefix}
+                <span data-count={s.value} data-decimals={'decimals' in s ? s.decimals : 0} data-delay={i * 120}>0</span>
+                <span class="text-signal">{s.suffix}</span>
+              </dd>
+              <dd class="mt-3 text-sm text-mute">{s.note}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section class="relative bg-ink py-24 text-bone md:py-36">
+    <div class="bg-grid pointer-events-none absolute inset-0 text-bone/40"></div>
+    <div class="container-x relative">
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-7">
+          <Eyebrow index="02" class="mb-8 text-bone/50">Services</Eyebrow>
+          <SplitText text="Every phase.|One team." class="font-wide text-display font-extrabold uppercase" />
+        </div>
+        <p class="text-lead text-bone/65 lg:col-span-5" data-reveal>From the first conceptual estimate to the day we hand over the keys, we bring the expertise to plan, build and deliver with certainty.</p>
+      </div>
+
+      <ul class="mt-20 border-t border-white/12">
+        {
+          services.map((s, i) => (
+            <li data-reveal style={`--d:${i % 3}`}>
+              <a href={`/services#${s.slug}`} class="service-row group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-white/12 py-7 md:grid-cols-[5rem_auto_1fr_auto] md:gap-10 md:py-9">
+                <span class="eyebrow text-bone/40 max-md:hidden">0{i + 1}</span>
+                <ServiceIcon name={s.icon} class="size-11 text-signal md:size-14" />
+                <span>
+                  <span class="block font-semiwide text-[clamp(1.5rem,3.2vw,3rem)] font-bold leading-none tracking-tight transition-transform duration-700 ease-(--ease-expo) group-hover:translate-x-3">{s.title}</span>
+                  <span class="mt-3 block max-w-xl text-bone/55 md:hidden">{s.short}</span>
+                </span>
+                <span class="flex items-center gap-8">
+                  <span class="hidden max-w-xs text-right text-bone/55 transition-colors group-hover:text-bone xl:block">{s.short}</span>
+                  <span class="grid size-12 shrink-0 place-items-center rounded-full border border-white/20 transition-all duration-500 ease-(--ease-expo) group-hover:rotate-[-45deg] group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
+                    <Icon name="arrow" class="size-5" />
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Proyectos destacados -->
+  <section class="py-24 md:py-36">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <Eyebrow index="03" class="mb-8 text-mute">Featured projects</Eyebrow>
+          <SplitText text="Built to|be landmarks." class="font-wide text-display font-extrabold uppercase" />
+        </div>
+        <div data-reveal><Button href="/projects" variant="dark">All projects</Button></div>
+      </div>
+
+      <div class="mt-16 grid gap-x-8 gap-y-16 md:mt-24 md:grid-cols-12">
+        {featured[0] && <div class="md:col-span-7"><ProjectCard project={featured[0]} size="lg" /></div>}
+        {featured[1] && <div class="md:col-span-5 md:mt-40"><ProjectCard project={featured[1]} index={1} /></div>}
+        {featured[2] && <div class="md:col-span-5"><ProjectCard project={featured[2]} /></div>}
+        {featured[3] && <div class="md:col-span-7 md:mt-24"><ProjectCard project={featured[3]} size="lg" index={1} /></div>}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sectores en marquee -->
+  <section class="overflow-hidden border-y border-ink/10 py-10 md:py-14" aria-label="Sectors">
+    <Marquee items={sectors} class="font-wide text-[clamp(2.5rem,7vw,6.5rem)] font-extrabold uppercase leading-none tracking-tight" speed="45s" />
+  </section>
+
+  <!-- Seguridad / enfoque con vídeo -->
+  <section class="py-24 md:py-36">
+    <div class="container-x grid gap-14 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-5">
+        <Eyebrow index="04" class="mb-8 text-mute">Safety & culture</Eyebrow>
+        <SplitText text="Everyone|home safe.|Every day." accent={['safe.']} class="font-wide text-title font-extrabold uppercase" />
+        <p class="mt-8 max-w-md text-lg text-ink/70" data-reveal>Safety isn't a program — it's how we work. Our people are empowered to stop any task, at any time, if something isn't right.</p>
+        <ul class="mt-10 grid grid-cols-2 gap-6" data-reveal style="--d:2">
+          <li class="border-l-2 border-signal pl-4"><p class="font-wide text-3xl font-extrabold">COR™</p><p class="text-sm text-mute">Certified in every province</p></li>
+          <li class="border-l-2 border-signal pl-4"><p class="font-wide text-3xl font-extrabold">1M+</p><p class="text-sm text-mute">Hours without lost time</p></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-7" data-reveal="mask">
+        <VideoFacade title="Building with purpose — Company film" seed="company-film" variant="tower" duration="02:14" />
+      </div>
+    </div>
+  </section>
+
+  <EstimatingCTA />
+
+  <!-- Noticias -->
+  <section class="py-24 md:py-36">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <Eyebrow index="05" class="mb-8 text-mute">News & updates</Eyebrow>
+          <SplitText text="From the field." class="font-wide text-display font-extrabold uppercase" />
+        </div>
+        <div data-reveal><Button href="/news" variant="dark">All news</Button></div>
+      </div>
+      <div class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
+        {news.map((post, i) => <NewsCard post={post} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Ubicaciones -->
+  <section class="relative overflow-hidden bg-concrete py-24 md:py-36">
+    <div class="container-x grid gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <Eyebrow index="06" class="mb-8 text-mute">Locations</Eyebrow>
+        <SplitText text="Local teams.|National reach." class="font-wide text-title font-extrabold uppercase" />
+        <div class="mt-10" data-reveal><Button href="/contact" variant="dark">Contact an office</Button></div>
+      </div>
+      <div class="lg:col-span-8">
+        <div data-reveal="fade" class="text-ink"><LocationsMap /></div>
+        <ul class="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/10 sm:grid-cols-2">
+          {
+            offices.map((o, i) => (
+              <li class="bg-concrete p-6" data-reveal style={`--d:${i}`}>
+                <p class="eyebrow text-signal">{o.label}</p>
+                <p class="mt-2 font-semiwide text-2xl font-bold">{o.city}</p>
+                <p class="mt-3 text-sm text-ink/60">{o.address.join(', ')}</p>
+                <a class="link-u mt-3 inline-block text-sm font-semibold" href={`tel:${o.phone.replace(/[^+\d]/g, '')}`}>{o.phone}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

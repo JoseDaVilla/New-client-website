@@ -1,0 +1,77 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Media from '@/components/Media.astro';
+import SplitText from '@/components/SplitText.astro';
+import NewsCard from '@/components/NewsCard.astro';
+import Icon from '@/components/Icon.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import { site } from '@/site.config';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, others: posts.filter((p) => p.id !== post.id).slice(0, 3) } }));
+}
+
+interface Props { post: CollectionEntry<'news'>; others: CollectionEntry<'news'>[] }
+const { post, others } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const date = d.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const share = [
+  { label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+  { label: 'Email', href: `mailto:?subject=${encodeURIComponent(d.title)}&body=${encodeURIComponent(url)}` },
+];
+---
+
+<Base title={d.title} description={d.excerpt}>
+  <article>
+    <header class="relative bg-ink pt-[calc(var(--header-h)+4rem)] pb-14 text-bone md:pb-20">
+      <div class="bg-grid pointer-events-none absolute inset-0 text-bone/50 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+      <div class="container-x relative max-w-5xl">
+        <a href="/news" class="eyebrow mb-10 inline-flex items-center gap-3 text-bone/60 hover:text-bone"><Icon name="arrow-left" class="size-4" /> All news</a>
+        <p class="eyebrow flex items-center gap-3 text-bone/60" data-reveal>
+          <span class="text-signal">{d.category}</span><span class="h-px w-6 bg-current"></span><time datetime={d.date.toISOString()}>{date}</time>
+        </p>
+        <SplitText as="h1" text={d.title} class="mt-6 font-wide text-[clamp(2.2rem,5vw,4.75rem)] font-extrabold uppercase leading-[0.95] tracking-tight" />
+        <p class="mt-8 max-w-3xl text-lead text-bone/70" data-reveal style="--d:3">{d.excerpt}</p>
+      </div>
+    </header>
+
+    <div class="container-x -mt-px max-w-6xl" data-reveal="mask">
+      <Media src={d.cover} alt={d.title} seed={post.id} variant={d.variant} eager class="aspect-[16/9] rounded-b-sm" sizes="(min-width: 1152px) 1152px, 100vw" />
+    </div>
+
+    <div class="container-x grid max-w-6xl gap-12 py-16 md:py-24 lg:grid-cols-12">
+      <aside class="lg:col-span-3">
+        <div class="space-y-6 lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
+          <div>
+            <p class="eyebrow text-mute">Written by</p>
+            <p class="mt-2 font-semibold">{d.author}</p>
+          </div>
+          <div>
+            <p class="eyebrow text-mute">Share</p>
+            <ul class="mt-2 space-y-1">
+              {share.map((s) => <li><a class="link-u font-semibold" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
+            </ul>
+          </div>
+        </div>
+      </aside>
+      <div class="prose lg:col-span-8 lg:col-start-5" data-reveal="fade">
+        <Content />
+        <hr class="my-12 border-ink/10" />
+        <p class="text-base text-mute">Media inquiries: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+    </div>
+  </article>
+
+  <section class="bg-concrete py-20 md:py-28">
+    <div class="container-x">
+      <Eyebrow class="mb-10 text-mute">Keep reading</Eyebrow>
+      <div class="grid gap-x-8 gap-y-14 md:grid-cols-3">
+        {others.map((p, i) => <NewsCard post={p} index={i} />)}
+      </div>
+    </div>
+  </section>
+</Base>

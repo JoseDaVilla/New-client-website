@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import PageHero from '@/components/PageHero.astro';
+import NewsCard from '@/components/NewsCard.astro';
+
+const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const [feature, ...rest] = posts;
+const categories = [...new Set(posts.map((p) => p.data.category))];
+---
+
+<Base title="News & Updates" description="Company news, project milestones, safety achievements and community updates.">
+  <PageHero index="05" eyebrow="News & updates" title="From the|field." lead="Project milestones, company announcements, safety achievements and stories from our people and communities." />
+
+  {
+    feature && (
+      <section class="pt-16 md:pt-24">
+        <div class="container-x">
+          <NewsCard post={feature} feature />
+        </div>
+      </section>
+    )
+  }
+
+  <section class="py-16 md:py-24">
+    <div class="container-x">
+      <div class="mb-12 flex flex-wrap gap-2 border-t border-ink/10 pt-10" data-filter-group="news-grid" role="toolbar" aria-label="Filter by category">
+        <button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>
+        {categories.map((c) => <button type="button" class="chip" data-filter={c} aria-pressed="false">{c}</button>)}
+      </div>
+      <div id="news-grid" class="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        {rest.map((post, i) => <div data-tags={post.data.category}><NewsCard post={post} index={i} /></div>)}
+      </div>
+      <p class="py-20 text-center text-mute" data-filter-empty hidden>No posts in this category yet.</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import PageHero from '@/components/PageHero.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import EstimatingCTA from '@/components/EstimatingCTA.astro';
+import { sectors } from '@/site.config';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const used = sectors.filter((s) => projects.some((p) => p.data.sector === s));
+const count = (s: string) => projects.filter((p) => p.data.sector === s).length;
+---
+
+<Base title="Projects" description="Explore our portfolio of commercial, institutional, healthcare, industrial, infrastructure and residential projects.">
+  <PageHero
+    index="03"
+    eyebrow="Projects"
+    title="Work that|shapes skylines."
+    lead="A selection of projects delivered by our teams across Canada — from hospitals and bridges to towers, plants and public spaces."
+  />
+
+  <section class="py-16 md:py-24">
+    <div class="container-x">
+      <div class="sticky top-[calc(var(--header-h)+0.5rem)] z-20 -mx-2 mb-14 flex flex-wrap items-center gap-2 rounded-full p-2 backdrop-blur-md" data-filter-group="project-grid" role="toolbar" aria-label="Filter by sector">
+        <button type="button" class="chip bg-bone" data-filter="all" aria-pressed="true">All <sup class="text-[0.65em] opacity-60">{projects.length}</sup></button>
+        {used.map((s) => <button type="button" class="chip bg-bone" data-filter={s} aria-pressed="false">{s} <sup class="text-[0.65em] opacity-60">{count(s)}</sup></button>)}
+      </div>
+
+      <div id="project-grid" class="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        {
+          projects.map((p, i) => (
+            <div class:list={[i % 7 === 0 && 'md:col-span-2']} data-tags={`${p.data.sector}`} style={`view-transition-name: p-${p.id}`}>
+              <ProjectCard project={p} index={i} size={i % 7 === 0 ? 'lg' : 'md'} eager={i < 2} />
+            </div>
+          ))
+        }
+      </div>
+      <p class="py-20 text-center text-mute" data-filter-empty hidden>No projects in this sector yet.</p>
+    </div>
+  </section>
+
+  <EstimatingCTA />
+</Base>

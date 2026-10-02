@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+---
+<dialog id="lightbox" class="lightbox m-0 h-dvh max-h-none w-screen max-w-none bg-ink/95 p-0 text-bone backdrop:bg-ink/80">
+  <div class="flex h-full flex-col">
+    <div class="container-x flex items-center justify-between py-5">
+      <p class="eyebrow text-bone/60" data-lb-counter></p>
+      <button type="button" class="grid size-12 place-items-center rounded-full border border-white/20 hover:border-white" data-lb-close aria-label="Close"><Icon name="close" class="size-5" /></button>
+    </div>
+    <div class="relative flex flex-1 items-center justify-center px-4 md:px-24" data-lb-stage></div>
+    <div class="container-x flex items-center justify-between gap-6 py-6">
+      <p class="text-bone/80" data-lb-caption></p>
+      <div class="flex gap-3">
+        <button type="button" class="grid size-12 place-items-center rounded-full border border-white/20 hover:border-white" data-lb-prev aria-label="Previous"><Icon name="arrow-left" class="size-5" /></button>
+        <button type="button" class="grid size-12 place-items-center rounded-full bg-signal text-ink" data-lb-next aria-label="Next"><Icon name="arrow" class="size-5" /></button>
+      </div>
+    </div>
+  </div>
+</dialog>
+<style>
+  .lightbox[open] { animation: lb-in 400ms cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes lb-in { from { opacity: 0; transform: scale(.98); } }
+</style>

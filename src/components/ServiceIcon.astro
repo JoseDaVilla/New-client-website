@@ -1,0 +1,17 @@
+---
+/** Iconos técnicos de servicios: se dibujan al entrar en pantalla y al hover. */
+import type { ServiceIcon } from '@/data/services';
+interface Props { name: ServiceIcon; class?: string }
+const { name, class: cls = 'size-14' } = Astro.props;
+const icons: Record<ServiceIcon, string[]> = {
+  cm: ['M8 40V18l16-10 16 10v22', 'M8 40h32', 'M18 40V28h12v12', 'M24 8v-4', 'M4 20l20-14 20 14'],
+  gc: ['M6 42h36', 'M10 42V14h12v28', 'M22 42V22h16v20', 'M14 20h4M14 26h4M14 32h4M26 28h8M26 34h8'],
+  db: ['M6 6h20v20H6z', 'M22 22h20v20H22z', 'M6 6l20 20', 'M30 30l8 8M38 30l-8 8'],
+  pre: ['M6 42L42 6', 'M6 30h12v12', 'M30 6h12v12', 'M6 6h8M6 6v8', 'M20 28l8-8'],
+  civil: ['M2 34h44', 'M2 38h44', 'M10 34V22M38 34V22', 'M2 22q22-22 44 0', 'M18 34v-9M24 34v-11M30 34v-9'],
+  industrial: ['M4 42V24l10 6v-6l10 6v-6l10 6V8h8v34z', 'M4 42h40', 'M36 8V4h4v4'],
+};
+---
+<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" class:list={['service-icon draw', cls]} aria-hidden="true">
+  {icons[name].map((d, i) => <path d={d} pathLength="1" class="ln" style={`--i:${i * 3}`} />)}
+</svg>

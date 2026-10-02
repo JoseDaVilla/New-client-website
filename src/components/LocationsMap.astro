@@ -1,0 +1,38 @@
+---
+/** Mapa SVG estilizado (sin peticiones externas) con oficinas pulsantes. */
+import { offices } from '@/site.config';
+// Retícula de puntos que sugiere el continente
+const dots: [number, number][] = [];
+for (let y = 0; y < 22; y++) {
+  for (let x = 0; x < 60; x++) {
+    const nx = x / 60, ny = y / 22;
+    const inside = ny > 0.18 + Math.sin(nx * 7) * 0.06 + (nx < 0.1 ? 0.3 : 0) && ny < 0.86 - Math.cos(nx * 5) * 0.06 && !(nx > 0.55 && nx < 0.66 && ny < 0.5) && !(nx > 0.9 && ny > 0.6);
+    if (inside) dots.push([x, y]);
+  }
+}
+---
+<div class="relative">
+  <svg viewBox="0 0 600 220" class="w-full" aria-label="Office locations map">
+    <g fill="currentColor" opacity=".22">
+      {dots.map(([x, y]) => <circle cx={x * 10 + 5} cy={y * 10 + 5} r="1.6" />)}
+    </g>
+    {offices.map((o, i) => (
+      <g transform={`translate(${o.map.x * 6} ${o.map.y * 2.2})`}>
+        <circle r="18" fill="var(--color-signal)" opacity=".18" class="pulse" style={`animation-delay:${i * 0.6}s`} />
+        <circle r="4.5" fill="var(--color-signal)" />
+        <text y="-14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1" fill="currentColor">{o.city.toUpperCase()}</text>
+      </g>
+    ))}
+  </svg>
+</div>
+<style>
+  .pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    from { transform: scale(0.3); opacity: 0.6; }
+    to { transform: scale(1.6); opacity: 0; }
+  }
+</style>

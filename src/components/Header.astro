@@ -1,0 +1,115 @@
+---
+import { nav, site, offices } from '@/site.config';
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+---
+
+<header id="site-header" class="group/header fixed inset-x-0 top-0 z-50 text-bone transition-[transform,background-color] duration-500 ease-(--ease-expo)">
+  <div class="progress-bar absolute inset-x-0 top-0 h-0.5 origin-left bg-signal"></div>
+  <div class="header-bg absolute inset-0 -z-10 border-b border-white/0 transition-all duration-500"></div>
+  <div class="container-x flex h-(--header-h) items-center justify-between gap-6">
+    <a href="/" class="relative z-10" aria-label={`${site.name} — Home`}>
+      <Logo />
+    </a>
+
+    <nav aria-label="Main" class="hidden lg:block">
+      <ul class="flex items-center gap-7 text-[0.95rem] font-medium">
+        {
+          nav.filter((n) => n.href !== '/contact').map((item) => (
+            <li>
+              <a href={item.href} class="link-u py-1" aria-current={isActive(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <Button href="/contact" variant="ghost-light" class="hidden !py-3 sm:inline-flex">Contact us</Button>
+      <button
+        id="menu-toggle"
+        type="button"
+        class="relative z-10 grid size-12 place-items-center rounded-full border border-white/25 transition-colors hover:border-white lg:hidden"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span class="menu-lines relative block h-3 w-5">
+          <span class="absolute left-0 top-0 h-0.5 w-full bg-current transition-transform duration-500 ease-(--ease-expo)"></span>
+          <span class="absolute bottom-0 left-0 h-0.5 w-full bg-current transition-transform duration-500 ease-(--ease-expo)"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil a pantalla completa -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 -z-20 flex flex-col bg-ink lg:hidden" hidden>
+    <div class="bg-grid pointer-events-none absolute inset-0 text-bone/60"></div>
+    <nav aria-label="Mobile" class="container-x relative flex flex-1 flex-col justify-center pt-(--header-h)">
+      <ul class="space-y-1">
+        {
+          nav.map((item, i) => (
+            <li class="overflow-hidden">
+              <a href={item.href} class="mm-item flex items-baseline gap-4 py-1.5 font-wide text-[clamp(2.2rem,9vw,3.5rem)] font-bold uppercase leading-none tracking-tight" style={`--i:${i}`} aria-current={isActive(item.href) ? 'page' : undefined}>
+                <span class="eyebrow text-signal">0{i + 1}</span>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="container-x relative grid grid-cols-2 gap-6 border-t border-white/10 py-8 text-sm text-bone/70">
+      <div>
+        <p class="eyebrow mb-2 text-bone/40">Head office</p>
+        <p>{offices[0].address[0]}<br />{offices[0].address[1]}</p>
+      </div>
+      <div>
+        <p class="eyebrow mb-2 text-bone/40">Talk to us</p>
+        <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="block">{site.phone}</a>
+        <a href={`mailto:${site.email}`} class="block">{site.email}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  #site-header.is-scrolled .header-bg {
+    background: rgb(11 13 16 / 0.82);
+    backdrop-filter: blur(14px) saturate(1.4);
+    border-color: rgb(255 255 255 / 0.08);
+  }
+  #site-header.is-hidden {
+    transform: translateY(-100%);
+  }
+  .mobile-menu {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 700ms cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  .menu-open .mobile-menu {
+    clip-path: inset(0 0 0 0);
+  }
+  .mm-item {
+    transform: translateY(110%);
+    transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .menu-open .mm-item {
+    transform: none;
+    transition-delay: calc(250ms + var(--i) * 50ms);
+  }
+  .menu-open .menu-lines span:first-child {
+    transform: translateY(5px) rotate(45deg);
+  }
+  .menu-open .menu-lines span:last-child {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+  .menu-open .header-bg {
+    background: transparent !important;
+    border-color: transparent !important;
+    backdrop-filter: none !important;
+  }
+</style>

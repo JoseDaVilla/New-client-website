@@ -1,0 +1,21 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageHero from '@/components/PageHero.astro';
+import { site } from '@/site.config';
+---
+<Base title="Privacy Policy">
+  <PageHero eyebrow="Legal" title="Privacy policy." />
+  <section class="py-20 md:py-28">
+    <div class="container-x">
+      <div class="prose max-w-3xl">
+        <p><strong>Placeholder.</strong> Replace with the client's privacy policy reviewed by legal counsel.</p>
+        <h2>Information we collect</h2>
+        <p>Information you submit through our contact and supplier registration forms, such as your name, company, email address, phone number and any documents you upload.</p>
+        <h2>How we use it</h2>
+        <ul><li>To respond to your inquiry</li><li>To evaluate trade partners and suppliers for bid opportunities</li><li>To improve our website</li></ul>
+        <h2>Contact</h2>
+        <p>Questions about this policy can be sent to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      </div>
+    </div>
+  </section>
+</Base>

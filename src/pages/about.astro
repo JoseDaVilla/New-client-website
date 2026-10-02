@@ -1,0 +1,168 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageHero from '@/components/PageHero.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import SplitText from '@/components/SplitText.astro';
+import Media from '@/components/Media.astro';
+import Button from '@/components/Button.astro';
+import Marquee from '@/components/Marquee.astro';
+import EstimatingCTA from '@/components/EstimatingCTA.astro';
+import { site, stats } from '@/site.config';
+import { values, timeline, leadership } from '@/data/services';
+
+const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Accredited', 'CCA Gold Seal', 'Envision® SP', 'Canada Green Building Council'];
+---
+
+<Base title="About" description={`Learn about ${site.legalName}: our story, values, leadership and commitment to safety.`}>
+  <PageHero
+    index="01"
+    eyebrow="About us"
+    title={`Builders since|${site.founded}.`}
+    accent={[`${site.founded}.`]}
+    lead="We are a privately owned general contractor and construction manager. Our people plan, build and deliver complex projects for public and private owners across Canada."
+  />
+
+  <!-- Historia -->
+  <section class="py-24 md:py-36">
+    <div class="container-x grid gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <Eyebrow index="01" class="mb-8 text-mute">Our story</Eyebrow>
+        <SplitText text="From a four-person|crew to a national|builder." class="font-wide text-title font-extrabold uppercase" />
+      </div>
+      <div class="space-y-6 text-lg leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal>
+        <p>Placeholder — the company story goes here. Explain how the business started, the values of its founders, and the milestones that shaped it into the organization it is today.</p>
+        <p>Talk about the people: the number of employees, the trades the company self-performs, and the long-standing relationships with clients and trade partners that bring repeat work year after year.</p>
+        <p>Close with the vision: where the company is going, the markets it serves and the kind of projects it wants to build next.</p>
+      </div>
+    </div>
+
+    <div class="container-x mt-20 grid gap-4 md:grid-cols-12">
+      <div class="md:col-span-8" data-reveal="mask"><Media seed="about-hero" variant="midrise" class="aspect-[16/10] rounded-sm" /></div>
+      <div class="grid gap-4 md:col-span-4" data-reveal="mask" style="--d:2">
+        <Media seed="about-team" variant="campus" class="aspect-[4/3] rounded-sm md:aspect-auto" />
+        <div class="flex flex-col justify-between rounded-sm bg-signal p-8">
+          <p class="eyebrow">Our mission</p>
+          <p class="mt-6 font-semiwide text-2xl font-bold leading-tight">To build with integrity, so the communities we serve can grow with confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cifras -->
+  <section class="border-y border-ink/10">
+    <dl class="container-x grid grid-cols-2 lg:grid-cols-4">
+      {
+        stats.map((s, i) => (
+          <div class="border-ink/10 py-10 max-lg:even:border-l lg:border-l lg:px-8 lg:first:border-l-0 lg:first:pl-0 max-lg:[&:nth-child(n+3)]:border-t max-lg:even:pl-6" data-reveal style={`--d:${i}`}>
+            <dt class="eyebrow text-mute">{s.label}</dt>
+            <dd class="mt-3 font-wide text-5xl font-extrabold tracking-tight">
+              {'prefix' in s && s.prefix}<span data-count={s.value} data-decimals={'decimals' in s ? s.decimals : 0}>0</span><span class="text-signal">{s.suffix}</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- Valores -->
+  <section class="bg-ink py-24 text-bone md:py-36">
+    <div class="container-x">
+      <Eyebrow index="02" class="mb-8 text-bone/50">Values</Eyebrow>
+      <SplitText text="What we stand on." class="font-wide text-display font-extrabold uppercase" />
+      <div class="mt-16 grid gap-px overflow-hidden rounded-sm bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+        {
+          values.map((v, i) => (
+            <article class="group relative bg-ink p-8 transition-colors duration-500 hover:bg-steel md:p-10" data-reveal style={`--d:${i}`}>
+              <p class="font-wide text-6xl font-extrabold text-signal/90">0{i + 1}</p>
+              <h3 class="mt-16 font-semiwide text-2xl font-bold">{v.title}</h3>
+              <p class="mt-4 text-bone/60">{v.text}</p>
+              <span class="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-signal transition-transform duration-700 ease-(--ease-expo) group-hover:scale-x-100" />
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-24 md:py-36">
+    <div class="container-x">
+      <Eyebrow index="03" class="mb-8 text-mute">Milestones</Eyebrow>
+      <SplitText text="Four decades|of building." class="font-wide text-display font-extrabold uppercase" />
+      <ol class="timeline relative mt-20 grid gap-12 md:grid-cols-3 lg:grid-cols-6 lg:gap-6" data-reveal="fade">
+        <span class="timeline-line absolute left-0 right-0 top-[0.55rem] hidden h-px origin-left bg-ink/20 lg:block"></span>
+        {
+          timeline.map((t, i) => (
+            <li class="relative" data-reveal style={`--d:${i}`}>
+              <span class="relative z-10 block size-3 rounded-full border-2 border-signal bg-bone" />
+              <p class="mt-6 font-wide text-4xl font-extrabold tracking-tight">{t.year}</p>
+              <p class="mt-3 font-semibold">{t.title}</p>
+              <p class="mt-2 text-sm text-ink/60">{t.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Liderazgo -->
+  <section class="bg-concrete py-24 md:py-36">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <Eyebrow index="04" class="mb-8 text-mute">Leadership</Eyebrow>
+          <SplitText text="The people|behind the work." class="font-wide text-title font-extrabold uppercase" />
+        </div>
+        <div data-reveal><Button href="/contact#careers" variant="dark">Join our team</Button></div>
+      </div>
+      <ul class="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          leadership.map((p, i) => (
+            <li class="group" data-reveal style={`--d:${i % 3}`}>
+              <div class="relative aspect-[4/5] overflow-hidden rounded-sm bg-ink-2">
+                <div class="bg-grid absolute inset-0 text-bone/40" />
+                <svg viewBox="0 0 200 250" class="absolute inset-x-0 bottom-0 w-full text-bone/15 transition-transform duration-1000 ease-(--ease-expo) group-hover:scale-105" aria-hidden="true">
+                  <circle cx="100" cy="95" r="42" fill="currentColor" />
+                  <path d="M20 250c0-55 36-90 80-90s80 35 80 90z" fill="currentColor" />
+                </svg>
+                <span class="eyebrow absolute bottom-4 left-4 text-bone/40">Portrait placeholder</span>
+              </div>
+              <p class="mt-5 font-semiwide text-xl font-bold">{p.name}</p>
+              <p class="text-mute">{p.role}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Seguridad y sostenibilidad -->
+  <section class="py-24 md:py-36">
+    <div class="container-x grid gap-6 lg:grid-cols-2">
+      <article id="safety" class="relative overflow-hidden rounded-sm bg-ink p-10 text-bone md:p-14" data-reveal>
+        <p class="eyebrow text-signal">Health & safety</p>
+        <h3 class="mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">Zero harm is the only target.</h3>
+        <p class="mt-6 max-w-md text-bone/65">Placeholder — describe the safety management system, training programs, certifications and leading indicators the company tracks.</p>
+        <svg viewBox="0 0 200 200" class="draw absolute -bottom-16 -right-16 w-72 text-signal/60" fill="none" aria-hidden="true">
+          <path d="M100 20l70 30v50c0 45-30 75-70 90-40-15-70-45-70-90V50z" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" />
+          <path d="M70 105l20 20 40-45" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:10" />
+        </svg>
+      </article>
+      <article id="sustainability" class="relative overflow-hidden rounded-sm bg-concrete p-10 md:p-14" data-reveal style="--d:1">
+        <p class="eyebrow text-signal">Sustainability</p>
+        <h3 class="mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">Building for the next century.</h3>
+        <p class="mt-6 max-w-md text-ink/65">Placeholder — describe the environmental commitments: net-zero targets, waste diversion, low-carbon materials and certified green buildings delivered.</p>
+        <svg viewBox="0 0 200 200" class="draw absolute -bottom-16 -right-16 w-72 text-ink/30" fill="none" aria-hidden="true">
+          <path d="M100 180V80" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" />
+          <path d="M100 120c-40 0-60-30-60-70 40 0 60 30 60 70zM100 100c35 0 55-25 55-60-35 0-55 25-55 60z" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:6" />
+        </svg>
+      </article>
+    </div>
+  </section>
+
+  <section class="overflow-hidden border-y border-ink/10 py-8" aria-label="Certifications">
+    <Marquee items={certifications} class="eyebrow text-base text-ink/60" speed="35s" />
+  </section>
+
+  <EstimatingCTA />
+</Base>

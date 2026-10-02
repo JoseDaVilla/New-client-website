@@ -1,0 +1,118 @@
+---
+/**
+ * Imagen optimizada (astro:assets) o, si aún no hay foto, una ilustración
+ * tipo plano generada en build a partir de `seed`. Cuando el cliente entregue
+ * fotografías basta con pasar `src` y el placeholder desaparece.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { blueprint, type BlueprintVariant } from '@/lib/blueprint';
+
+interface Props {
+  src?: ImageMetadata | string;
+  alt?: string;
+  seed?: string;
+  variant?: BlueprintVariant;
+  tone?: 'dark' | 'light';
+  class?: string;
+  imgClass?: string;
+  sizes?: string;
+  widths?: number[];
+  eager?: boolean;
+  label?: boolean;
+}
+
+const {
+  src,
+  alt = '',
+  seed = 'halden',
+  variant,
+  tone = 'dark',
+  class: cls = '',
+  imgClass = '',
+  sizes = '(min-width: 1024px) 50vw, 100vw',
+  widths = [480, 800, 1200, 1600, 2000],
+  eager = false,
+  label = true,
+} = Astro.props;
+
+const bp = !src ? blueprint(seed, variant) : null;
+const dark = tone === 'dark';
+const c = {
+  bg: dark ? 'var(--color-ink-2)' : 'var(--color-concrete)',
+  main: dark ? 'rgb(246 245 241 / .82)' : 'rgb(11 13 16 / .78)',
+  thin: dark ? 'rgb(246 245 241 / .28)' : 'rgb(11 13 16 / .28)',
+  text: dark ? 'rgb(246 245 241 / .55)' : 'rgb(11 13 16 / .55)',
+};
+const stroke = (k: string) =>
+  k === 'main' ? c.main : k === 'thin' || k === 'dash' ? c.thin : k === 'accent' ? 'var(--color-signal)' : 'none';
+const width = (k: string) => (k === 'main' ? 1.6 : k === 'accent' ? 1.8 : 1);
+const pos = /\b(absolute|fixed)\b/.test(cls) ? '' : 'relative';
+const fig = String((seed.length * 7) % 97).padStart(2, '0');
+---
+
+<div class:list={[pos, 'overflow-hidden', cls]} style={bp ? `background:${c.bg};color:${dark ? 'var(--color-bone)' : 'var(--color-ink)'}` : undefined}>
+  {
+    src ? (
+      typeof src === 'string' ? (
+        <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" class:list={['h-full w-full object-cover', imgClass]} />
+      ) : (
+        <Image
+          src={src}
+          alt={alt}
+          widths={widths}
+          sizes={sizes}
+          loading={eager ? 'eager' : 'lazy'}
+          fetchpriority={eager ? 'high' : 'auto'}
+          class:list={['h-full w-full object-cover', imgClass]}
+        />
+      )
+    ) : (
+      bp && (
+        <>
+          <div class="bg-grid absolute inset-0 opacity-70" aria-hidden="true" />
+          <svg
+            viewBox={`0 0 ${bp.w} ${bp.h}`}
+            preserveAspectRatio="xMidYMid slice"
+            class:list={['draw absolute inset-0 h-full w-full', imgClass]}
+            role="img"
+            aria-label={alt || `Placeholder illustration: ${bp.label}`}
+          >
+            <g fill="none" stroke-linecap="square">
+              {bp.strokes.map((st, i) =>
+                st.kind === 'fill' || st.kind === 'accent-fill' ? (
+                  <path d={st.d} class="draw-fill" fill={st.kind === 'accent-fill' ? 'rgb(255 79 23 / .22)' : c.thin} stroke="var(--color-signal)" stroke-width="1" vector-effect="non-scaling-stroke" style={`--i:${Math.min(i, 40)}`} />
+                ) : (
+                  <path
+                    d={st.d}
+                    pathLength={st.kind === 'dash' ? undefined : '1'}
+                    class={st.kind === 'dash' ? undefined : 'ln'}
+                    stroke={stroke(st.kind)}
+                    stroke-width={width(st.kind)}
+                    stroke-dasharray={st.kind === 'dash' ? '4 4' : undefined}
+                    style={`--i:${Math.min(i, 40)}`}
+                  />
+                ),
+              )}
+              {bp.dims.map((d) => (
+                <g stroke={c.thin}>
+                  <path d={`M${d.x1} ${d.y}H${d.x2}M${d.x1} ${d.y - 6}v12M${d.x2} ${d.y - 6}v12`} vector-effect="non-scaling-stroke" />
+                  <text x={(d.x1 + d.x2) / 2} y={d.y - 8} fill={c.text} stroke="none" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">{d.text}</text>
+                </g>
+              ))}
+            </g>
+            {label && (
+              <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.2" fill={c.text}>
+                <text x="24" y="556">FIG. {fig}</text>
+                <text x="24" y="574" fill="var(--color-signal)">{bp.label.toUpperCase()}</text>
+                <text x="776" y="34" text-anchor="end">SCALE 1:{200 + (seed.length % 5) * 50}</text>
+                <text x="776" y="574" text-anchor="end">PHOTO PLACEHOLDER</text>
+              </g>
+            )}
+          </svg>
+        </>
+      )
+    )
+  }
+  <slot />
+</div>

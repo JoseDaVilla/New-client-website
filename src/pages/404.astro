@@ -1,0 +1,22 @@
+---
+import Base from '@/layouts/Base.astro';
+import Button from '@/components/Button.astro';
+---
+<Base title="Page not found" noindex>
+  <section class="relative flex min-h-[100svh] items-center overflow-hidden bg-ink text-bone">
+    <div class="bg-grid pointer-events-none absolute inset-0 text-bone/50"></div>
+    <svg viewBox="0 0 600 300" class="draw pointer-events-none absolute bottom-0 right-0 w-[70vw] max-w-4xl text-bone/20" fill="none" aria-hidden="true">
+      <path d="M0 290H600" stroke="currentColor" pathLength="1" class="ln" />
+      <path d="M380 290V40M396 290V40M300 40H560M388 10V40" stroke="var(--color-signal)" stroke-width="2" pathLength="1" class="ln" style="--i:3" />
+      <path d="M470 40V170" stroke="currentColor" stroke-dasharray="3 5" />
+      <path d="M440 170h60v30h-60z" stroke="var(--color-signal)" pathLength="1" class="ln" style="--i:8" />
+      <path d="M60 290V180h120v110M200 290V220h80v70" stroke="currentColor" stroke-dasharray="4 6" />
+    </svg>
+    <div class="container-x relative">
+      <p class="eyebrow text-signal">Error 404 · Under construction</p>
+      <h1 class="mt-6 font-wide text-[clamp(6rem,22vw,20rem)] font-black leading-[0.8] tracking-[-0.05em]">404</h1>
+      <p class="mt-8 max-w-md text-lead text-bone/70">This page hasn't been built yet — or it was moved. Let's get you back on site.</p>
+      <div class="mt-10 flex flex-wrap gap-3"><Button href="/">Back to home</Button><Button href="/contact" variant="ghost-light">Contact us</Button></div>
+    </div>
+  </section>
+</Base>

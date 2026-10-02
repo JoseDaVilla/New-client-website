@@ -1,0 +1,22 @@
+---
+/** Cabecera de páginas interiores: fondo oscuro con retícula y título partido. */
+import SplitText from './SplitText.astro';
+import Eyebrow from './Eyebrow.astro';
+interface Props { eyebrow: string; title: string; lead?: string; index?: string; accent?: string[] }
+const { eyebrow, title, lead, index, accent = [] } = Astro.props;
+---
+<section class="relative overflow-hidden bg-ink pt-[calc(var(--header-h)+5rem)] pb-16 text-bone md:pb-24">
+  <div class="bg-grid pointer-events-none absolute inset-0 text-bone/60 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+  <svg class="draw pointer-events-none absolute -right-20 top-10 h-[130%] w-auto text-bone/10 max-md:hidden" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+    <circle cx="200" cy="200" r="190" stroke="currentColor" pathLength="1" class="ln" style="--i:2" />
+    <circle cx="200" cy="200" r="120" stroke="currentColor" stroke-dasharray="2 6" />
+    <path d="M0 200h400M200 0v400" stroke="currentColor" pathLength="1" class="ln" style="--i:4" />
+    <path d="M200 200L334 66" stroke="var(--color-signal)" pathLength="1" class="ln" style="--i:8" />
+  </svg>
+  <div class="container-x relative">
+    <Eyebrow index={index} class="mb-8 text-bone/60" >{eyebrow}</Eyebrow>
+    <SplitText as="h1" text={title} accent={accent} class="max-w-6xl font-wide text-display font-extrabold uppercase" />
+    {lead && <p class="mt-10 max-w-2xl text-lead text-bone/70" data-reveal style="--d:4">{lead}</p>}
+    <slot />
+  </div>
+</section>
