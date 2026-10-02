@@ -169,7 +169,7 @@ const lead = featured[0];
           {
             offices.map((o, i) => (
               <li class="bg-concrete p-6" data-reveal style={`--d:${i}`}>
-                <p class="eyebrow text-signal">{o.label}</p>
+                <p class="eyebrow text-signal-ink">{o.label}</p>
                 <p class="mt-2 font-semiwide text-2xl font-bold">{o.city}</p>
                 <p class="mt-3 text-sm text-ink/60">{o.address.join(', ')}</p>
                 <a class="link-u mt-3 inline-block text-sm font-semibold" href={`tel:${o.phone.replace(/[^+\d]/g, '')}`}>{o.phone}</a>

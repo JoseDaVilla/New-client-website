@@ -35,7 +35,7 @@ const related = (title: string) => projects.filter((p) => p.data.services.some((
           <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
             <div class:list={['lg:col-span-6', flip && 'lg:order-2 lg:col-start-7']}>
               <div class="flex items-center gap-5" data-reveal>
-                <span class="eyebrow text-signal">0{i + 1} / 0{services.length}</span>
+                <span class="eyebrow text-signal-ink">0{i + 1} / 0{services.length}</span>
                 <ServiceIcon name={s.icon} class="size-12 text-signal" />
               </div>
               <h2 class="mt-8 font-wide text-title font-extrabold uppercase" data-reveal style="--d:1">{s.title}</h2>

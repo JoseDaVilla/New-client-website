@@ -29,7 +29,7 @@ const projects = defineCollection({
       order: z.number().default(99),
       cover: image().optional(),
       gallery: z.array(z.object({ src: image().optional(), caption: z.string(), variant: variant.optional() })).default([]),
-      video: z.string().url().optional(),
+      video: z.url().optional(),
       variant: variant.optional(),
       facts: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     }),

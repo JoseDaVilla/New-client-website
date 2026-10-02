@@ -160,7 +160,7 @@ if (lightbox) {
         clone.classList.remove('is-in');
         clone.removeAttribute('loading');
         clone.setAttribute('class', 'max-h-[80vh] w-auto max-w-full object-contain');
-        if (clone.tagName.toLowerCase() === 'svg') clone.setAttribute('class', 'aspect-[4/3] w-[min(100%,1100px)] h-auto bg-ink-2');
+        if (clone.tagName.toLowerCase() === 'svg') clone.setAttribute('class', 'aspect-[4/3] h-[min(70vh,75vw)] max-w-full bg-ink-2');
         stage.append(clone);
       }
     }

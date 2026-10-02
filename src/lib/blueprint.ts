@@ -86,7 +86,9 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
   const crane = (x: number, top: number, reach: number, dir: 1 | -1 = 1) => {
     vline(x, top, G - top, 'accent');
     vline(x + 10, top, G - top, 'accent');
-    for (let y = top + 18; y < G; y += 22) add(`M${x} ${y}l10 -18`, 'thin');
+    let lattice = '';
+    for (let y = top + 18; y < G; y += 22) lattice += `M${x} ${y}l10 -18`;
+    add(lattice, 'thin');
     add(`M${x - 50 * dir} ${top}h${(reach + 50) * dir}`, 'accent');
     add(`M${x + 5} ${top - 34}L${x - 50 * dir} ${top}M${x + 5} ${top - 34}L${x + reach * dir} ${top}`, 'thin');
     vline(x + 5, top - 34, 34, 'accent');
@@ -142,7 +144,9 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
         }
       }
       add(`M0 ${G}Q400 ${G - 40} ${W} ${G}`, 'thin');
-      for (let x = 20; x < W; x += 40) add(`M${x} ${G + 20}q10 -6 20 0t20 0`, 'thin');
+      let waves = '';
+      for (let x = 20; x < W; x += 40) waves += `M${x} ${G + 20}q10 -6 20 0t20 0`;
+      add(waves, 'thin');
       dims.push({ x1: p1, x2: p2, y: deck - 40, text: `${Math.round((p2 - p1) * 0.6)} m span` });
       label = 'Cable-stayed bridge · Profile';
       break;
@@ -231,7 +235,9 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
 
   // Suelo y cotas
   add(`M0 ${G}H${W}`, 'main');
-  for (let x = 0; x < W; x += 16) add(`M${x} ${G + 2}l-10 10`, 'thin');
+  let hatch = '';
+  for (let x = 0; x < W; x += 16) hatch += `M${x} ${G + 2}l-10 10`;
+  add(hatch, 'thin');
 
   return { w: W, h: H, ground: G, strokes: s, label, dims };
 }

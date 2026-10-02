@@ -3,7 +3,8 @@
  * Divide un texto en líneas (separadas por "|") y palabras en build time,
  * para animarlas con CSS sin layout shift ni JS pesado.
  */
-interface Props { text: string; as?: string; class?: string; delay?: number; accent?: string[]; afterIntro?: boolean }
+import type { HTMLTag } from 'astro/types';
+interface Props { text: string; as?: HTMLTag; class?: string; delay?: number; accent?: string[]; afterIntro?: boolean }
 const { text, as: Tag = 'h2', class: cls = '', delay = 0, accent = [], afterIntro = false } = Astro.props;
 const base = afterIntro ? `calc(var(--intro-delay, 0ms) + ${delay}ms)` : `${delay}ms`;
 const lines = text.split('|').map((l) => l.trim().split(/\s+/));

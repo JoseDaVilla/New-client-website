@@ -27,12 +27,13 @@
   --color-ink-2: #12161b;
   --color-steel: #1c2229;
   --color-graphite: #2b323b;
-  --color-mute: #868d97;
+  --color-mute: #656c76;
   --color-fog: #c9ccd0;
   --color-concrete: #e9e7e1;
   --color-bone: #f6f5f1;
   --color-signal: #ff4f17;
   --color-signal-soft: #ff8a5c;
+  --color-signal-ink: #c2410c; /* naranja para texto pequeño sobre fondos claros (AA) */
 
   --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -234,6 +235,7 @@
   }
 }
 
+@layer components {
 /* ------------------------------------------------------------------ */
 /*  Components                                                         */
 /* ------------------------------------------------------------------ */
@@ -370,7 +372,7 @@
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .scrub-word {
-      opacity: 0.16;
+      opacity: 0.2;
       animation: scrub linear both;
       animation-timeline: view();
       animation-range: entry 60% cover 45%;
@@ -536,6 +538,8 @@ textarea.input {
 .chip:has(input:focus-visible) {
   outline: 2px solid var(--color-signal);
   outline-offset: 2px;
+}
+
 }
 
 /* ------------------------------------------------------------------ */

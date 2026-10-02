@@ -25,7 +25,7 @@ const n = () => `--i:${i++}`;
   <!-- Suelo -->
   <path d={`M0 ${G}H1440`} stroke="rgb(246 245 241 / .5)" stroke-width="1.5" pathLength="1" class="ln" style="--i:0" />
   <g stroke="rgb(246 245 241 / .12)">
-    {Array.from({ length: 90 }, (_, k) => <path d={`M${k * 16} ${G + 2}l-10 10`} />)}
+    <path d={Array.from({ length: 90 }, (_, k) => `M${k * 16} ${G + 2}l-10 10`).join('')} />
   </g>
 
   <!-- Torre: plantas construyéndose de abajo hacia arriba -->
@@ -67,8 +67,8 @@ const n = () => `--i:${i++}`;
     <path d="M1251 70L900 128M1251 70L1420 128M1251 70V140" pathLength="1" class="ln" style="--i:12" />
   </g>
   <g stroke="rgb(255 79 23 / .5)" stroke-width="1">
-    {Array.from({ length: 30 }, (_, k) => <path d={`M1240 ${G - k * 23}l22 -23`} />)}
-    {Array.from({ length: 22 }, (_, k) => <path d={`M${910 + k * 23} 140l11 -12l12 12`} />)}
+    <path d={Array.from({ length: 30 }, (_, k) => `M1240 ${G - k * 23}l22 -23`).join('')} />
+    <path d={Array.from({ length: 22 }, (_, k) => `M${910 + k * 23} 140l11 -12l12 12`).join('')} />
   </g>
   <rect x="1380" y="142" width="40" height="26" fill="var(--color-signal)" class="draw-fill" style="--i:14" />
   <rect x="1226" y="140" width="22" height="20" fill="rgb(246 245 241 / .9)" class="draw-fill" style="--i:14" />

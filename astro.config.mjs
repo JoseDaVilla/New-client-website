@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   // TODO: reemplazar por el dominio final del cliente
   site: 'https://www.example.com',
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !/\/(thanks|privacy)\/$/.test(page) })],
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   build: { inlineStylesheets: 'always' },
   vite: { plugins: [tailwindcss()] },

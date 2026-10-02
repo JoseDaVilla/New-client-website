@@ -123,17 +123,17 @@ const facts = [
             </div>
             <p class="eyebrow text-bone/50">{p.gallery.length} images · click to enlarge</p>
           </div>
-          <div class="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+          <div class="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
             {p.gallery.map((g, i) => (
               <button
                 type="button"
-                class:list={['group relative block overflow-hidden rounded-sm text-left', i % 5 === 0 ? 'col-span-2 row-span-2' : '']}
+                class:list={['group relative block overflow-hidden rounded-sm text-left', i % 6 === 0 ? 'col-span-2 row-span-2' : '']}
                 data-lightbox="gallery"
                 data-caption={g.caption}
                 data-reveal="mask"
                 style={`--d:${i % 4}`}
               >
-                <Media src={g.src} alt={g.caption} seed={`${project.id}-${i}`} variant={g.variant} label={false} class:list={['h-full w-full', i % 5 === 0 ? 'aspect-square' : 'aspect-[4/3]']} imgClass="transition-transform duration-[1.2s] ease-(--ease-expo) group-hover:scale-105" sizes="(min-width: 768px) 50vw, 100vw" />
+                <Media src={g.src} alt={g.caption} seed={`${project.id}-${i}`} variant={g.variant} label={false} class:list={['h-full w-full', i % 6 === 0 ? 'aspect-[4/3] md:aspect-auto' : 'aspect-[4/3]']} imgClass="transition-transform duration-[1.2s] ease-(--ease-expo) group-hover:scale-105" sizes="(min-width: 768px) 50vw, 100vw" />
                 <span class="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-sm bg-ink/70 px-3 py-2 text-sm opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
                   {g.caption}
                   <Icon name="plus" class="size-4" />
