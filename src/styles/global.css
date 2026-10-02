@@ -9,14 +9,14 @@
   font-display: swap;
   font-weight: 100 900;
   font-stretch: 62% 125%;
-  src: url("/fonts/archivo.woff2") format("woff2-variations");
+  src: url("../assets/fonts/archivo.woff2") format("woff2-variations");
 }
 @font-face {
   font-family: "JetBrains Mono";
   font-style: normal;
   font-display: swap;
   font-weight: 500;
-  src: url("/fonts/jetbrains-mono-500.woff2") format("woff2");
+  src: url("../assets/fonts/jetbrains-mono-500.woff2") format("woff2");
 }
 
 /* ------------------------------------------------------------------ */
@@ -41,10 +41,10 @@
   --text-mega: clamp(3.4rem, 11.5vw, 12rem);
   --text-mega--line-height: 0.86;
   --text-mega--letter-spacing: -0.035em;
-  --text-display: clamp(2.6rem, 7vw, 7rem);
+  --text-display: clamp(2.25rem, 7vw, 7rem);
   --text-display--line-height: 0.9;
   --text-display--letter-spacing: -0.03em;
-  --text-title: clamp(2rem, 4.4vw, 4.25rem);
+  --text-title: clamp(1.75rem, 4.4vw, 4.25rem);
   --text-title--line-height: 0.95;
   --text-title--letter-spacing: -0.025em;
   --text-lead: clamp(1.15rem, 1.6vw, 1.5rem);
@@ -56,11 +56,21 @@
   --breakpoint-3xl: 112rem;
 }
 
+/* Sólo dispositivos con puntero fino: en táctil el contenido "hover" queda visible */
+@custom-variant can-hover (@media (hover: hover) and (pointer: fine));
+
+/* Mobile-first: en pantallas pequeñas el ancho es menor para que las palabras largas quepan */
 @utility font-wide {
-  font-stretch: 125%;
+  font-stretch: 108%;
+  @media (min-width: 48rem) {
+    font-stretch: 125%;
+  }
 }
 @utility font-semiwide {
-  font-stretch: 112%;
+  font-stretch: 100%;
+  @media (min-width: 48rem) {
+    font-stretch: 112%;
+  }
 }
 @utility font-narrow {
   font-stretch: 80%;
@@ -108,6 +118,11 @@
     font-feature-settings: "ss01", "ss02";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
   }
   ::selection {
     background: var(--color-signal);
@@ -266,9 +281,13 @@
   transform: translateY(101%);
   transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.btn:hover::before,
 .btn:focus-visible::before {
   transform: none;
+}
+@media (hover: hover) {
+  .btn:hover::before {
+    transform: none;
+  }
 }
 .btn .btn-arrow {
   display: grid;
@@ -283,8 +302,10 @@
 .btn .btn-arrow svg {
   color: var(--arrow, var(--color-bone));
 }
-.btn:hover .btn-arrow {
-  transform: rotate(-45deg);
+@media (hover: hover) {
+  .btn:hover .btn-arrow {
+    transform: rotate(-45deg);
+  }
 }
 .btn-primary {
   background: var(--color-signal);
@@ -292,11 +313,15 @@
   --fill: var(--color-ink);
   --arrow: var(--color-signal);
 }
-.btn-primary:hover {
-  color: var(--color-bone);
+@media (hover: hover) {
+  .btn-primary:hover {
+    color: var(--color-bone);
+  }
 }
-.btn-primary:hover .btn-arrow svg {
-  color: var(--color-ink);
+@media (hover: hover) {
+  .btn-primary:hover .btn-arrow svg {
+    color: var(--color-ink);
+  }
 }
 .btn-dark {
   background: var(--color-ink);
@@ -304,8 +329,10 @@
   --fill: var(--color-signal);
   --arrow: var(--color-ink);
 }
-.btn-dark:hover {
-  color: var(--color-ink);
+@media (hover: hover) {
+  .btn-dark:hover {
+    color: var(--color-ink);
+  }
 }
 .btn-ghost {
   border: 1px solid currentColor;
@@ -317,14 +344,20 @@
   --fill: var(--color-bone);
   --arrow: var(--color-ink);
 }
-.btn-ghost-light:hover {
-  color: var(--color-ink);
+@media (hover: hover) {
+  .btn-ghost-light:hover {
+    color: var(--color-ink);
+  }
 }
-.btn-ghost-light:hover .btn-arrow {
-  background: var(--color-ink);
+@media (hover: hover) {
+  .btn-ghost-light:hover .btn-arrow {
+    background: var(--color-ink);
+  }
 }
-.btn-ghost-light:hover .btn-arrow svg {
-  color: var(--color-bone);
+@media (hover: hover) {
+  .btn-ghost-light:hover .btn-arrow svg {
+    color: var(--color-bone);
+  }
 }
 
 .link-u {
@@ -334,10 +367,15 @@
   background-repeat: no-repeat;
   transition: background-size 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.link-u:hover,
 .link-u[aria-current="page"] {
   background-size: 100% 1px;
   background-position: 0 100%;
+}
+@media (hover: hover) {
+  .link-u:hover {
+    background-size: 100% 1px;
+    background-position: 0 100%;
+  }
 }
 
 /* Marquee */
@@ -359,8 +397,10 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
 }
 @keyframes marquee {
   to {
@@ -516,6 +556,7 @@ textarea.input {
 }
 .chip {
   display: inline-flex;
+  min-height: 2.75rem; /* objetivo táctil ≥ 44px */
   cursor: pointer;
   align-items: center;
   gap: 0.5rem;
@@ -526,8 +567,10 @@ textarea.input {
   transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
-.chip:hover {
-  border-color: currentColor;
+@media (hover: hover) {
+  .chip:hover {
+    border-color: currentColor;
+  }
 }
 .chip:has(input:checked),
 .chip[aria-pressed="true"] {

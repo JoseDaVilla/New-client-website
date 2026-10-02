@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import Base from '@/layouts/Base.astro';
 import PageHero from '@/components/PageHero.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
@@ -53,7 +54,7 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
     <dl class="container-x grid grid-cols-2 lg:grid-cols-4">
       {
         stats.map((s, i) => (
-          <div class="border-ink/10 py-10 max-lg:even:border-l lg:border-l lg:px-8 lg:first:border-l-0 lg:first:pl-0 max-lg:[&:nth-child(n+3)]:border-t max-lg:even:pl-6" data-reveal style={`--d:${i}`}>
+          <div class="border-ink/10 py-10 even:border-l even:pl-6 [&:nth-child(n+3)]:border-t lg:border-l lg:px-8 lg:first:border-l-0 lg:first:pl-0 lg:[&:nth-child(n+3)]:border-t-0" data-reveal style={`--d:${i}`}>
             <dt class="eyebrow text-mute">{s.label}</dt>
             <dd class="mt-3 font-wide text-5xl font-extrabold tracking-tight">
               {'prefix' in s && s.prefix}<span data-count={s.value} data-decimals={'decimals' in s ? s.decimals : 0}>0</span><span class="text-signal">{s.suffix}</span>
@@ -113,7 +114,7 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
           <Eyebrow index="04" class="mb-8 text-mute">Leadership</Eyebrow>
           <SplitText text="The people|behind the work." class="font-wide text-title font-extrabold uppercase" />
         </div>
-        <div data-reveal><Button href="/contact#careers" variant="dark">Join our team</Button></div>
+        <div data-reveal><Button href={u('/contact#careers')} variant="dark">Join our team</Button></div>
       </div>
       <ul class="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {

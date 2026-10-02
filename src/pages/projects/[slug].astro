@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import Media from '@/components/Media.astro';
@@ -50,7 +51,7 @@ const facts = [
       <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/30"></div>
     </div>
     <div class="container-x relative flex min-h-[92svh] flex-col justify-end pb-14 pt-[calc(var(--header-h)+4rem)]">
-      <a href="/projects" class="eyebrow mb-10 inline-flex items-center gap-3 text-bone/60 hover:text-bone" data-reveal>
+      <a href={u('/projects')} class="eyebrow mb-10 inline-flex items-center gap-3 text-bone/60 hover:text-bone" data-reveal>
         <Icon name="arrow-left" class="size-4" /> All projects
       </a>
       <div class="mb-6 flex flex-wrap gap-2" data-reveal style="--d:1">
@@ -69,7 +70,7 @@ const facts = [
       <section class="border-b border-ink/10">
         <dl class="container-x grid grid-cols-2 md:grid-cols-4">
           {p.facts.map((f, i) => (
-            <div class="border-ink/10 py-10 max-md:[&:nth-child(n+3)]:border-t max-md:even:border-l max-md:even:pl-6 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0" data-reveal style={`--d:${i}`}>
+            <div class="border-ink/10 py-10 even:border-l even:pl-6 [&:nth-child(n+3)]:border-t md:border-l md:px-8 md:first:border-l-0 md:first:pl-0 md:[&:nth-child(n+3)]:border-t-0" data-reveal style={`--d:${i}`}>
               <dd class="font-wide text-4xl font-extrabold tracking-tight md:text-5xl">{f.value}</dd>
               <dt class="eyebrow mt-3 text-mute">{f.label}</dt>
             </div>
@@ -98,11 +99,11 @@ const facts = [
           {
             p.services.length > 0 && (
               <div class="mt-8 flex flex-wrap gap-2" data-reveal>
-                {p.services.map((s) => <a href="/services" class="chip text-sm">{s}</a>)}
+                {p.services.map((s) => <a href={u('/services')} class="chip text-sm">{s}</a>)}
               </div>
             )
           }
-          <div class="mt-10" data-reveal><Button href="/contact" variant="dark">Discuss a similar project</Button></div>
+          <div class="mt-10" data-reveal><Button href={u('/contact')} variant="dark">Discuss a similar project</Button></div>
         </div>
       </aside>
       <article class="prose max-w-none lg:col-span-7 lg:col-start-6" data-reveal="fade">
@@ -134,7 +135,7 @@ const facts = [
                 style={`--d:${i % 4}`}
               >
                 <Media src={g.src} alt={g.caption} seed={`${project.id}-${i}`} variant={g.variant} label={false} class:list={['h-full w-full', i % 6 === 0 ? 'aspect-[4/3] md:aspect-auto' : 'aspect-[4/3]']} imgClass="transition-transform duration-[1.2s] ease-(--ease-expo) group-hover:scale-105" sizes="(min-width: 768px) 50vw, 100vw" />
-                <span class="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-sm bg-ink/70 px-3 py-2 text-sm opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+                <span class="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-sm bg-ink/70 px-3 py-2 text-sm backdrop-blur transition-opacity can-hover:opacity-0 can-hover:group-hover:opacity-100">
                   {g.caption}
                   <Icon name="plus" class="size-4" />
                 </span>
@@ -148,7 +149,7 @@ const facts = [
   }
 
   <!-- Siguiente proyecto -->
-  <a href={`/projects/${next.id}`} class="group relative block overflow-hidden bg-signal text-ink">
+  <a href={u(`/projects/${next.id}`)} class="group relative block overflow-hidden bg-signal text-ink">
     <div class="container-x relative flex flex-col gap-6 py-20 md:flex-row md:items-end md:justify-between md:py-28">
       <div>
         <p class="eyebrow">Next project</p>

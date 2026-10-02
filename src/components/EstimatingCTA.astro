@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import Button from './Button.astro';
 import SplitText from './SplitText.astro';
 import { bids } from '@/data/services';
@@ -17,8 +18,8 @@ import { bids } from '@/data/services';
     <div class="lg:col-span-6 lg:col-start-7" data-reveal style="--d:3">
       <p class="text-lead">We're always looking for qualified subcontractors and suppliers. Register your company, view open tenders and get invited to bid on upcoming work.</p>
       <div class="mt-8 flex flex-wrap items-center gap-4">
-        <Button href="/estimating#register" variant="dark">Register as a supplier</Button>
-        <a href="/estimating#opportunities" class="link-u font-semibold">{bids.length} open opportunities</a>
+        <Button href={u('/estimating#register')} variant="dark">Register as a supplier</Button>
+        <a href={u('/estimating#opportunities')} class="link-u font-semibold">{bids.length} open opportunities</a>
       </div>
     </div>
   </div>

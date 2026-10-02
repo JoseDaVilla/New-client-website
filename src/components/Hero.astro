@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import { site, sectors } from '@/site.config';
 import HeroScene from './HeroScene.astro';
 import SplitText from './SplitText.astro';
@@ -22,7 +23,7 @@ const { video, featured } = Astro.props;
         <source src={video.src} type="video/mp4" />
       </video>
     ) : (
-      <div class="absolute inset-0 max-lg:opacity-45">
+      <div class="absolute inset-0 opacity-45 lg:opacity-100">
         <HeroScene />
       </div>
     )
@@ -48,15 +49,15 @@ const { video, featured } = Astro.props;
       <div class="hero-fade lg:col-span-5" style="--k:1">
         <p class="max-w-md text-lead text-bone/75">{site.description}</p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <Button href="/projects">Explore our work</Button>
-          <Button href="/estimating" variant="ghost-light">Bid opportunities</Button>
+          <Button href={u('/projects')}>Explore our work</Button>
+          <Button href={u('/estimating')} variant="ghost-light">Bid opportunities</Button>
         </div>
       </div>
 
       <div class="hero-fade flex flex-col gap-6 lg:col-span-7 lg:items-end" style="--k:2">
         {
           featured && (
-            <a href={featured.href} class="group flex w-full max-w-sm items-center gap-5 rounded-sm border border-white/12 bg-ink/50 p-4 backdrop-blur-md transition-colors hover:border-signal">
+            <a href={u(featured.href)} class="group flex w-full max-w-sm items-center gap-5 rounded-sm border border-white/12 bg-ink/50 p-4 backdrop-blur-md transition-colors hover:border-signal">
               <span class="grid size-14 shrink-0 place-items-center bg-signal text-ink">
                 <Icon name="arrow" class="size-5 -rotate-45 transition-transform duration-500 ease-(--ease-expo) group-hover:rotate-0" />
               </span>

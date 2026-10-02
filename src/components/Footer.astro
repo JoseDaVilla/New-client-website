@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import { nav, site, offices } from '@/site.config';
 import { services } from '@/data/services';
 import Icon from './Icon.astro';
@@ -25,13 +26,13 @@ const year = new Date().getFullYear();
         <div>
           <p class="eyebrow mb-5 text-bone/40">Company</p>
           <ul class="space-y-2.5 text-bone/80">
-            {nav.map((n) => <li><a class="link-u" href={n.href}>{n.label}</a></li>)}
+            {nav.map((n) => <li><a class="link-u" href={u(n.href)}>{n.label}</a></li>)}
           </ul>
         </div>
         <div>
           <p class="eyebrow mb-5 text-bone/40">Services</p>
           <ul class="space-y-2.5 text-bone/80">
-            {services.map((s) => <li><a class="link-u" href={`/services#${s.slug}`}>{s.title}</a></li>)}
+            {services.map((s) => <li><a class="link-u" href={u(`/services#${s.slug}`)}>{s.title}</a></li>)}
           </ul>
         </div>
         <div class="col-span-2 sm:col-span-1">
@@ -64,8 +65,8 @@ const year = new Date().getFullYear();
         {site.social.map((s) => <li><a class="link-u" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
       </ul>
       <ul class="flex gap-6">
-        <li><a class="link-u" href="/privacy">Privacy</a></li>
-        <li><a class="link-u" href="/estimating">Suppliers</a></li>
+        <li><a class="link-u" href={u('/privacy')}>Privacy</a></li>
+        <li><a class="link-u" href={u('/estimating')}>Suppliers</a></li>
         <li><a class="link-u" href="#top">Back to top ↑</a></li>
       </ul>
     </div>

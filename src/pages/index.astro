@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import Hero from '@/components/Hero.astro';
@@ -35,8 +36,8 @@ const lead = featured[0];
         {statement.split(' ').map((w) => <span class="scrub-word">{w} </span>)}
       </p>
       <div class="mt-12 flex flex-wrap items-center gap-6" data-reveal>
-        <Button href="/about" variant="dark">About the company</Button>
-        <a href="/services" class="link-u font-semibold">What we do</a>
+        <Button href={u('/about')} variant="dark">About the company</Button>
+        <a href={u('/services')} class="link-u font-semibold">What we do</a>
       </div>
 
       <dl class="mt-24 grid grid-cols-2 border-t border-ink/12 lg:grid-cols-4">
@@ -73,8 +74,8 @@ const lead = featured[0];
         {
           services.map((s, i) => (
             <li data-reveal style={`--d:${i % 3}`}>
-              <a href={`/services#${s.slug}`} class="service-row group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-white/12 py-7 md:grid-cols-[5rem_auto_1fr_auto] md:gap-10 md:py-9">
-                <span class="eyebrow text-bone/40 max-md:hidden">0{i + 1}</span>
+              <a href={u(`/services#${s.slug}`)} class="service-row group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-white/12 py-7 md:grid-cols-[5rem_auto_1fr_auto] md:gap-10 md:py-9">
+                <span class="eyebrow hidden text-bone/40 md:inline">0{i + 1}</span>
                 <ServiceIcon name={s.icon} class="size-11 text-signal md:size-14" />
                 <span>
                   <span class="block font-semiwide text-[clamp(1.5rem,3.2vw,3rem)] font-bold leading-none tracking-tight transition-transform duration-700 ease-(--ease-expo) group-hover:translate-x-3">{s.title}</span>
@@ -102,7 +103,7 @@ const lead = featured[0];
           <Eyebrow index="03" class="mb-8 text-mute">Featured projects</Eyebrow>
           <SplitText text="Built to|be landmarks." class="font-wide text-display font-extrabold uppercase" />
         </div>
-        <div data-reveal><Button href="/projects" variant="dark">All projects</Button></div>
+        <div data-reveal><Button href={u('/projects')} variant="dark">All projects</Button></div>
       </div>
 
       <div class="mt-16 grid gap-x-8 gap-y-16 md:mt-24 md:grid-cols-12">
@@ -147,7 +148,7 @@ const lead = featured[0];
           <Eyebrow index="05" class="mb-8 text-mute">News & updates</Eyebrow>
           <SplitText text="From the field." class="font-wide text-display font-extrabold uppercase" />
         </div>
-        <div data-reveal><Button href="/news" variant="dark">All news</Button></div>
+        <div data-reveal><Button href={u('/news')} variant="dark">All news</Button></div>
       </div>
       <div class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
         {news.map((post, i) => <NewsCard post={post} index={i} />)}
@@ -161,7 +162,7 @@ const lead = featured[0];
       <div class="lg:col-span-4">
         <Eyebrow index="06" class="mb-8 text-mute">Locations</Eyebrow>
         <SplitText text="Local teams.|National reach." class="font-wide text-title font-extrabold uppercase" />
-        <div class="mt-10" data-reveal><Button href="/contact" variant="dark">Contact an office</Button></div>
+        <div class="mt-10" data-reveal><Button href={u('/contact')} variant="dark">Contact an office</Button></div>
       </div>
       <div class="lg:col-span-8">
         <div data-reveal="fade" class="text-ink"><LocationsMap /></div>

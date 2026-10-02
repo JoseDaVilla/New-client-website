@@ -1,16 +1,20 @@
 ---
+import { u } from '@/lib/url';
 import { nav, site, offices } from '@/site.config';
 import Logo from './Logo.astro';
 import Button from './Button.astro';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isActive = (href: string) => path === href || path.startsWith(href + '/');
+const isActive = (href: string) => {
+  const target = u(href).replace(/\/$/, '');
+  return path === target || path.startsWith(target + '/');
+};
 ---
 
 <header id="site-header" class="group/header fixed inset-x-0 top-0 z-50 text-bone transition-[transform,background-color] duration-500 ease-(--ease-expo)">
   <div class="progress-bar absolute inset-x-0 top-0 h-0.5 origin-left bg-signal"></div>
   <div class="header-bg absolute inset-0 -z-10 border-b border-white/0 transition-all duration-500"></div>
   <div class="container-x flex h-(--header-h) items-center justify-between gap-6">
-    <a href="/" class="relative z-10" aria-label={`${site.name} — Home`}>
+    <a href={u('/')} class="relative z-10" aria-label={`${site.name} — Home`}>
       <Logo />
     </a>
 
@@ -19,7 +23,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
         {
           nav.filter((n) => n.href !== '/contact').map((item) => (
             <li>
-              <a href={item.href} class="link-u py-1" aria-current={isActive(item.href) ? 'page' : undefined}>
+              <a href={u(item.href)} class="link-u py-1" aria-current={isActive(item.href) ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>
@@ -29,7 +33,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
     </nav>
 
     <div class="flex items-center gap-3">
-      <Button href="/contact" variant="ghost-light" class="hidden !py-3 sm:inline-flex">Contact us</Button>
+      <Button href={u('/contact')} variant="ghost-light" class="hidden !py-3 sm:inline-flex">Contact us</Button>
       <button
         id="menu-toggle"
         type="button"
@@ -54,7 +58,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
         {
           nav.map((item, i) => (
             <li class="overflow-hidden">
-              <a href={item.href} class="mm-item flex items-baseline gap-4 py-1.5 font-wide text-[clamp(2.2rem,9vw,3.5rem)] font-bold uppercase leading-none tracking-tight" style={`--i:${i}`} aria-current={isActive(item.href) ? 'page' : undefined}>
+              <a href={u(item.href)} class="mm-item flex items-baseline gap-4 py-1.5 font-wide text-[clamp(2.2rem,9vw,3.5rem)] font-bold uppercase leading-none tracking-tight" style={`--i:${i}`} aria-current={isActive(item.href) ? 'page' : undefined}>
                 <span class="eyebrow text-signal">0{i + 1}</span>
                 {item.label}
               </a>

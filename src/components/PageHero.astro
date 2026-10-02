@@ -8,7 +8,7 @@ const { eyebrow, title, lead, index, accent = [] } = Astro.props;
 <section class="relative overflow-hidden bg-ink pt-[calc(var(--header-h)+5rem)] pb-16 text-bone md:pb-24">
   <div class="bg-grid pointer-events-none absolute inset-0 text-bone/60 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
   <!-- Retícula de replanteo decorativa -->
-  <div class="pointer-events-none absolute right-[-16rem] top-[calc(50%+2.5rem)] aspect-square h-[100%] -translate-y-1/2 opacity-70 max-md:hidden xl:right-[-10rem]" aria-hidden="true">
+  <div class="pointer-events-none absolute right-[-16rem] top-[calc(50%+2.5rem)] aspect-square h-[100%] -translate-y-1/2 hidden opacity-70 md:block xl:right-[-10rem]" aria-hidden="true">
     <svg viewBox="0 0 400 400" class="draw h-full w-full text-bone/15" fill="none">
       <circle cx="200" cy="200" r="196" stroke="currentColor" pathLength="1" class="ln" style="--i:0" />
       <circle cx="200" cy="200" r="140" stroke="currentColor" pathLength="1" class="ln" style="--i:3" />

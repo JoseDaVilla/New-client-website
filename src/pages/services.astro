@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import PageHero from '@/components/PageHero.astro';
@@ -51,7 +52,7 @@ const related = (title: string) => projects.filter((p) => p.data.services.some((
               {rel.length > 0 && (
                 <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3" data-reveal style="--d:4">
                   <span class="eyebrow text-mute">Related work</span>
-                  {rel.map((p) => <a href={`/projects/${p.id}`} class="link-u font-semibold">{p.data.title}</a>)}
+                  {rel.map((p) => <a href={u(`/projects/${p.id}`)} class="link-u font-semibold">{p.data.title}</a>)}
                 </div>
               )}
             </div>
@@ -67,7 +68,7 @@ const related = (title: string) => projects.filter((p) => p.data.services.some((
   <section class="bg-ink py-24 text-bone md:py-32">
     <div class="container-x flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
       <h2 class="max-w-3xl font-wide text-title font-extrabold uppercase" data-reveal>Not sure which delivery model fits?</h2>
-      <div data-reveal style="--d:2"><Button href="/contact">Talk to our team</Button></div>
+      <div data-reveal style="--d:2"><Button href={u('/contact')}>Talk to our team</Button></div>
     </div>
   </section>
 

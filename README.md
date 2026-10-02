@@ -10,7 +10,7 @@ Construido con **Astro 7 + Tailwind CSS 4**, sin frameworks de UI en el cliente:
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
+npm run dev       # http://localhost:4321/New-client-website/
 npm run build     # genera /dist (estático)
 npm run preview   # sirve /dist
 ```
@@ -75,6 +75,8 @@ Si se despliega en otro hosting, poner la URL de Formspree / Basin / API propia 
 
 ## Rendimiento y técnica
 
+- **Mobile first**: estilos base pensados para móvil y ampliados con `sm/md/lg/xl`; el contenido que en escritorio aparece al pasar el cursor está siempre visible en táctil; titulares con menor anchura tipográfica en móvil; licitaciones en tarjetas en móvil y tabla en escritorio; objetivos táctiles ≥ 44 px.
+
 - Lighthouse (móvil, home): **Performance 99 · Best Practices 100 · SEO 100 · Accesibilidad 96**, CLS 0.
 - Fuentes self-hosted (Archivo variable con eje de anchura + JetBrains Mono), precargadas.
 - CSS inlined por página, un único bundle JS (`src/scripts/main.ts`), prefetch de enlaces al pasar el cursor.
@@ -85,4 +87,15 @@ Si se despliega en otro hosting, poner la URL de Formspree / Basin / API propia 
 
 ## Despliegue
 
-`netlify.toml` incluido (build + cabeceras de caché). También funciona en Vercel, Cloudflare Pages o cualquier hosting estático sirviendo `dist/`.
+### GitHub Pages (actual)
+
+URL: **https://josedavilla.github.io/New-client-website/**
+
+- El workflow `.github/workflows/deploy.yml` compila y publica en cada push a `main` o `ccr-235f9ecb-ks3q6e` (también se puede lanzar a mano desde *Actions → Deploy to GitHub Pages → Run workflow*).
+- Requisito único: en *Settings → Pages → Build and deployment → Source* elegir **GitHub Actions**.
+- Como el sitio vive en un subdirectorio, todos los enlaces internos pasan por el helper `u()` de `src/lib/url.ts`, que añade el `base`. **Al crear enlaces nuevos usar siempre `href={u('/ruta')}`**.
+- Los formularios no funcionan en GitHub Pages (es hosting estático sin backend): configurar `site.formEndpoint` con Formspree/Basin para recibir envíos.
+
+### Dominio propio u otro hosting
+
+Compilar con `SITE_URL=https://www.cliente.com BASE_PATH=/ npm run build`. `netlify.toml` incluido (build + cabeceras de caché + Netlify Forms). También funciona en Vercel, Cloudflare Pages o cualquier hosting estático sirviendo `dist/`.

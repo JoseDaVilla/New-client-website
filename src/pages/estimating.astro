@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import Base from '@/layouts/Base.astro';
 import PageHero from '@/components/PageHero.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
@@ -16,7 +17,7 @@ const process = [
   { t: 'Get invited', d: 'Approved partners are added to our bid list and invited to tender by trade and region.' },
   { t: 'Build together', d: 'Successful bidders join a team focused on safety, quality and fair, prompt payment.' },
 ];
-const formAction = site.formEndpoint || '/thanks';
+const formAction = site.formEndpoint || u('/thanks');
 ---
 
 <Base title="Estimating" description="Bid opportunities and supplier / subcontractor prequalification for trade partners.">
@@ -62,8 +63,29 @@ const formAction = site.formEndpoint || '/thanks';
         <p class="max-w-sm text-bone/60" data-reveal>Bid documents are shared with registered partners. Contact <a class="link-u text-bone" href={`mailto:${site.estimatingEmail}`}>{site.estimatingEmail}</a> to request access.</p>
       </div>
 
-      <div class="mt-14 overflow-x-auto" data-reveal>
-        <table class="w-full min-w-[720px] text-left">
+      <!-- Móvil: tarjetas -->
+      <ul class="mt-12 space-y-3 md:hidden">
+        {
+          bids.map((b, i) => (
+            <li class="rounded-sm border border-white/10 bg-ink-2 p-5" data-reveal style={`--d:${i}`}>
+              <div class="flex items-center justify-between gap-4">
+                <span class="eyebrow text-signal">{b.id}</span>
+                <span class="eyebrow text-bone/50">Closes <time datetime={b.closes}>{fmt(b.closes)}</time></span>
+              </div>
+              <p class="mt-3 font-semiwide text-xl font-bold">{b.project}</p>
+              <p class="mt-1 text-sm text-bone/60">{b.location}</p>
+              <p class="mt-3 text-sm text-bone/80">{b.trades}</p>
+              <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-signal px-5 text-sm font-semibold text-ink">
+                Request docs <Icon name="arrow" class="size-4" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Tablet / escritorio: tabla -->
+      <div class="mt-14 hidden overflow-x-auto md:block" data-reveal>
+        <table class="w-full text-left">
           <thead>
             <tr class="eyebrow border-b border-white/15 text-bone/45">
               <th class="py-4 pr-6 font-medium">Ref.</th>

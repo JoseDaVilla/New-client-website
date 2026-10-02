@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import Base from '@/layouts/Base.astro';
 import Button from '@/components/Button.astro';
 ---
@@ -16,7 +17,7 @@ import Button from '@/components/Button.astro';
       <p class="eyebrow text-signal">Error 404 · Under construction</p>
       <h1 class="mt-6 font-wide text-[clamp(6rem,22vw,20rem)] font-black leading-[0.8] tracking-[-0.05em]">404</h1>
       <p class="mt-8 max-w-md text-lead text-bone/70">This page hasn't been built yet — or it was moved. Let's get you back on site.</p>
-      <div class="mt-10 flex flex-wrap gap-3"><Button href="/">Back to home</Button><Button href="/contact" variant="ghost-light">Contact us</Button></div>
+      <div class="mt-10 flex flex-wrap gap-3"><Button href={u('/')}>Back to home</Button><Button href={u('/contact')} variant="ghost-light">Contact us</Button></div>
     </div>
   </section>
 </Base>

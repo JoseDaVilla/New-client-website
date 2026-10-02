@@ -1,4 +1,5 @@
 ---
+import { u } from '@/lib/url';
 import type { CollectionEntry } from 'astro:content';
 import Media from './Media.astro';
 interface Props { post: CollectionEntry<'news'>; index?: number; feature?: boolean }
@@ -6,7 +7,7 @@ const { post, index = 0, feature = false } = Astro.props;
 const d = post.data;
 const date = d.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 ---
-<a href={`/news/${post.id}`} class:list={['group block', feature && 'md:grid md:grid-cols-12 md:items-end md:gap-10']} data-reveal style={`--d:${index % 3}`}>
+<a href={u(`/news/${post.id}`)} class:list={['group block', feature && 'md:grid md:grid-cols-12 md:items-end md:gap-10']} data-reveal style={`--d:${index % 3}`}>
   <Media
     src={d.cover}
     alt={d.title}
