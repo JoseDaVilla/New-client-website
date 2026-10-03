@@ -1,11 +1,12 @@
 ---
 /**
- * Animación de intro: retícula de plano + marca que se dibuja + contador.
- * 100% CSS. Se muestra una vez por sesión (o forzada con ?intro en la URL),
- * se puede saltar con clic / tecla, y respeta prefers-reduced-motion.
+ * Animación de intro: fondo blanco, retícula de plano y el logo Grascan Build
+ * construyéndose (las torres crecen desde la base, el wordmark se revela).
+ * 100% CSS. Una vez por sesión (o forzada con ?intro), se puede saltar con clic / tecla,
+ * y respeta prefers-reduced-motion.
  */
 import { site } from '@/site.config';
-const letters = site.name.toUpperCase().split('');
+import Logo from './Logo.astro';
 ---
 
 <div id="intro" class="intro" aria-hidden="true">
@@ -18,23 +19,14 @@ const letters = site.name.toUpperCase().split('');
 
     <div class="intro-meta eyebrow">
       <span class="intro-tl">{site.legalName}</span>
-      <span class="intro-tr">43.6453° N — 79.3806° W</span>
+      <span class="intro-tr">43.7440° N — 79.5940° W</span>
       <span class="intro-bl">Loading <b class="intro-count"></b>%</span>
-      <span class="intro-br">Est. {site.founded}</span>
+      <span class="intro-br">Since {site.founded}</span>
     </div>
 
     <div class="intro-center">
-      <svg viewBox="0 0 120 120" class="intro-mark" fill="none" stroke-linecap="square">
-        <circle cx="60" cy="60" r="56" stroke-width="1" pathLength="1" class="ln stroke-bone/14" style="--i:0" />
-        <path d="M4 60h112M60 4v112" stroke-width="1" pathLength="1" class="ln stroke-bone/14" style="--i:1" />
-        <path d="M32 104V16" stroke-width="12" pathLength="1" class="ln stroke-bone" style="--i:3" />
-        <path d="M88 104V16" stroke-width="12" pathLength="1" class="ln stroke-bone" style="--i:4" />
-        <path d="M32 60h56" stroke-width="12" pathLength="1" class="ln stroke-signal" style="--i:8" />
-        <path d="M32 16h10M78 16h10M32 104h10M78 104h10" stroke-width="3" pathLength="1" class="ln stroke-bone" style="--i:10" />
-      </svg>
-      <p class="intro-word font-wide">
-        {letters.map((l, i) => <span style={`--i:${i}`}>{l}</span>)}
-      </p>
+      <span class="intro-ground"></span>
+      <Logo variant="full" animate delay={250} class="intro-logo" />
     </div>
   </div>
 </div>
@@ -54,10 +46,10 @@ const letters = site.name.toUpperCase().split('');
     inset: 0;
     z-index: 100;
     pointer-events: auto;
-    animation: intro-hide 0s linear 3.1s forwards;
+    animation: intro-hide 0s linear 3.3s forwards;
   }
   html.has-intro {
-    --intro-delay: 2250ms;
+    --intro-delay: 2450ms;
   }
   html.has-intro:not(.intro-done) {
     overflow: hidden;
@@ -81,12 +73,12 @@ const letters = site.name.toUpperCase().split('');
   }
   .intro-layer--accent {
     background: var(--color-signal);
-    animation-delay: 2.2s;
+    animation-delay: 2.4s;
   }
   .intro-layer--main {
-    background: var(--color-ink);
-    color: var(--color-bone);
-    animation-delay: 2s;
+    background: var(--color-bone);
+    color: var(--color-ink);
+    animation-delay: 2.2s;
   }
   @keyframes intro-wipe {
     to {
@@ -96,7 +88,7 @@ const letters = site.name.toUpperCase().split('');
   .intro-grid span,
   .intro-grid i {
     position: absolute;
-    background: color-mix(in oklab, var(--color-bone) 8%, transparent);
+    background: color-mix(in oklab, var(--color-signal) 8%, transparent);
   }
   .intro-grid span {
     top: 0;
@@ -124,7 +116,7 @@ const letters = site.name.toUpperCase().split('');
   .intro-meta > span {
     position: absolute;
     opacity: 0;
-    color: color-mix(in oklab, var(--color-bone) 60%, transparent);
+    color: var(--color-mute);
     animation: intro-fade 0.8s ease 0.3s forwards;
   }
   .intro-tl { top: 1.5rem; left: 1.5rem; }
@@ -134,9 +126,9 @@ const letters = site.name.toUpperCase().split('');
   .intro-br { bottom: 1.5rem; right: 1.5rem; }
   .intro-count {
     font-weight: 500;
-    color: var(--color-bone);
+    color: var(--color-signal);
     counter-reset: n var(--intro-n);
-    animation: intro-count 1.7s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+    animation: intro-count 1.9s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
   }
   .intro-count::after {
     content: counter(n);
@@ -157,41 +149,31 @@ const letters = site.name.toUpperCase().split('');
     display: grid;
     place-content: center;
     justify-items: center;
-    gap: 1.75rem;
-    animation: intro-out 0.6s cubic-bezier(0.76, 0, 0.24, 1) 1.85s forwards;
+    animation: intro-out 0.6s cubic-bezier(0.76, 0, 0.24, 1) 2.05s forwards;
+  }
+  .intro-logo {
+    width: clamp(11rem, 34vw, 19rem);
+  }
+  /* línea de "terreno" bajo las torres */
+  .intro-ground {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + clamp(11rem, 34vw, 19rem) * 0.276);
+    width: clamp(14rem, 44vw, 24rem);
+    height: 1px;
+    background: color-mix(in oklab, var(--color-signal) 30%, transparent);
+    transform: translateX(-50%) scaleX(0);
+    animation: intro-grow-x 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  }
+  @keyframes intro-grow-x {
+    to {
+      transform: translateX(-50%) scaleX(1);
+    }
   }
   @keyframes intro-out {
     to {
       opacity: 0;
       transform: translateY(-40px);
-    }
-  }
-  .intro-mark {
-    width: clamp(6rem, 16vw, 9rem);
-  }
-  .intro-mark .ln {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    animation: draw 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--i) * 70ms + 150ms);
-  }
-  .intro-word {
-    display: flex;
-    overflow: hidden;
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: 0.08em;
-  }
-  .intro-word span {
-    display: inline-block;
-    transform: translateY(110%);
-    animation: intro-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(0.75s + var(--i) * 55ms);
-  }
-  @keyframes intro-up {
-    to {
-      transform: none;
     }
   }
 </style>

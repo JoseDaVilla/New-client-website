@@ -12,25 +12,25 @@ import { bids, trades } from '@/data/services';
 const fmt = (d: string) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const steps = ['Company', 'Capabilities', 'Documents'];
 const process = [
-  { t: 'Register', d: 'Submit your company profile and prequalification documents through the form below.' },
-  { t: 'Review', d: 'Our estimating team reviews safety, capacity and insurance within 10 business days.' },
-  { t: 'Get invited', d: 'Approved partners are added to our bid list and invited to tender by trade and region.' },
-  { t: 'Build together', d: 'Successful bidders join a team focused on safety, quality and fair, prompt payment.' },
+  { t: 'Add your company', d: 'Add your company to our bidding list with your profile and prequalification documents.' },
+  { t: 'Review', d: 'Our estimating team reviews safety, capacity and insurance. COR™ / ISO 45001 alignment is a plus.' },
+  { t: 'Get invited', d: 'Approved partners are invited to price upcoming work by trade and region across Southern Ontario.' },
+  { t: 'Build together', d: 'Join a team with an excellent relationship with its subcontractors, built to meet high demand and critical timing.' },
 ];
 const formAction = site.formEndpoint || u('/thanks');
 ---
 
-<Base title="Estimating" description="Bid opportunities and supplier / subcontractor prequalification for trade partners.">
+<Base title="Estimating" description="Add your company to the Grascan Build bidding list. Supplier and subcontractor prequalification and current tenders.">
   <PageHero
     index="04"
     eyebrow="Estimating & procurement"
-    title="Build the|future with us."
-    accent={['us.']}
-    lead="We partner with hundreds of subcontractors and suppliers every year. Register your company, browse current tenders and join our bid list."
+    title="Add your company|to our bidding list."
+    accent={['bidding', 'list.']}
+    lead="As a general contractor, Grascan performs all associated civil work and maintains an excellent relationship with many subcontractors and suppliers to aid and assist with high demand and critical timing."
   >
     <div class="mt-12 flex flex-wrap gap-3" data-reveal style="--d:5">
-      <Button href="#register">Register your company</Button>
-      <Button href="#opportunities" variant="ghost-light">View open tenders</Button>
+      <Button href="#register">Add your company</Button>
+      <Button href="#opportunities" variant="ghost">View open tenders</Button>
     </div>
   </PageHero>
 
@@ -53,7 +53,7 @@ const formAction = site.formEndpoint || u('/thanks');
   </section>
 
   <!-- Licitaciones abiertas -->
-  <section id="opportunities" class="scroll-mt-24 bg-ink py-20 text-bone md:py-28">
+  <section id="opportunities" class="on-dark scroll-mt-24 bg-ink py-20 text-bone md:py-28">
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div>
@@ -75,7 +75,7 @@ const formAction = site.formEndpoint || u('/thanks');
               <p class="mt-3 font-semiwide text-xl font-bold">{b.project}</p>
               <p class="mt-1 text-sm text-bone/60">{b.location}</p>
               <p class="mt-3 text-sm text-bone/80">{b.trades}</p>
-              <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-signal px-5 text-sm font-semibold text-ink">
+              <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-signal px-5 text-sm font-semibold text-on-signal">
                 Request docs <Icon name="arrow" class="size-4" />
               </a>
             </li>
@@ -106,7 +106,7 @@ const formAction = site.formEndpoint || u('/thanks');
                   <td class="py-6 pr-6 text-bone/70">{b.trades}</td>
                   <td class="py-6 pr-6"><time datetime={b.closes}>{fmt(b.closes)}</time></td>
                   <td class="py-6 text-right">
-                    <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="inline-flex items-center gap-2 rounded-full border border-bone/20 px-4 py-2 text-sm transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
+                    <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="inline-flex items-center gap-2 rounded-full border border-bone/20 px-4 py-2 text-sm transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-on-signal">
                       Request docs <Icon name="arrow" class="size-4" />
                     </a>
                   </td>
@@ -125,8 +125,8 @@ const formAction = site.formEndpoint || u('/thanks');
       <div class="lg:col-span-4">
         <div class="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
           <Eyebrow index="03" class="mb-8 text-mute">Supplier registration</Eyebrow>
-          <SplitText text="Join our|bid list." class="font-wide text-title font-extrabold uppercase" />
-          <p class="mt-6 text-ink/65" data-reveal>Complete the prequalification form. It takes about 5 minutes. Have your safety statistics, insurance certificate and WSIB / WCB clearance handy.</p>
+          <SplitText text="Bidding list|registration." class="font-wide text-title font-extrabold uppercase" />
+          <p class="mt-6 text-ink/65" data-reveal>Complete the prequalification form. It takes about 5 minutes. Have your safety statistics, insurance certificate and WSIB clearance handy.</p>
 
           <ol class="mt-10 space-y-3" data-steps-nav data-reveal>
             {
@@ -210,7 +210,7 @@ const formAction = site.formEndpoint || u('/thanks');
           <div>
             <p class="field-label mb-4">Regions served *</p>
             <div class="flex flex-wrap gap-2" data-group-required>
-              {['Ontario', 'British Columbia', 'Alberta', 'Québec', 'Prairies', 'Atlantic'].map((r) => <label class="chip"><input type="checkbox" name="regions" value={r} class="sr-only" />{r}</label>)}
+              {['Toronto', 'Peel', 'York', 'Durham', 'Halton', 'Hamilton / Niagara', 'Southwestern Ontario'].map((r) => <label class="chip"><input type="checkbox" name="regions" value={r} class="sr-only" />{r}</label>)}
             </div>
           </div>
           <div class="grid gap-8 md:grid-cols-3">
@@ -230,7 +230,7 @@ const formAction = site.formEndpoint || u('/thanks');
           <label class="dropzone group relative flex cursor-pointer flex-col items-center justify-center gap-4 rounded-sm border border-dashed border-ink/25 bg-concrete/50 px-6 py-14 text-center transition-colors hover:border-signal">
             <span class="grid size-14 place-items-center rounded-full bg-ink text-bone transition-transform duration-500 group-hover:-translate-y-1"><Icon name="upload" class="size-6" /></span>
             <span class="font-semibold">Drop files here or <span class="text-signal underline underline-offset-4">browse</span></span>
-            <span class="text-sm text-mute">Insurance certificate, WSIB/WCB clearance, safety manual, company profile · PDF, max 10 MB each</span>
+            <span class="text-sm text-mute">Insurance certificate, WSIB clearance, COR™ / safety manual, company profile · PDF, max 10 MB each</span>
             <input type="file" name="documents" multiple accept=".pdf,.doc,.docx,.jpg,.png" class="absolute inset-0 cursor-pointer opacity-0" data-file-input />
           </label>
           <ul class="space-y-2 text-sm" data-file-list></ul>

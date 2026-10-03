@@ -1,10 +1,11 @@
-# Sitio corporativo — constructora
+# Grascan Build — sitio web
 
-Maquetación completa del sitio web corporativo para una empresa constructora (referencias: grascan.com, pcl.com).
-Construido con **Astro 7 + Tailwind CSS 4**, sin frameworks de UI en el cliente: HTML estático, ~5 KB de JS propio y animaciones con CSS/SVG.
+Sitio corporativo de **Grascan Build** (construcción privada), construido con **Astro 7 + Tailwind CSS 4**: HTML estático, ~5 KB de JS propio y animaciones con CSS/SVG.
 
-> La marca **"Halden"**, los textos, cifras, proyectos y noticias son **placeholders** hasta recibir el contenido real.
-> Las fotos se sustituyen por ilustraciones tipo plano (SVG generadas en build) que desaparecen automáticamente al añadir imágenes.
+- **Logo**: vectorizado a partir del original (sin fondo) en `src/lib/logo.ts`; componente `src/components/Logo.astro` con variantes `full`, `horizontal` y `mark`, y animación de construcción (las torres crecen y el wordmark se revela). Se usa en la intro, header, footer, favicon e imagen OG.
+- **Paleta**: exclusivamente la del logo — navy `#062E61`, gris `#72787F` y blanco — más sus variaciones claras/oscuras.
+- **Contenido**: tomado de grascan.com (historia, servicios, proyectos, cultura, seguridad, oficinas). Lo pendiente de confirmar está marcado con `TODO` en `src/site.config.ts` y `src/data/services.ts` (emails de Grascan Build, horarios, equipo directivo, licitaciones abiertas reales).
+- Las fotos se sustituyen por ilustraciones tipo plano (SVG generadas en build) que desaparecen al añadir imágenes reales.
 
 ## Comandos
 
@@ -53,10 +54,14 @@ ilustraciones SVG, escena del hero, intro, favicon, imagen Open Graph y `theme-c
 
 | Token | Uso |
 | --- | --- |
-| `ink` / `ink-2` / `steel` / `graphite` | Fondos oscuros, superficies y texto principal sobre claro |
-| `bone` / `concrete` / `fog` / `mute` | Fondos claros, texto sobre oscuro y texto secundario |
-| `signal` / `signal-soft` / `signal-ink` | Color de marca (acento); `signal-ink` es la versión accesible para texto pequeño sobre claro |
+| `signal` | **Navy del logo** (#062E61): botones, acentos, iconos |
+| `gray` | **Gris del logo** (#72787F): palabras destacadas y detalles |
+| `ink` / `ink-2` / `steel` / `graphite` | Navy oscurecido/aclarado: texto principal y secciones oscuras |
+| `bone` / `concrete` / `fog` / `mute` | Blanco y grises derivados del gris del logo |
+| `signal-soft` / `on-signal` | Acento sobre secciones navy y texto sobre botones navy |
 | `danger` | Errores de formulario |
+
+Las secciones navy llevan la clase `on-dark`, que cambia automáticamente el acento a gris claro dentro de ellas.
 
 Reglas para mantenerlo así:
 - No escribir colores HEX/RGB en componentes: usar las clases (`text-signal`, `fill-bone/40`, `stroke-ink`) o `var(--color-…)` en CSS.

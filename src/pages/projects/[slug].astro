@@ -43,11 +43,11 @@ const facts = [
 ].filter((f) => f.value);
 ---
 
-<Base title={p.title} description={p.summary}>
+<Base title={p.title} description={p.summary} darkHero>
   <!-- Hero de proyecto -->
-  <section class="relative min-h-[92svh] overflow-hidden bg-ink text-bone">
+  <section class="on-dark relative min-h-[92svh] overflow-hidden bg-ink text-bone">
     <div class="absolute inset-0">
-      <Media src={p.cover} alt={p.title} seed={project.id} variant={p.variant} eager class="absolute inset-0" imgClass="parallax" sizes="100vw" />
+      <Media src={p.cover} alt={p.title} seed={project.id} variant={p.variant} tone="dark" eager class="absolute inset-0" imgClass="parallax" sizes="100vw" />
       <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/30"></div>
     </div>
     <div class="container-x relative flex min-h-[92svh] flex-col justify-end pb-14 pt-[calc(var(--header-h)+4rem)]">
@@ -57,7 +57,7 @@ const facts = [
       <div class="mb-6 flex flex-wrap gap-2" data-reveal style="--d:1">
         <span class="eyebrow rounded-full bg-bone px-3 py-1.5 text-ink">{p.sector}</span>
         <span class="eyebrow rounded-full border border-bone/25 px-3 py-1.5">{p.location}</span>
-        {p.status !== 'Completed' && <span class="eyebrow rounded-full bg-signal px-3 py-1.5 text-ink">{p.status}</span>}
+        {p.status !== 'Completed' && <span class="eyebrow rounded-full bg-signal px-3 py-1.5 text-on-signal">{p.status}</span>}
       </div>
       <SplitText as="h1" text={p.title} class="max-w-6xl font-wide text-display font-extrabold uppercase" />
       <p class="mt-8 max-w-2xl text-lead text-bone/75" data-reveal style="--d:3">{p.summary}</p>
@@ -115,7 +115,7 @@ const facts = [
   <!-- Galería -->
   {
     p.gallery.length > 0 && (
-      <section class="bg-ink py-20 text-bone md:py-32">
+      <section class="on-dark bg-ink py-20 text-bone md:py-32">
         <div class="container-x">
           <div class="flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -149,13 +149,13 @@ const facts = [
   }
 
   <!-- Siguiente proyecto -->
-  <a href={u(`/projects/${next.id}`)} class="group relative block overflow-hidden bg-signal text-ink">
+  <a href={u(`/projects/${next.id}`)} class="group relative block overflow-hidden bg-signal text-on-signal">
     <div class="container-x relative flex flex-col gap-6 py-20 md:flex-row md:items-end md:justify-between md:py-28">
       <div>
         <p class="eyebrow">Next project</p>
         <p class="mt-4 font-wide text-display font-extrabold uppercase transition-transform duration-700 ease-(--ease-expo) group-hover:translate-x-4">{next.data.title}</p>
       </div>
-      <span class="grid size-20 shrink-0 place-items-center rounded-full bg-ink text-signal transition-transform duration-700 ease-(--ease-expo) group-hover:-rotate-45">
+      <span class="grid size-20 shrink-0 place-items-center rounded-full bg-bone text-signal transition-transform duration-700 ease-(--ease-expo) group-hover:-rotate-45">
         <Icon name="arrow" class="size-7" />
       </span>
     </div>

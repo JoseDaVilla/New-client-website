@@ -1,4 +1,18 @@
-export type ServiceIcon = 'cm' | 'gc' | 'db' | 'pre' | 'civil' | 'industrial';
+/**
+ * Contenido basado en grascan.com (servicios, historia, cultura, estimating).
+ */
+export type ServiceIcon =
+  | 'bridge'
+  | 'dam'
+  | 'designbuild'
+  | 'environmental'
+  | 'paving'
+  | 'infrastructure'
+  | 'landscaping'
+  | 'pm'
+  | 'rail'
+  | 'roads'
+  | 'underground';
 
 export interface Service {
   slug: string;
@@ -11,111 +25,178 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    slug: 'construction-management',
-    title: 'Construction Management',
-    short: 'One accountable partner from first estimate to final handover.',
+    slug: 'bridges-and-structures',
+    title: 'Bridges and Structures',
+    short: 'Rehabilitation and new construction of highway, pedestrian and rail structures.',
     description:
-      'We act as an extension of the owner’s team — controlling cost, schedule and quality while managing every trade partner on site. Transparent reporting and open-book pricing keep decisions informed at every stage.',
-    icon: 'cm',
-    capabilities: ['At-risk & agency CM', 'Cost & schedule control', 'Trade procurement', 'Quality assurance', 'Commissioning & closeout'],
+      'As one of Toronto’s largest bridge contractors, Grascan provides a full-service approach to the rehabilitation and new construction of highway, pedestrian and rail structures and other transportation structures.',
+    icon: 'bridge',
+    capabilities: ['Bridge rehabilitation', 'New bridge construction', 'Pedestrian & cyclist bridges', 'Rail structures', 'Deck replacement & re-decking'],
   },
   {
-    slug: 'general-contracting',
-    title: 'General Contracting',
-    short: 'Lump-sum delivery with the certainty of a single contract.',
+    slug: 'dams-and-waterways',
+    title: 'Dams and Waterways',
+    short: 'Design-build expertise in the construction of dams and waterways.',
     description:
-      'For owners who need price certainty, our general contracting teams self-perform critical scopes and coordinate specialty trades to deliver on budget, on schedule and to specification.',
-    icon: 'gc',
-    capabilities: ['Stipulated sum', 'Self-performed concrete', 'Site logistics', 'Safety leadership', 'Warranty program'],
+      'Grascan brings design-build expertise to the construction and rehabilitation of dams, channels and waterways, including channel stabilization and emergency wash-out repairs.',
+    icon: 'dam',
+    capabilities: ['Dam construction & rehabilitation', 'Channel stabilization', 'Erosion control', 'Emergency wash-out repairs'],
   },
   {
     slug: 'design-build',
-    title: 'Design-Build',
-    short: 'Design and construction integrated under one roof.',
+    title: 'Design / Build',
+    short: 'An integrated Design-Build team delivering major projects.',
     description:
-      'Integrated design-build teams compress schedules and reduce risk. Architects, engineers and builders collaborate from day one, so constructability is designed in — not added later.',
-    icon: 'db',
-    capabilities: ['Progressive design-build', 'P3 & alternative finance', 'Integrated project delivery', 'Value engineering', 'BIM coordination'],
+      'With over 36 years of experience successfully completing Bid-Build projects, Grascan has established an integrated Design-Build Team which is currently performing multiple major Design-Build projects for Metrolinx.',
+    icon: 'designbuild',
+    capabilities: ['Integrated design-build team', 'Progressive design-build', 'Constructability reviews', 'Design coordination'],
   },
   {
-    slug: 'pre-construction',
-    title: 'Pre-Construction',
-    short: 'Decisions made early cost less. We make them with you.',
+    slug: 'environmental',
+    title: 'Environmental',
+    short: 'Meeting and exceeding environmental regulations on every site.',
     description:
-      'Conceptual estimating, feasibility, constructability reviews and phasing strategies give owners the clarity to move forward with confidence — long before ground is broken.',
-    icon: 'pre',
-    capabilities: ['Conceptual estimating', 'Feasibility studies', 'Constructability reviews', 'Phasing & logistics', 'Life-cycle costing'],
+      'Grascan is committed to meeting and exceeding relevant environmental regulations and environmental-related requirements on every project it delivers.',
+    icon: 'environmental',
+    capabilities: ['Environmental compliance', 'Erosion & sediment control', 'Spill prevention', 'Site restoration'],
   },
   {
-    slug: 'civil-infrastructure',
-    title: 'Civil & Infrastructure',
-    short: 'Roads, bridges, transit and utilities that connect regions.',
+    slug: 'grading-and-paving',
+    title: 'Grading and Paving',
+    short: 'Fully equipped crews for any size job, from roads to parking lots.',
     description:
-      'Our heavy civil division delivers the infrastructure communities rely on: bridges, interchanges, water treatment, transit and site servicing — with a fleet and crews built for complex environments.',
-    icon: 'civil',
-    capabilities: ['Bridges & structures', 'Transit & rail', 'Water & wastewater', 'Earthworks', 'Site servicing'],
+      'Grascan has successfully provided grading and paving services throughout the Greater Toronto Area, with crews fully equipped to handle any size job — from roads to bridges, parking lots to channel stabilization.',
+    icon: 'paving',
+    capabilities: ['Site grading', 'Asphalt paving', 'Parking lots', 'Bridge approaches'],
   },
   {
-    slug: 'industrial',
-    title: 'Industrial',
-    short: 'Facilities engineered around process, uptime and safety.',
+    slug: 'infrastructure',
+    title: 'Infrastructure',
+    short: 'From emergency repairs to complete hard and soft infrastructure.',
     description:
-      'From advanced manufacturing to energy and logistics, we build industrial facilities around the process inside them — coordinating equipment, mechanical and electrical systems with zero tolerance for downtime.',
-    icon: 'industrial',
-    capabilities: ['Process facilities', 'Energy & utilities', 'Distribution centres', 'Shutdowns & retrofits', 'Modular fabrication'],
+      'Grascan has completed many infrastructure projects, ranging from critical infrastructure during emergency repairs to the Gardiner Expressway, sinkhole repairs and emergency wash-outs, and has been invited by municipalities and private firms to construct or reconstruct their hard to soft infrastructure needs.',
+    icon: 'infrastructure',
+    capabilities: ['Emergency repairs', 'Sinkhole repairs', 'Municipal infrastructure', 'Private-sector infrastructure'],
+  },
+  {
+    slug: 'landscaping',
+    title: 'Landscaping',
+    short: 'Some of the largest landscape projects in the City of Toronto.',
+    description:
+      'Grascan has successfully completed some of the largest landscape projects the City of Toronto has been able to offer, with works ranging from laser-cut steel statues, precast planters and granite pavers to specialty granite monuments, boardwalks and piazzas.',
+    icon: 'landscaping',
+    capabilities: ['Granite pavers & monuments', 'Boardwalks & piazzas', 'Precast planters', 'Public art installation'],
+  },
+  {
+    slug: 'project-management',
+    title: 'Project Management',
+    short: 'Coordinating every trade on complicated, time-sensitive projects.',
+    description:
+      'Grascan specializes in project management and coordination, typically performing all associated civil work and maintaining excellent relationships with subcontractors to meet high demand and critical timing.',
+    icon: 'pm',
+    capabilities: ['Planning & scheduling', 'Subcontractor coordination', 'Cost control', 'Stakeholder management'],
+  },
+  {
+    slug: 'rapid-transit-and-railway',
+    title: 'Rapid Transit and Railway',
+    short: 'An approved Metrolinx, CN Rail and TTC contractor.',
+    description:
+      'Grascan is one of the few approved Metrolinx (GO Transit), Canadian National Railway (CNR) and Toronto Transit Commission (TTC) contractors, delivering stations, platforms, grade separations and rail structures.',
+    icon: 'rail',
+    capabilities: ['GO Station construction', 'Platforms & tunnels', 'Rail-to-rail grade separations', 'Rail bridges'],
+  },
+  {
+    slug: 'roads-and-highway-construction',
+    title: 'Roads and Highway Construction',
+    short: 'A preferred contractor for major road construction in Southern Ontario.',
+    description:
+      'Grascan’s ability to deliver time-sensitive, complicated and high-profile heavy civil projects has cemented its legacy as a preferred contractor for major road construction, with a Ministry of Transportation of Ontario rating in excess of $100,000,000.',
+    icon: 'roads',
+    capabilities: ['Highway reconstruction', 'Ramps & interchanges', 'Urban road reconstruction', 'Expressway re-decking'],
+  },
+  {
+    slug: 'underground-infrastructure',
+    title: 'Underground Infrastructure',
+    short: 'Sanitary, storm and water services to specialized systems.',
+    description:
+      'Grascan is at the forefront of underground infrastructure projects, completing contracts with sanitary, storm and water services — from large transmission services to specialized snow-melting systems for Metrolinx platforms.',
+    icon: 'underground',
+    capabilities: ['Sanitary & storm sewers', 'Watermains & transmission', 'Snow-melting systems', 'Utility relocation'],
   },
 ];
 
 export const values = [
-  { title: 'Safety without exception', text: 'Everyone goes home safe, every day. It is the first item on every agenda and the last word on every decision.' },
-  { title: 'Ownership', text: 'We treat every project as if we were the owner — because our name stays on it long after we leave.' },
-  { title: 'Craft', text: 'Quality is built in by people who take pride in their trade, not inspected in at the end.' },
-  { title: 'Community', text: 'We hire locally, invest locally and leave every neighbourhood better than we found it.' },
+  {
+    title: 'Safety first',
+    text: 'COR™ certified since 2015. Senior management instills strong safety values into the fabric of every operation, and every person is committed to continual improvement.',
+  },
+  {
+    title: 'Our people',
+    text: 'Grascan places a premium on creating a comfortable and desirable work environment — a priority since the company was incorporated in 1987.',
+  },
+  {
+    title: 'Innovation',
+    text: 'From being the first contractor in Ontario to dismantle the Gardiner Expressway to an integrated design-build team, we lead with an innovative mindset.',
+  },
+  {
+    title: 'Partnership',
+    text: 'Seasonal barbecues, holiday gatherings and an annual Christmas party bring together our employees and valued partners.',
+  },
 ];
 
 export const timeline = [
-  { year: '1987', title: 'Founded', text: 'Started as a four-person concrete contractor in Toronto.' },
-  { year: '1996', title: 'General contracting', text: 'First institutional project — a 120,000 sq ft secondary school.' },
-  { year: '2004', title: 'Going west', text: 'Opened the Calgary office to serve the industrial sector.' },
-  { year: '2012', title: 'Civil division', text: 'Launched heavy civil and infrastructure operations.' },
-  { year: '2019', title: 'Coast to coast', text: 'Vancouver and Montréal offices complete the national footprint.' },
-  { year: '2025', title: 'Net-zero commitment', text: 'Pledged net-zero operational emissions by 2040.' },
+  { year: '1987', title: 'Incorporated', text: 'Founded by Angelo Grassa and John Balazic, starting with basic roadwork.' },
+  { year: '2000', title: 'Captains of industry', text: 'High-profile City of Toronto work, including dismantling of the Gardiner.' },
+  { year: '2011', title: 'West Toronto Diamond', text: 'Rail-to-rail grade separation for Metrolinx.' },
+  { year: '2014', title: 'Gardiner re-decking', text: '$75M contract delivered 3 months early and $2M under budget. Named one of Canada’s Best Managed Companies.' },
+  { year: '2015', title: 'COR™ certified', text: 'Certificate of Recognition for health & safety.' },
+  { year: '2019', title: 'Gold Certified', text: 'Best Managed Gold status · Early Stations design-build for Metrolinx.' },
+  { year: '2021', title: 'Platinum Member', text: 'Platinum status after 7 years as one of Canada’s Best Managed Companies.' },
 ];
 
 export const leadership = [
-  { name: 'Full Name', role: 'President & CEO' },
-  { name: 'Full Name', role: 'Chief Operating Officer' },
-  { name: 'Full Name', role: 'Chief Financial Officer' },
-  { name: 'Full Name', role: 'VP, Pre-Construction' },
-  { name: 'Full Name', role: 'VP, Civil & Infrastructure' },
-  { name: 'Full Name', role: 'Director, Health & Safety' },
+  { name: 'Angelo Grassa', role: 'Co-Founder & Owner' },
+  { name: 'John Balazic', role: 'Co-Founder & Owner' },
+  { name: 'Full Name', role: 'Director, Design-Build' }, // TODO: equipo directivo
+  { name: 'Full Name', role: 'Director, Estimating' },
+  { name: 'Full Name', role: 'Manager, Health & Safety' },
+  { name: 'Full Name', role: 'Manager, Human Resources' },
 ];
 
-/** Oportunidades de licitación abiertas (página Estimating). */
+export const awards = [
+  'Canada’s Best Managed Companies · Platinum Member (2021)',
+  'Best Managed · Gold Certified (2019)',
+  'Canada’s Best Managed Companies (2014, 2016)',
+  'COR™ / ISO 45001 Certified',
+  'Structural Design Innovation',
+  'Canada’s Top Contractors',
+];
+
+/** Oportunidades de licitación abiertas (página Estimating). TODO: reemplazar por licitaciones reales. */
 export const bids = [
-  { id: 'HB-2614', project: 'Lakeshore Medical Pavilion', location: 'Toronto, ON', trades: 'Mechanical, Electrical', closes: '2026-10-21' },
-  { id: 'HB-2609', project: 'Northgate Distribution Hub', location: 'Calgary, AB', trades: 'Structural Steel, Roofing', closes: '2026-10-28' },
-  { id: 'HB-2603', project: 'Fraser River Bridge Rehab', location: 'Vancouver, BC', trades: 'Rebar, Formwork, Traffic Control', closes: '2026-11-04' },
-  { id: 'HB-2598', project: 'Saint-Laurent Library', location: 'Montréal, QC', trades: 'Curtain Wall, Millwork', closes: '2026-11-12' },
+  { id: 'GB-0101', project: 'Sample — Commercial Site Works', location: 'Vaughan, ON', trades: 'Excavation, Underground Services', closes: '2026-10-21' },
+  { id: 'GB-0102', project: 'Sample — Private Bridge Crossing', location: 'Mississauga, ON', trades: 'Rebar, Formwork, Structural Steel', closes: '2026-10-28' },
+  { id: 'GB-0103', project: 'Sample — Industrial Campus Paving', location: 'Brampton, ON', trades: 'Grading, Asphalt Paving', closes: '2026-11-04' },
+  { id: 'GB-0104', project: 'Sample — Mixed-Use Landscape Package', location: 'Toronto, ON', trades: 'Landscaping, Granite Pavers', closes: '2026-11-12' },
 ];
 
 export const trades = [
-  'Sitework & Excavation',
+  'Excavation & Earthworks',
   'Concrete & Formwork',
-  'Masonry',
+  'Rebar',
   'Structural Steel',
-  'Carpentry & Millwork',
-  'Roofing & Waterproofing',
-  'Curtain Wall & Glazing',
-  'Drywall & Ceilings',
-  'Flooring',
-  'Painting & Coatings',
-  'Mechanical / HVAC',
-  'Plumbing',
+  'Precast Concrete',
+  'Waterproofing',
+  'Asphalt Paving',
+  'Sanitary / Storm / Watermain',
   'Electrical',
-  'Fire Protection',
-  'Elevators',
+  'Rail Track Work',
+  'Traffic Control',
+  'Survey & Layout',
   'Landscaping',
+  'Environmental',
+  'Demolition',
+  'Trucking & Haulage',
   'Material Supplier',
   'Equipment Rental',
 ];

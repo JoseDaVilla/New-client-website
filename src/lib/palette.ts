@@ -18,5 +18,6 @@ export const palette = {
   ink: pick('ink'),
   bone: pick('bone'),
   mute: pick('mute'),
+  gray: pick('gray'),
   signal: pick('signal'),
 };

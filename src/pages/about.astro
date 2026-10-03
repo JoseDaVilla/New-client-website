@@ -9,18 +9,16 @@ import Button from '@/components/Button.astro';
 import Marquee from '@/components/Marquee.astro';
 import EstimatingCTA from '@/components/EstimatingCTA.astro';
 import { site, stats } from '@/site.config';
-import { values, timeline, leadership } from '@/data/services';
-
-const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Accredited', 'CCA Gold Seal', 'Envision® SP', 'Canada Green Building Council'];
+import { values, timeline, leadership, awards } from '@/data/services';
 ---
 
-<Base title="About" description={`Learn about ${site.legalName}: our story, values, leadership and commitment to safety.`}>
+<Base title="About" description={`${site.legalName}: building Southern Ontario since ${site.founded}. Our history, culture, leadership and commitment to safety.`}>
   <PageHero
     index="01"
     eyebrow="About us"
     title={`Builders since|${site.founded}.`}
     accent={[`${site.founded}.`]}
-    lead="We are a privately owned general contractor and construction manager. Our people plan, build and deliver complex projects for public and private owners across Canada."
+    lead="Grascan has been servicing the construction needs of Southern Ontario since 1987. Approaching our 40th anniversary, we continue to leverage our experience, expertise and innovative spirit to deliver complicated projects."
   />
 
   <!-- Historia -->
@@ -28,12 +26,12 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
     <div class="container-x grid gap-14 lg:grid-cols-12">
       <div class="lg:col-span-6">
         <Eyebrow index="01" class="mb-8 text-mute">Our story</Eyebrow>
-        <SplitText text="From a four-person|crew to a national|builder." class="font-wide text-title font-extrabold uppercase" />
+        <SplitText text="From roadwork|to landmark|projects." accent={["projects."]} class="font-wide text-title font-extrabold uppercase" />
       </div>
       <div class="space-y-6 text-lg leading-relaxed text-ink/75 lg:col-span-5 lg:col-start-8" data-reveal>
-        <p>Placeholder — the company story goes here. Explain how the business started, the values of its founders, and the milestones that shaped it into the organization it is today.</p>
-        <p>Talk about the people: the number of employees, the trades the company self-performs, and the long-standing relationships with clients and trade partners that bring repeat work year after year.</p>
-        <p>Close with the vision: where the company is going, the markets it serves and the kind of projects it wants to build next.</p>
+        <p>Grascan was incorporated in 1987 by owners <strong class="text-ink">Angelo Grassa and John Balazic</strong>. The company undertook basic roadwork when it launched, but it wasn't long before the founders decided to focus on more challenging, unique projects.</p>
+        <p>By 2000, Grascan had solidified its position as captains of industry, completing some of the most high-profile jobs in the City of Toronto — including dismantling the Gardiner Expressway, something no other contractor in Ontario had done before.</p>
+        <p>With over 36 years of experience completing Bid-Build projects, Grascan established an integrated Design-Build team that is successfully performing multiple major Design-Build projects for Metrolinx. <strong class="text-ink">Grascan Build</strong> now brings that experience to private construction.</p>
       </div>
     </div>
 
@@ -41,9 +39,9 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
       <div class="md:col-span-8" data-reveal="mask"><Media seed="about-hero" variant="midrise" class="aspect-[16/10] rounded-sm" /></div>
       <div class="grid gap-4 md:col-span-4" data-reveal="mask" style="--d:2">
         <Media seed="about-team" variant="campus" class="aspect-[4/3] rounded-sm md:aspect-auto" />
-        <div class="flex flex-col justify-between rounded-sm bg-signal p-8">
-          <p class="eyebrow">Our mission</p>
-          <p class="mt-6 font-semiwide text-2xl font-bold leading-tight">To build with integrity, so the communities we serve can grow with confidence.</p>
+        <div class="on-dark flex flex-col justify-between rounded-sm bg-ink p-8">
+          <p class="eyebrow text-gray">Our commitment</p>
+          <p class="mt-6 font-semiwide text-2xl font-bold leading-tight">To be a model of innovation in the construction industry — delivering on time, on budget and safely.</p>
         </div>
       </div>
     </div>
@@ -56,8 +54,8 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
         stats.map((s, i) => (
           <div class="border-ink/10 py-10 even:border-l even:pl-6 [&:nth-child(n+3)]:border-t lg:border-l lg:px-8 lg:first:border-l-0 lg:first:pl-0 lg:[&:nth-child(n+3)]:border-t-0" data-reveal style={`--d:${i}`}>
             <dt class="eyebrow text-mute">{s.label}</dt>
-            <dd class="mt-3 font-wide text-5xl font-extrabold tracking-tight">
-              {'prefix' in s && s.prefix}<span data-count={s.value} data-decimals={'decimals' in s ? s.decimals : 0}>0</span><span class="text-signal">{s.suffix}</span>
+            <dd class="mt-3 whitespace-nowrap font-wide text-[clamp(1.9rem,8vw,3rem)] font-extrabold tracking-tight text-signal">
+              {'prefix' in s && s.prefix}<span data-count={s.value}>0</span><span class="text-gray">{s.suffix}</span>
             </dd>
           </div>
         ))
@@ -66,10 +64,10 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
   </section>
 
   <!-- Valores -->
-  <section class="bg-ink py-24 text-bone md:py-36">
+  <section class="on-dark bg-ink py-24 text-bone md:py-36">
     <div class="container-x">
-      <Eyebrow index="02" class="mb-8 text-bone/50">Values</Eyebrow>
-      <SplitText text="What we stand on." class="font-wide text-display font-extrabold uppercase" />
+      <Eyebrow index="02" class="mb-8 text-bone/50">Culture</Eyebrow>
+      <SplitText text="What drives us." class="font-wide text-display font-extrabold uppercase" />
       <div class="mt-16 grid gap-px overflow-hidden rounded-sm bg-bone/10 md:grid-cols-2 lg:grid-cols-4">
         {
           values.map((v, i) => (
@@ -89,9 +87,9 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
   <section class="py-24 md:py-36">
     <div class="container-x">
       <Eyebrow index="03" class="mb-8 text-mute">Milestones</Eyebrow>
-      <SplitText text="Four decades|of building." class="font-wide text-display font-extrabold uppercase" />
-      <ol class="timeline relative mt-20 grid gap-12 md:grid-cols-3 lg:grid-cols-6 lg:gap-6" data-reveal="fade">
-        <span class="timeline-line absolute left-0 right-0 top-[0.55rem] hidden h-px origin-left bg-ink/20 lg:block"></span>
+      <SplitText text="Nearly four decades|of building." class="font-wide text-display font-extrabold uppercase" />
+      <ol class="timeline relative mt-20 grid gap-12 sm:grid-cols-2 md:grid-cols-4 lg:gap-8 xl:grid-cols-7 xl:gap-6" data-reveal="fade">
+        <span class="timeline-line absolute left-0 right-0 top-[0.55rem] hidden h-px origin-left bg-ink/20 xl:block"></span>
         {
           timeline.map((t, i) => (
             <li class="relative" data-reveal style={`--d:${i}`}>
@@ -120,13 +118,13 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
         {
           leadership.map((p, i) => (
             <li class="group" data-reveal style={`--d:${i % 3}`}>
-              <div class="relative aspect-[4/5] overflow-hidden rounded-sm bg-ink-2">
-                <div class="bg-grid absolute inset-0 text-bone/40" />
-                <svg viewBox="0 0 200 250" class="absolute inset-x-0 bottom-0 w-full text-bone/15 transition-transform duration-1000 ease-(--ease-expo) group-hover:scale-105" aria-hidden="true">
+              <div class="relative aspect-[4/5] overflow-hidden rounded-sm bg-bone">
+                <div class="bg-grid absolute inset-0 text-signal/60" />
+                <svg viewBox="0 0 200 250" class="absolute inset-x-0 bottom-0 w-full text-gray/25 transition-transform duration-1000 ease-(--ease-expo) group-hover:scale-105" aria-hidden="true">
                   <circle cx="100" cy="95" r="42" fill="currentColor" />
                   <path d="M20 250c0-55 36-90 80-90s80 35 80 90z" fill="currentColor" />
                 </svg>
-                <span class="eyebrow absolute bottom-3 left-3 hidden text-bone/40 sm:block">Portrait placeholder</span>
+                <span class="eyebrow absolute bottom-3 left-3 hidden text-mute sm:block">Portrait placeholder</span>
               </div>
               <p class="mt-4 font-semiwide text-base font-bold sm:text-xl md:mt-5">{p.name}</p>
               <p class="text-sm text-mute sm:text-base">{p.role}</p>
@@ -140,29 +138,30 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
   <!-- Seguridad y sostenibilidad -->
   <section class="py-24 md:py-36">
     <div class="container-x grid gap-6 lg:grid-cols-2">
-      <article id="safety" class="relative overflow-hidden rounded-sm bg-ink p-10 text-bone md:p-14" data-reveal>
+      <article id="safety" class="on-dark relative overflow-hidden rounded-sm bg-ink p-10 text-bone md:p-14" data-reveal>
         <p class="eyebrow text-signal">Health & safety</p>
-        <h3 class="relative z-10 mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">Zero harm is the only target.</h3>
-        <p class="relative z-10 mt-6 max-w-sm text-bone/65">Placeholder — describe the safety management system, training programs, certifications and leading indicators the company tracks.</p>
+        <h3 class="relative z-10 mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">COR™ certified since 2015.</h3>
+        <p class="relative z-10 mt-6 max-w-sm text-bone/65">During the COR audit process, overwhelming evidence of a strong safety culture was presented — all personnel expressed commitment to continual improvement, and senior management instills strong values into the fabric of our operation.</p>
         <svg viewBox="0 0 200 200" class="draw absolute -bottom-20 -right-20 w-64 text-signal/50" fill="none" aria-hidden="true">
           <path d="M100 20l70 30v50c0 45-30 75-70 90-40-15-70-45-70-90V50z" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" />
           <path d="M70 105l20 20 40-45" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:10" />
         </svg>
       </article>
-      <article id="sustainability" class="relative overflow-hidden rounded-sm bg-concrete p-10 md:p-14" data-reveal style="--d:1">
-        <p class="eyebrow text-signal-ink">Sustainability</p>
-        <h3 class="relative z-10 mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">Building for the next century.</h3>
-        <p class="relative z-10 mt-6 max-w-sm text-ink/65">Placeholder — describe the environmental commitments: net-zero targets, waste diversion, low-carbon materials and certified green buildings delivered.</p>
+      <article id="recognition" class="relative overflow-hidden rounded-sm bg-concrete p-10 md:p-14" data-reveal style="--d:1">
+        <p class="eyebrow text-signal-ink">Awards & recognition</p>
+        <h3 class="relative z-10 mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">Platinum. Best Managed.</h3>
+        <p class="relative z-10 mt-6 max-w-sm text-ink/65">In 2021 Grascan reached Platinum status after 7 years as one of Canada’s Best Managed Companies, certified by Deloitte. Owner Angelo Grassa credits the work ethic, dedication and innovative mindset of Grascan’s employees.</p>
         <svg viewBox="0 0 200 200" class="draw absolute -bottom-20 -right-20 w-64 text-ink/25" fill="none" aria-hidden="true">
-          <path d="M100 180V80" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" />
-          <path d="M100 120c-40 0-60-30-60-70 40 0 60 30 60 70zM100 100c35 0 55-25 55-60-35 0-55 25-55 60z" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:6" />
+          <circle cx="100" cy="80" r="50" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" />
+          <path d="M75 120l-15 60 40-20 40 20-15-60" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:6" />
+          <path d="M100 55l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:10" />
         </svg>
       </article>
     </div>
   </section>
 
-  <section class="overflow-hidden border-y border-ink/10 py-8" aria-label="Certifications">
-    <Marquee items={certifications} class="eyebrow text-base text-ink/60" speed="35s" />
+  <section class="overflow-hidden border-y border-ink/10 bg-concrete py-8" aria-label="Awards and certifications">
+    <Marquee items={awards} class="eyebrow text-base text-signal" speed="45s" />
   </section>
 
   <EstimatingCTA />

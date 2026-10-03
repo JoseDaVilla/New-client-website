@@ -2,47 +2,52 @@
 import { u } from '@/lib/url';
 import { nav, site, offices } from '@/site.config';
 import { services } from '@/data/services';
+import { logo } from '@/lib/logo';
 import Icon from './Icon.astro';
+import Logo from './Logo.astro';
 const year = new Date().getFullYear();
 ---
 
-<footer class="relative overflow-hidden bg-ink text-bone">
+<footer class="on-dark relative overflow-hidden bg-ink text-bone">
   <div class="bg-grid pointer-events-none absolute inset-0 text-bone/50"></div>
 
-  <div class="container-x relative pt-24 pb-10 md:pt-32">
+  <div class="container-x relative pt-20 pb-10 md:pt-28">
     <div class="grid gap-14 lg:grid-cols-12">
-      <div class="lg:col-span-5">
-        <p class="eyebrow mb-6 text-signal">Start a conversation</p>
-        <p class="font-semiwide text-title font-bold">Have a project in mind?</p>
-        <a href={`mailto:${site.email}`} class="group mt-8 inline-flex items-center gap-4 text-lead">
-          <span class="link-u">{site.email}</span>
-          <span class="grid size-11 place-items-center rounded-full bg-signal text-ink transition-transform duration-500 ease-(--ease-expo) group-hover:-rotate-45">
+      <div class="lg:col-span-4">
+        <Logo variant="full" class="w-40 text-bone md:w-48" />
+        <p class="mt-8 max-w-sm text-bone/70">{site.tagline} Delivering time-sensitive, complicated and high-profile construction for nearly four decades.</p>
+        <a href={u('/contact')} class="group mt-8 inline-flex items-center gap-4 font-semibold">
+          <span class="link-u">Start a conversation</span>
+          <span class="grid size-11 place-items-center rounded-full bg-signal text-on-signal transition-transform duration-500 ease-(--ease-expo) group-hover:-rotate-45">
             <Icon name="arrow" />
           </span>
         </a>
       </div>
 
-      <div class="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
+      <div class="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-8">
         <div>
-          <p class="eyebrow mb-5 text-bone/40">Company</p>
+          <p class="eyebrow mb-5 text-gray">Company</p>
           <ul class="space-y-2.5 text-bone/80">
             {nav.map((n) => <li><a class="link-u" href={u(n.href)}>{n.label}</a></li>)}
           </ul>
         </div>
         <div>
-          <p class="eyebrow mb-5 text-bone/40">Services</p>
-          <ul class="space-y-2.5 text-bone/80">
+          <p class="eyebrow mb-5 text-gray">Services</p>
+          <ul class="space-y-2.5 text-sm text-bone/80">
             {services.map((s) => <li><a class="link-u" href={u(`/services#${s.slug}`)}>{s.title}</a></li>)}
           </ul>
         </div>
         <div class="col-span-2 sm:col-span-1">
-          <p class="eyebrow mb-5 text-bone/40">Offices</p>
-          <ul class="space-y-4 text-bone/80">
+          <p class="eyebrow mb-5 text-gray">Offices</p>
+          <ul class="space-y-6 text-sm text-bone/80">
             {
               offices.map((o) => (
                 <li>
                   <p class="font-semibold text-bone">{o.city}</p>
-                  <p class="text-sm text-bone/60">{o.phone}</p>
+                  <p class="mt-1 text-bone/60">{o.address.join(', ')}</p>
+                  {o.phones.map((p) => (
+                    <p class="text-bone/60">{p.label}: <a class="link-u" href={`tel:${p.value.replace(/[^+\d]/g, '')}`}>{p.value}</a></p>
+                  ))}
                 </li>
               ))
             }
@@ -51,18 +56,17 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- Wordmark gigante: SVG con textLength para ocupar siempre el ancho exacto -->
-    <div class="footer-word relative mt-24 select-none" aria-hidden="true">
-      <svg viewBox="0 0 1000 190" class="w-full text-bone/[0.07]">
-        <text x="0" y="178" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="currentColor" font-size="230" font-weight="900" style="font-stretch:125%;letter-spacing:-0.04em">{site.name.toUpperCase()}</text>
-      </svg>
-      <span class="absolute bottom-[30%] left-0 w-full origin-left bg-signal" data-reveal="fade"></span>
+    <!-- Wordmark gigante (trazado del logo) -->
+    <div class="footer-word relative mt-20 select-none" aria-hidden="true">
+      <svg viewBox="0 485 602 58" class="w-full text-bone/[0.06]"><path d={logo.word} fill="currentColor" fill-rule="evenodd" /></svg>
+      <span class="absolute -bottom-4 left-0 w-full origin-left bg-gray" data-reveal="fade"></span>
     </div>
 
-    <div class="mt-10 flex flex-col gap-6 border-t border-bone/10 pt-8 text-sm text-bone/50 md:flex-row md:items-center md:justify-between">
+    <div class="mt-12 flex flex-col gap-6 border-t border-bone/10 pt-8 text-sm text-bone/50 md:flex-row md:items-center md:justify-between">
       <p>© {year} {site.legalName}. All rights reserved.</p>
       <ul class="flex flex-wrap gap-6">
         {site.social.map((s) => <li><a class="link-u" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
+        <li><a class="link-u" href={`mailto:${site.safetyEmail}`}>Health & Safety</a></li>
       </ul>
       <ul class="flex gap-6">
         <li><a class="link-u" href={u('/privacy')}>Privacy</a></li>

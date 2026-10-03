@@ -1,8 +1,10 @@
 import type { APIRoute } from 'astro';
 import { palette } from '@/lib/palette';
+import { logo } from '@/lib/logo';
 
-/** Favicon generado en build con los colores de la paleta. */
-export const faviconSvg = () =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="${palette.ink}"/><path d="M18 14v36M46 14v36" stroke="${palette.bone}" stroke-width="7" stroke-linecap="square"/><path d="M18 32h28" stroke="${palette.signal}" stroke-width="7"/></svg>`;
-
-export const GET: APIRoute = () => new Response(faviconSvg(), { headers: { 'Content-Type': 'image/svg+xml' } });
+/** Favicon generado en build: icono del logo Grascan Build con los colores de la paleta. */
+export const GET: APIRoute = () =>
+  new Response(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="71 -40 458 541"><rect x="71" y="-40" width="458" height="541" rx="60" fill="${palette.bone}"/><path d="${logo.gray}" fill="${palette.gray}"/><path d="${logo.navy}" fill="${palette.signal}"/><path d="${logo.g}" fill="${palette.signal}" fill-rule="evenodd"/></svg>`,
+    { headers: { 'Content-Type': 'image/svg+xml' } },
+  );

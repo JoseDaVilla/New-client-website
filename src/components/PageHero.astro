@@ -1,31 +1,31 @@
 ---
-/** Cabecera de páginas interiores: fondo oscuro con retícula y título partido. */
+/** Cabecera de páginas interiores: fondo blanco con retícula de plano y título partido. */
 import SplitText from './SplitText.astro';
 import Eyebrow from './Eyebrow.astro';
 interface Props { eyebrow: string; title: string; lead?: string; index?: string; accent?: string[] }
 const { eyebrow, title, lead, index, accent = [] } = Astro.props;
 ---
-<section class="relative overflow-hidden bg-ink pt-[calc(var(--header-h)+5rem)] pb-16 text-bone md:pb-24">
-  <div class="bg-grid pointer-events-none absolute inset-0 text-bone/60 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+<section class="relative overflow-hidden border-b border-ink/8 bg-bone pt-[calc(var(--header-h)+5rem)] pb-16 text-ink md:pb-24">
+  <div class="bg-grid pointer-events-none absolute inset-0 text-signal/70 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
   <!-- Retícula de replanteo decorativa -->
   <div class="pointer-events-none absolute right-[-16rem] top-[calc(50%+2.5rem)] aspect-square h-[100%] -translate-y-1/2 hidden opacity-70 md:block xl:right-[-10rem]" aria-hidden="true">
-    <svg viewBox="0 0 400 400" class="draw h-full w-full text-bone/15" fill="none">
+    <svg viewBox="0 0 400 400" class="draw h-full w-full text-signal/20" fill="none">
       <circle cx="200" cy="200" r="196" stroke="currentColor" pathLength="1" class="ln" style="--i:0" />
       <circle cx="200" cy="200" r="140" stroke="currentColor" pathLength="1" class="ln" style="--i:3" />
       <path d="M0 200h400M200 0v400" stroke="currentColor" pathLength="1" class="ln" style="--i:5" />
-      <path d="M200 200L60 340" stroke-width="1.5" pathLength="1" class="ln stroke-signal" style="--i:10" />
-      <circle cx="60" cy="340" r="5" class="draw-fill fill-signal" style="--i:14" />
+      <path d="M200 200L60 340" stroke-width="1.5" pathLength="1" class="ln stroke-gray" style="--i:10" />
+      <circle cx="60" cy="340" r="5" class="draw-fill fill-gray" style="--i:14" />
       <circle cx="200" cy="200" r="4" fill="currentColor" class="draw-fill" style="--i:6" />
     </svg>
-    <svg viewBox="0 0 400 400" class="survey-spin absolute inset-0 h-full w-full text-bone/20" fill="none">
+    <svg viewBox="0 0 400 400" class="survey-spin absolute inset-0 h-full w-full text-gray/40" fill="none">
       <circle cx="200" cy="200" r="168" stroke="currentColor" stroke-dasharray="1 9" stroke-width="6" />
       <circle cx="200" cy="200" r="110" stroke="currentColor" stroke-dasharray="2 4" />
     </svg>
   </div>
   <div class="container-x relative">
-    <Eyebrow index={index} class="mb-8 text-bone/60" >{eyebrow}</Eyebrow>
+    <Eyebrow index={index} class="mb-8 text-mute">{eyebrow}</Eyebrow>
     <SplitText as="h1" text={title} accent={accent} class="max-w-6xl font-wide text-display font-extrabold uppercase" />
-    {lead && <p class="mt-10 max-w-2xl text-lead text-bone/70" data-reveal style="--d:4">{lead}</p>}
+    {lead && <p class="mt-10 max-w-2xl text-lead text-ink/70" data-reveal style="--d:4">{lead}</p>}
     <slot />
   </div>
 </section>

@@ -18,42 +18,42 @@ const n = () => `--i:${i++}`;
 
 <svg viewBox="0 0 1440 900" preserveAspectRatio="xMaxYMax slice" class="hero-scene draw absolute inset-0 h-full w-full" style="--base: var(--intro-delay, 0ms)" aria-hidden="true" fill="none" stroke-linecap="square">
   <!-- Skyline lejano -->
-  <g class="stroke-bone/10" stroke-width="1">
+  <g class="stroke-ink/10" stroke-width="1">
     {skyline.map(([x, y, w]) => <path d={`M${x} ${G}V${y}H${x + w}V${G}`} pathLength="1" class="ln" style={n()} />)}
   </g>
 
   <!-- Suelo -->
-  <path d={`M0 ${G}H1440`} stroke-width="1.5" pathLength="1" class="ln stroke-bone/50" style="--i:0" />
-  <g class="stroke-bone/12">
+  <path d={`M0 ${G}H1440`} stroke-width="1.5" pathLength="1" class="ln stroke-ink/50" style="--i:0" />
+  <g class="stroke-ink/12">
     <path d={Array.from({ length: 90 }, (_, k) => `M${k * 16} ${G + 2}l-10 10`).join('')} />
   </g>
 
   <!-- Torre: plantas construyéndose de abajo hacia arriba -->
-  <g class="stroke-bone/75" stroke-width="1.5">
+  <g class="stroke-ink/75" stroke-width="1.5">
     <path d={`M${bx} ${G}V${top}M${bx + bw} ${G}V${top}`} pathLength="1" class="ln" style={n()} />
     {Array.from({ length: floors }, (_, f) => (
       <path d={`M${bx - 8} ${G - (f + 1) * fh}H${bx + bw + 8}`} pathLength="1" class="ln" style={`--i:${6 + f}`} />
     ))}
   </g>
-  <g class="stroke-bone/22" stroke-width="1">
+  <g class="stroke-ink/22" stroke-width="1">
     {[1, 2, 3, 4, 5].map((c) => <path d={`M${bx + (bw / 6) * c} ${G}V${top}`} pathLength="1" class="ln" style={`--i:${8 + c}`} />)}
   </g>
   <!-- Paneles de fachada (acento) -->
   <g class="draw-fill">
     {[2, 5, 6, 9].map((f, k) => (
-      <rect class="fill-signal/20 stroke-signal" x={bx + (bw / 6) * ((k * 2 + 1) % 6)} y={G - (f + 1) * fh} width={bw / 6} height={fh} stroke-width="1" vector-effect="non-scaling-stroke" />
+      <rect class="fill-gray/25 stroke-gray" x={bx + (bw / 6) * ((k * 2 + 1) % 6)} y={G - (f + 1) * fh} width={bw / 6} height={fh} stroke-width="1" vector-effect="non-scaling-stroke" />
     ))}
   </g>
   <!-- Plantas futuras (punteadas) -->
-  <g class="stroke-bone/25" stroke-dasharray="4 6" stroke-width="1">
+  <g class="stroke-ink/25" stroke-dasharray="4 6" stroke-width="1">
     <path d={`M${bx + 20} ${top}V${top - 3 * fh}H${bx + bw - 20}V${top}M${bx + 20} ${top - fh}H${bx + bw - 20}M${bx + 20} ${top - 2 * fh}H${bx + bw - 20}`} vector-effect="non-scaling-stroke" />
   </g>
 
   <!-- Cotas -->
-  <g class="stroke-bone/30" stroke-width="1">
+  <g class="stroke-ink/30" stroke-width="1">
     <path d={`M${bx - 60} ${G}V${top}M${bx - 66} ${G}h12M${bx - 66} ${top}h12`} pathLength="1" class="ln" style="--i:22" />
   </g>
-  <g font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1.5" class="draw-fill fill-bone/45" style="--i:20">
+  <g font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1.5" class="draw-fill fill-ink/45" style="--i:20">
     <text x={bx - 74} y={(G + top) / 2} transform={`rotate(-90 ${bx - 74} ${(G + top) / 2})`} text-anchor="middle">+168.00 M</text>
     <text x={bx + bw + 24} y={top + 4}>L46</text>
     <text x={bx + bw + 24} y={G - 6 * fh + 4}>L24</text>
@@ -71,23 +71,23 @@ const n = () => `--i:${i++}`;
     <path d={Array.from({ length: 22 }, (_, k) => `M${910 + k * 23} 140l11 -12l12 12`).join('')} />
   </g>
   <rect x="1380" y="142" width="40" height="26" class="draw-fill fill-signal" style="--i:14" />
-  <rect x="1226" y="140" width="22" height="20" class="draw-fill fill-bone/90" style="--i:14" />
+  <rect x="1226" y="140" width="22" height="20" class="draw-fill fill-gray" style="--i:14" />
 
   <!-- Carro + cable + carga (animación continua) -->
   <g class="draw-fill" style="--i:18"><g class="trolley">
-    <rect class="fill-bone" x="-12" y="140" width="24" height="8" />
+    <rect class="fill-ink" x="-12" y="140" width="24" height="8" />
     <g class="hoist">
-      <path class="cable stroke-bone/60" d="M0 148V430" stroke-width="1" vector-effect="non-scaling-stroke" />
+      <path class="cable stroke-ink/60" d="M0 148V430" stroke-width="1" vector-effect="non-scaling-stroke" />
       <g class="load">
-        <path class="stroke-bone/60" d="M0 430l-40 22M0 430l40 22" stroke-width="1" vector-effect="non-scaling-stroke" />
+        <path class="stroke-ink/60" d="M0 430l-40 22M0 430l40 22" stroke-width="1" vector-effect="non-scaling-stroke" />
         <rect class="fill-signal" x="-70" y="452" width="140" height="14" />
-        <path class="stroke-ink" d="M-70 459h140" stroke-width="1" />
+        <path class="stroke-bone" d="M-70 459h140" stroke-width="1" />
       </g>
     </g>
   </g></g>
 
   <!-- Marcas de replanteo -->
-  <g stroke-width="1" class="draw-fill stroke-bone/35" style="--i:24">
+  <g stroke-width="1" class="draw-fill stroke-ink/35" style="--i:24">
     <circle cx={bx} cy={G} r="10" /><path d={`M${bx - 16} ${G}h32M${bx} ${G - 16}v32`} />
     <circle cx={bx + bw} cy={G} r="10" /><path d={`M${bx + bw - 16} ${G}h32M${bx + bw} ${G - 16}v32`} />
   </g>

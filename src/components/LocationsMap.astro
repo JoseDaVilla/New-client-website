@@ -1,26 +1,32 @@
 ---
-/** Mapa SVG estilizado (sin peticiones externas) con oficinas pulsantes. */
+/** Mapa estilizado del GTA (SVG propio, sin peticiones externas) con las oficinas. */
 import { offices } from '@/site.config';
-// Retícula de puntos que sugiere el continente
-const dots: [number, number][] = [];
-for (let y = 0; y < 22; y++) {
-  for (let x = 0; x < 60; x++) {
-    const nx = x / 60, ny = y / 22;
-    const inside = ny > 0.18 + Math.sin(nx * 7) * 0.06 + (nx < 0.1 ? 0.3 : 0) && ny < 0.86 - Math.cos(nx * 5) * 0.06 && !(nx > 0.55 && nx < 0.66 && ny < 0.5) && !(nx > 0.9 && ny > 0.6);
-    if (inside) dots.push([x, y]);
-  }
-}
 ---
 <div class="relative">
-  <svg viewBox="0 0 600 220" class="w-full" aria-label="Office locations map">
-    <g fill="currentColor" opacity=".22">
-      {dots.map(([x, y]) => <circle cx={x * 10 + 5} cy={y * 10 + 5} r="1.6" />)}
+  <svg viewBox="0 0 600 300" class="draw w-full" role="img" aria-label="Office locations in the Greater Toronto Area">
+    <!-- Lago Ontario -->
+    <path d="M0 250 C90 238 170 252 240 236 S360 196 430 214 S540 248 600 232 V300 H0Z" class="fill-signal/10" />
+    <path d="M0 250 C90 238 170 252 240 236 S360 196 430 214 S540 248 600 232" class="ln stroke-signal/40" fill="none" stroke-width="1.5" pathLength="1" style="--i:1" />
+    <!-- Autopistas -->
+    <g fill="none" class="stroke-current/25" stroke-width="3" stroke-linecap="round">
+      <path d="M20 128 C150 122 300 118 600 112" pathLength="1" class="ln" style="--i:3" /><!-- 401 -->
+      <path d="M20 60 C200 52 380 48 600 44" pathLength="1" class="ln" style="--i:5" /><!-- 407 -->
+      <path d="M268 40 V232" pathLength="1" class="ln" style="--i:7" /><!-- 427 -->
+      <path d="M182 30 V140" pathLength="1" class="ln" style="--i:9" /><!-- 410 -->
+      <path d="M40 238 C140 226 220 232 300 220 S420 198 470 206" pathLength="1" class="ln" style="--i:11" /><!-- QEW / Gardiner -->
+      <path d="M420 40 V210" pathLength="1" class="ln" style="--i:13" /><!-- 404/DVP -->
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1" class="fill-current/45">
+      <text x="560" y="106">401</text><text x="560" y="38">407</text><text x="274" y="52">427</text><text x="188" y="40">410</text><text x="60" y="228">QEW</text>
+      <text x="470" y="270" class="fill-signal/60">LAKE ONTARIO</text>
+      <text x="470" y="176">TORONTO</text>
     </g>
     {offices.map((o, i) => (
-      <g transform={`translate(${o.map.x * 6} ${o.map.y * 2.2})`}>
-        <circle r="18" opacity=".18" class="pulse fill-signal" style={`animation-delay:${i * 0.6}s`} />
-        <circle class="fill-signal" r="4.5" />
-        <text y="-14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1" fill="currentColor">{o.city.toUpperCase()}</text>
+      <g transform={`translate(${o.map.x * 6} ${o.map.y * 3})`}>
+        <circle r="20" class="pulse fill-signal/15" style={`animation-delay:${i * 0.8}s`} />
+        <circle r="6" class="fill-signal" />
+        <circle r="2.5" class="fill-bone" />
+        <text y="-14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" letter-spacing="1" class="fill-current">{o.city.toUpperCase()}</text>
       </g>
     ))}
   </svg>
@@ -32,7 +38,7 @@ for (let y = 0; y < 22; y++) {
     animation: pulse 2.4s ease-out infinite;
   }
   @keyframes pulse {
-    from { transform: scale(0.3); opacity: 0.6; }
+    from { transform: scale(0.3); opacity: 0.8; }
     to { transform: scale(1.6); opacity: 0; }
   }
 </style>

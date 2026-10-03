@@ -28,15 +28,15 @@ const share = [
 
 <Base title={d.title} description={d.excerpt}>
   <article>
-    <header class="relative bg-ink pt-[calc(var(--header-h)+4rem)] pb-14 text-bone md:pb-20">
-      <div class="bg-grid pointer-events-none absolute inset-0 text-bone/50 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+    <header class="relative bg-bone pt-[calc(var(--header-h)+4rem)] pb-14 text-ink md:pb-20">
+      <div class="bg-grid pointer-events-none absolute inset-0 text-signal/70 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
       <div class="container-x relative max-w-5xl">
-        <a href={u('/news')} class="eyebrow mb-10 inline-flex items-center gap-3 text-bone/60 hover:text-bone"><Icon name="arrow-left" class="size-4" /> All news</a>
-        <p class="eyebrow flex items-center gap-3 text-bone/60" data-reveal>
-          <span class="text-signal">{d.category}</span><span class="h-px w-6 bg-current"></span><time datetime={d.date.toISOString()}>{date}</time>
+        <a href={u('/news')} class="eyebrow mb-10 inline-flex items-center gap-3 text-mute hover:text-ink"><Icon name="arrow-left" class="size-4" /> All news</a>
+        <p class="eyebrow flex items-center gap-3 text-mute" data-reveal>
+          <span class="text-signal-ink">{d.category}</span><span class="h-px w-6 bg-current"></span><time datetime={d.date.toISOString()}>{date}</time>
         </p>
         <SplitText as="h1" text={d.title} class="mt-6 font-wide text-[clamp(2.2rem,5vw,4.75rem)] font-extrabold uppercase leading-[0.95] tracking-tight" />
-        <p class="mt-8 max-w-3xl text-lead text-bone/70" data-reveal style="--d:3">{d.excerpt}</p>
+        <p class="mt-8 max-w-3xl text-lead text-ink/70" data-reveal style="--d:3">{d.excerpt}</p>
       </div>
     </header>
 

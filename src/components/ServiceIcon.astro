@@ -1,15 +1,20 @@
 ---
-/** Iconos técnicos de servicios: se dibujan al entrar en pantalla y al hover. */
+/** Iconos técnicos de servicios (48×48, trazo): se dibujan al entrar en pantalla. */
 import type { ServiceIcon } from '@/data/services';
 interface Props { name: ServiceIcon; class?: string }
 const { name, class: cls = 'size-14' } = Astro.props;
 const icons: Record<ServiceIcon, string[]> = {
-  cm: ['M8 40V18l16-10 16 10v22', 'M8 40h32', 'M18 40V28h12v12', 'M24 8v-4', 'M4 20l20-14 20 14'],
-  gc: ['M6 42h36', 'M10 42V14h12v28', 'M22 42V22h16v20', 'M14 20h4M14 26h4M14 32h4M26 28h8M26 34h8'],
-  db: ['M6 6h20v20H6z', 'M22 22h20v20H22z', 'M6 6l20 20', 'M30 30l8 8M38 30l-8 8'],
-  pre: ['M6 42L42 6', 'M6 30h12v12', 'M30 6h12v12', 'M6 6h8M6 6v8', 'M20 28l8-8'],
-  civil: ['M2 34h44', 'M2 38h44', 'M10 34V22M38 34V22', 'M2 22q22-22 44 0', 'M18 34v-9M24 34v-11M30 34v-9'],
-  industrial: ['M4 42V24l10 6v-6l10 6v-6l10 6V8h8v34z', 'M4 42h40', 'M36 8V4h4v4'],
+  bridge: ['M2 30h44', 'M2 34h44', 'M2 30q22-22 44 0', 'M10 34v10M38 34v10', 'M16 30v-8M24 30v-11M32 30v-8'],
+  dam: ['M6 8h14l8 34H6z', 'M28 42h16', 'M28 20q4 -3 8 0t8 0', 'M28 28q4 -3 8 0t8 0', 'M28 36q4 -3 8 0t8 0'],
+  designbuild: ['M6 6h20v20H6z', 'M22 22h20v20H22z', 'M6 6l20 20', 'M30 30l8 8M38 30l-8 8'],
+  environmental: ['M24 44V22', 'M24 30c-10 0-16-7-16-18 10 0 16 7 16 18z', 'M24 24c8 0 14-6 14-15-8 0-14 6-14 15z', 'M14 44h20'],
+  paving: ['M4 40h40', 'M8 32h18a6 6 0 0 1 6 6v2', 'M8 32v8', 'M30 26h10v14', 'M12 44h4M22 44h4M32 44h4'],
+  infrastructure: ['M6 42h36', 'M10 42V18h10v24', 'M28 42V10h10v32', 'M20 26h8', 'M14 24h2M14 30h2M14 36h2M32 16h2M32 22h2M32 28h2'],
+  landscaping: ['M14 44V30', 'M14 30a8 8 0 1 0 0-16 8 8 0 0 0 0 16z', 'M34 44V26', 'M34 26l-8 0 8-16 8 16z', 'M4 44h40'],
+  pm: ['M8 6h32v36H8z', 'M14 14h4M14 22h4M14 30h4', 'M22 14h12M22 22h12M22 30h8', 'M30 36l4 4 8-10'],
+  rail: ['M14 4L6 44M34 4l8 40', 'M12 12h24M10 22h28M8 32h32M7 40h34', 'M24 4v6'],
+  roads: ['M4 44L18 4M44 44L30 4', 'M24 6v6M24 18v7M24 31v9', 'M2 20h8M38 20h8'],
+  underground: ['M2 14h44', 'M2 14l4-6h36l4 6', 'M10 22h28v20H10z', 'M10 32h28', 'M24 14v8'],
 };
 ---
 <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" class:list={['service-icon draw', cls]} aria-hidden="true">

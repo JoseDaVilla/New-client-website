@@ -1,28 +1,29 @@
 /**
- * Configuración central del sitio.
- * Todo el contenido "global" (marca, navegación, oficinas, cifras, redes)
- * vive aquí para poder reemplazarlo fácilmente cuando llegue el contenido real.
+ * Configuración central del sitio Grascan Build.
+ * Contenido basado en grascan.com (historia, servicios, proyectos, oficinas).
+ * Los valores marcados con TODO deben confirmarse con el cliente.
  */
 
 export const site = {
-  name: 'Halden',
-  legalName: 'Halden Construction Group',
-  tagline: 'Building what moves communities forward.',
+  name: 'Grascan',
+  legalName: 'Grascan Build',
+  tagline: 'Building Southern Ontario since 1987.',
   description:
-    'Halden is a full-service general contractor and construction manager delivering commercial, institutional, industrial and civil projects across North America.',
+    'Grascan Build brings nearly four decades of Grascan experience — time-sensitive, complex and high-profile construction across Southern Ontario — to private-sector clients.',
   founded: 1987,
-  email: 'info@halden.example',
-  phone: '+1 (416) 555-0142',
-  estimatingEmail: 'estimating@halden.example',
-  careersUrl: '/contact#careers',
+  email: 'info@grascanbuild.com', // TODO: confirmar email general
+  phone: '416-644-8858',
+  tollFree: '1-888-929-4727',
+  fax: '416-644-8864',
+  estimatingEmail: 'estimating@grascanbuild.com', // TODO: confirmar
+  safetyEmail: 'safety@grascan.com',
+  careersEmail: 'hr@grascanbuild.com', // TODO: confirmar
   social: [
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
-    { label: 'Instagram', href: 'https://www.instagram.com/' },
-    { label: 'YouTube', href: 'https://www.youtube.com/' },
+    { label: 'LinkedIn', href: 'https://ca.linkedin.com/company/grascan-construction-ltd-' },
   ],
   /**
-   * Endpoint de formularios. Por defecto se usa Netlify Forms (atributo data-netlify).
-   * Si se despliega en otro hosting, poner aquí la URL de Formspree / Basin / API propia.
+   * Endpoint de formularios. GitHub Pages no procesa formularios: poner aquí la URL
+   * de Formspree / Basin / API propia. Vacío = Netlify Forms (si se aloja en Netlify).
    */
   formEndpoint: '',
 } as const;
@@ -38,63 +39,56 @@ export const nav = [
 ] as const;
 
 export const stats = [
-  { value: 38, suffix: '', label: 'Years building', note: `Since ${site.founded}` },
-  { value: 1200, suffix: '+', label: 'Projects delivered', note: 'Across 6 sectors' },
-  { value: 4.8, suffix: 'B', prefix: '$', decimals: 1, label: 'Work in place', note: 'Last 10 years' },
-  { value: 0.42, suffix: '', decimals: 2, label: 'EMR safety rating', note: 'Industry avg. 1.0' },
+  { value: new Date().getFullYear() - 1987, suffix: '', label: 'Years building', note: 'Incorporated in 1987' },
+  { value: 300, prefix: '$', suffix: 'M+', label: 'Tender capacity', note: 'Single-project bid capacity' },
+  { value: 29, suffix: '', label: 'GO Stations upgraded', note: 'Early Stations design-build' },
+  { value: 18, suffix: ' mo', label: 'Ahead of schedule', note: 'Gardiner Expressway Section 2' },
 ] as const;
 
 export const offices = [
   {
     city: 'Toronto',
-    label: 'Head Office',
-    address: ['120 Front Street West, Suite 900', 'Toronto, ON M5J 2L7'],
-    phone: '+1 (416) 555-0142',
-    email: 'toronto@halden.example',
-    hours: 'Mon–Fri · 8:00–17:00',
-    // posición relativa (0–100) en el mapa SVG estilizado
-    map: { x: 71, y: 58 },
-    coords: '43.6453° N, 79.3806° W',
+    label: 'Main Office & Facility',
+    address: ['61 Steinway Blvd.', 'Toronto, ON M9W 6H6'],
+    phone: '416-644-8858',
+    phones: [
+      { label: 'Tel', value: '416-644-8858' },
+      { label: 'Fax', value: '416-644-8864' },
+      { label: 'Toll free', value: '1-888-929-4727' },
+    ],
+    email: 'info@grascanbuild.com', // TODO: confirmar
+    hours: 'Mon–Fri · 7:00–17:00', // TODO: confirmar horario
+    // posición relativa (0–100) en el mapa estilizado del GTA
+    map: { x: 46, y: 40 },
+    coords: '43.7440° N, 79.5940° W',
   },
   {
-    city: 'Vancouver',
-    label: 'Western Region',
-    address: ['1055 West Georgia Street, Floor 14', 'Vancouver, BC V6E 3P3'],
-    phone: '+1 (604) 555-0187',
-    email: 'vancouver@halden.example',
-    hours: 'Mon–Fri · 8:00–17:00',
-    map: { x: 14, y: 50 },
-    coords: '49.2856° N, 123.1207° W',
-  },
-  {
-    city: 'Calgary',
-    label: 'Prairies Region',
-    address: ['600 3rd Avenue SW, Suite 1200', 'Calgary, AB T2P 0G5'],
-    phone: '+1 (403) 555-0119',
-    email: 'calgary@halden.example',
-    hours: 'Mon–Fri · 8:00–17:00',
-    map: { x: 27, y: 52 },
-    coords: '51.0486° N, 114.0708° W',
-  },
-  {
-    city: 'Montréal',
-    label: 'Eastern Region',
-    address: ['1250 René-Lévesque Blvd W, Suite 2200', 'Montréal, QC H3B 4W8'],
-    phone: '+1 (514) 555-0163',
-    email: 'montreal@halden.example',
-    hours: 'Mon–Fri · 8:00–17:00',
-    map: { x: 80, y: 52 },
-    coords: '45.4972° N, 73.5716° W',
+    city: 'Brampton',
+    label: 'EHS, Human Resources & Overflow Facility',
+    address: ['85 Devon Rd.', 'Brampton, ON L6T 5A4'],
+    phone: '416-213-8766',
+    phones: [{ label: 'Tel', value: '416-213-8766' }],
+    email: 'safety@grascan.com',
+    hours: 'Mon–Fri · 7:00–17:00', // TODO: confirmar horario
+    map: { x: 30, y: 30 },
+    coords: '43.7110° N, 79.7000° W',
   },
 ] as const;
 
-export const sectors = [
-  'Commercial',
-  'Institutional',
-  'Healthcare',
-  'Industrial',
-  'Infrastructure',
-  'Residential',
-] as const;
+/** Categorías de proyecto (filtros). */
+export const sectors = ['Bridges & Structures', 'Rail & Transit', 'Roads & Highways', 'Infrastructure'] as const;
 
 export type Sector = (typeof sectors)[number];
+
+/** Organizaciones para las que Grascan ha sido invitada a licitar (grascan.com). */
+export const clients = [
+  'Metrolinx (GO Transit)',
+  'City of Toronto',
+  'Ministry of Transportation Ontario',
+  'Toronto Transit Commission',
+  'CN Railway',
+  'CP Rail',
+  'Waterfront Toronto',
+  'GTAA',
+  'Regional Municipalities',
+] as const;

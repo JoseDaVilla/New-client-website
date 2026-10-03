@@ -21,9 +21,9 @@ const p = project.data;
     />
     <div class="absolute left-4 top-4 flex gap-2">
       <span class="eyebrow rounded-full bg-bone/90 px-3 py-1.5 text-ink backdrop-blur">{p.sector}</span>
-      {p.status !== 'Completed' && <span class="eyebrow rounded-full bg-signal px-3 py-1.5 text-ink">{p.status}</span>}
+      {p.status !== 'Completed' && <span class="eyebrow rounded-full bg-signal px-3 py-1.5 text-on-signal">{p.status}</span>}
     </div>
-    <span class="absolute bottom-4 right-4 grid size-12 place-items-center rounded-full bg-signal text-ink transition-all duration-500 ease-(--ease-expo) can-hover:translate-y-3 can-hover:opacity-0 can-hover:group-hover:translate-y-0 can-hover:group-hover:opacity-100">
+    <span class="absolute bottom-4 right-4 grid size-12 place-items-center rounded-full bg-signal text-on-signal transition-all duration-500 ease-(--ease-expo) can-hover:translate-y-3 can-hover:opacity-0 can-hover:group-hover:translate-y-0 can-hover:group-hover:opacity-100">
       <Icon name="arrow" class="size-5 -rotate-45" />
     </span>
   </div>

@@ -3,6 +3,8 @@ import { u } from '@/lib/url';
 import { nav, site, offices } from '@/site.config';
 import Logo from './Logo.astro';
 import Button from './Button.astro';
+interface Props { darkHero?: boolean }
+const { darkHero = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => {
   const target = u(href).replace(/\/$/, '');
@@ -10,12 +12,12 @@ const isActive = (href: string) => {
 };
 ---
 
-<header id="site-header" class="group/header fixed inset-x-0 top-0 z-50 text-bone transition-[transform,background-color] duration-500 ease-(--ease-expo)">
+<header id="site-header" class:list={['group/header fixed inset-x-0 top-0 z-50 text-ink transition-[transform,background-color] duration-500 ease-(--ease-expo)', darkHero && 'header-dark']}>
   <div class="progress-bar absolute inset-x-0 top-0 h-0.5 origin-left bg-signal"></div>
-  <div class="header-bg absolute inset-0 -z-10 border-b border-bone/0 transition-all duration-500"></div>
+  <div class="header-bg absolute inset-0 -z-10 border-b border-ink/0 transition-all duration-500"></div>
   <div class="container-x flex h-(--header-h) items-center justify-between gap-6">
-    <a href={u('/')} class="relative z-10" aria-label={`${site.name} — Home`}>
-      <Logo />
+    <a href={u('/')} class="relative z-10" aria-label={`${site.legalName} — Home`}>
+      <Logo variant="horizontal" animate delay={150} class="header-logo h-10 w-auto md:h-11" />
     </a>
 
     <nav aria-label="Main" class="hidden lg:block">
@@ -33,11 +35,11 @@ const isActive = (href: string) => {
     </nav>
 
     <div class="flex items-center gap-3">
-      <Button href={u('/contact')} variant="ghost-light" class="hidden !py-3 sm:inline-flex">Contact us</Button>
+      <Button href={u('/contact')} variant="ghost" class="hidden !py-3 sm:inline-flex">Contact us</Button>
       <button
         id="menu-toggle"
         type="button"
-        class="relative z-10 grid size-12 place-items-center rounded-full border border-bone/25 transition-colors hover:border-bone lg:hidden"
+        class="relative z-10 grid size-12 place-items-center rounded-full border border-current/25 transition-colors hover:border-current lg:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label="Open menu"
@@ -51,7 +53,7 @@ const isActive = (href: string) => {
   </div>
 
   <!-- Menú móvil a pantalla completa -->
-  <div id="mobile-menu" class="mobile-menu fixed inset-0 -z-20 flex flex-col bg-ink lg:hidden" hidden>
+  <div id="mobile-menu" class="mobile-menu on-dark fixed inset-0 -z-20 flex flex-col bg-ink lg:hidden" hidden>
     <div class="bg-grid pointer-events-none absolute inset-0 text-bone/60"></div>
     <nav aria-label="Mobile" class="container-x relative flex flex-1 flex-col justify-center pt-(--header-h)">
       <ul class="space-y-1">
@@ -83,9 +85,28 @@ const isActive = (href: string) => {
 
 <style>
   #site-header.is-scrolled .header-bg {
-    background: color-mix(in oklab, var(--color-ink) 82%, transparent);
+    background: color-mix(in oklab, var(--color-bone) 88%, transparent);
     backdrop-filter: blur(14px) saturate(1.4);
-    border-color: color-mix(in oklab, var(--color-bone) 8%, transparent);
+    border-color: color-mix(in oklab, var(--color-ink) 8%, transparent);
+  }
+  /* Sobre heroes oscuros (hasta hacer scroll) y con el menú móvil abierto, el header pasa a claro */
+  #site-header.header-dark:not(.is-scrolled),
+  #site-header.menu-open {
+    color: var(--color-bone);
+    --color-gray: var(--color-signal-soft);
+  }
+  #site-header.header-dark:not(.is-scrolled) :global(.header-logo),
+  #site-header.menu-open :global(.header-logo) {
+    color: var(--color-bone);
+  }
+  #site-header.header-dark:not(.is-scrolled) :global(.btn-ghost .btn-arrow svg),
+  #site-header.menu-open :global(.btn-ghost .btn-arrow svg) {
+    color: var(--color-ink);
+  }
+  #site-header.header-dark:not(.is-scrolled) :global(.btn-ghost),
+  #site-header.menu-open :global(.btn-ghost) {
+    color: var(--color-bone);
+    border-color: color-mix(in oklab, var(--color-bone) 35%, transparent);
   }
   #site-header.is-hidden {
     transform: translateY(-100%);

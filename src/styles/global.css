@@ -30,25 +30,30 @@
 /*  leen de este archivo en build (src/lib/palette.ts).                */
 /* ================================================================== */
 @theme static {
-  /* Neutros oscuros (fondos de secciones oscuras, texto principal) */
-  --color-ink: #0b0d10; /* fondo oscuro principal / texto sobre claro */
-  --color-ink-2: #12161b; /* superficies sobre ink (tarjetas, placeholders) */
-  --color-steel: #1c2229; /* hover sobre superficies oscuras */
-  --color-graphite: #2b323b; /* reservado: bordes/superficies oscuras */
+  /* PALETA DEL LOGO GRASCAN BUILD: navy #062E61 · gris #72787F · blanco.
+     Todos los demás tonos son variaciones (más claras/oscuras) de esos tres. */
 
-  /* Neutros claros (fondos claros, texto sobre oscuro) */
-  --color-bone: #f6f5f1; /* fondo claro principal / texto sobre oscuro */
-  --color-concrete: #e9e7e1; /* secciones claras alternas */
-  --color-fog: #c9ccd0; /* reservado: neutro medio */
-  --color-mute: #656c76; /* texto secundario (AA sobre bone) */
+  /* Colores de marca */
+  --color-signal: #062e61; /* NAVY del logo: botones, acentos, iconos, líneas */
+  --color-gray: #72787f; /* GRIS del logo: detalles, palabras destacadas */
+  --color-signal-soft: #c7ccd2; /* gris del logo aclarado: acento sobre fondos navy (.on-dark) */
+  --color-signal-ink: #062e61; /* acento para texto pequeño sobre blanco (AA) */
+  --color-on-signal: #ffffff; /* texto sobre botones/bloques navy */
 
-  /* Acento de marca */
-  --color-signal: #ff4f17; /* acento principal: botones, líneas, detalles */
-  --color-signal-soft: #ff8a5c; /* variante clara del acento */
-  --color-signal-ink: #c2410c; /* acento para texto pequeño sobre fondos claros (AA) */
+  /* Navy (texto principal y secciones oscuras) */
+  --color-ink: #041f42; /* navy del logo oscurecido: texto y fondo de secciones oscuras */
+  --color-ink-2: #062e61; /* navy del logo: superficies sobre fondo oscuro */
+  --color-steel: #0b3a75; /* navy aclarado: hover sobre superficies oscuras */
+  --color-graphite: #1d4a85; /* navy aclarado: bordes sobre oscuro */
+
+  /* Blanco y grises (derivados del gris del logo) */
+  --color-bone: #ffffff; /* fondo principal (blanco) / texto sobre oscuro */
+  --color-concrete: #f3f4f5; /* gris del logo muy claro: secciones alternas */
+  --color-fog: #d9dcdf; /* gris del logo claro: bordes suaves */
+  --color-mute: #5b6168; /* gris del logo oscurecido: texto secundario (AA) */
 
   /* Estados */
-  --color-danger: #d93a1e; /* errores de formulario */
+  --color-danger: #b42318; /* errores de formulario (único tono fuera del logo, por accesibilidad) */
 
   /* ---------------- Tipografía, tamaños y curvas ---------------- */
   --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -70,6 +75,16 @@
   --ease-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
   --breakpoint-3xl: 112rem;
+}
+
+/* Contexto oscuro: dentro de una sección navy el acento pasa a azul claro y el gris se aclara.
+   Úsalo en el contenedor de cualquier sección con fondo bg-ink / bg-ink-2 / bg-signal. */
+@utility on-dark {
+  --color-signal: var(--color-signal-soft);
+  --color-signal-ink: var(--color-signal-soft);
+  --color-on-signal: var(--color-ink);
+  --color-gray: var(--color-signal-soft);
+  color: var(--color-bone);
 }
 
 /* Sólo dispositivos con puntero fino: en táctil el contenido "hover" queda visible */
@@ -142,7 +157,7 @@
   }
   ::selection {
     background: var(--color-signal);
-    color: var(--color-bone);
+    color: var(--color-on-signal);
   }
   :focus-visible {
     outline: 2px solid var(--color-signal);
@@ -327,7 +342,7 @@
 }
 .btn-primary {
   background: var(--color-signal);
-  color: var(--color-ink);
+  color: var(--color-on-signal);
   --fill: var(--color-ink);
   --arrow: var(--color-signal);
 }
@@ -335,8 +350,9 @@
   .btn-primary:hover {
     color: var(--color-bone);
   }
-}
-@media (hover: hover) {
+  .btn-primary:hover .btn-arrow {
+    background: var(--color-bone);
+  }
   .btn-primary:hover .btn-arrow svg {
     color: var(--color-ink);
   }
@@ -349,12 +365,29 @@
 }
 @media (hover: hover) {
   .btn-dark:hover {
-    color: var(--color-ink);
+    color: var(--color-on-signal);
+  }
+  .btn-dark:hover .btn-arrow svg {
+    color: var(--color-signal);
   }
 }
 .btn-ghost {
-  border: 1px solid currentColor;
-  --fill: currentColor;
+  border: 1px solid color-mix(in oklab, var(--color-ink) 25%, transparent);
+  color: var(--color-ink);
+  --fill: var(--color-ink);
+  --arrow: var(--color-bone);
+}
+@media (hover: hover) {
+  .btn-ghost:hover {
+    color: var(--color-bone);
+    border-color: var(--color-ink);
+  }
+  .btn-ghost:hover .btn-arrow {
+    background: var(--color-bone);
+  }
+  .btn-ghost:hover .btn-arrow svg {
+    color: var(--color-ink);
+  }
 }
 .btn-ghost-light {
   border: 1px solid color-mix(in oklab, var(--color-bone) 35%, transparent);
@@ -366,13 +399,9 @@
   .btn-ghost-light:hover {
     color: var(--color-ink);
   }
-}
-@media (hover: hover) {
   .btn-ghost-light:hover .btn-arrow {
     background: var(--color-ink);
   }
-}
-@media (hover: hover) {
   .btn-ghost-light:hover .btn-arrow svg {
     color: var(--color-bone);
   }

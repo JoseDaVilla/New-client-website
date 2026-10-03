@@ -1,17 +1,80 @@
 ---
+/**
+ * Logo Grascan Build (SVG vectorizado, sin fondo).
+ *  - variant "full": icono + wordmark apilados (intro, footer)
+ *  - variant "horizontal": icono + wordmark en línea (header)
+ *  - variant "mark": sólo el icono
+ * Colores: partes navy = currentColor (por defecto text-signal), barra gris = --color-gray.
+ * En fondos oscuros pasar class="text-bone" (y el gris se aclara con .on-dark).
+ * `animate` construye el logo: las torres crecen desde la base y el wordmark se revela.
+ */
+import { logo } from '@/lib/logo';
 import { site } from '@/site.config';
-interface Props { class?: string; mark?: boolean }
-const { class: cls = '', mark = false } = Astro.props;
+interface Props { variant?: 'full' | 'horizontal' | 'mark'; class?: string; animate?: boolean; delay?: number }
+const { variant = 'horizontal', class: cls = '', animate = false, delay = 0 } = Astro.props;
+const views = { full: '0 0 602 591', horizontal: '0 0 520 100', mark: '121 0 358 461' };
 ---
-<span class:list={['inline-flex items-center gap-2.5', cls]}>
-  <svg viewBox="0 0 40 40" class="size-8 shrink-0" aria-hidden="true">
-    <path d="M9 5v30M31 5v30" stroke="currentColor" stroke-width="5" stroke-linecap="square" />
-    <path class="stroke-signal" d="M9 20h22" stroke-width="5" />
-    <path d="M9 5h4M27 5h4M9 35h4M27 35h4" stroke="currentColor" stroke-width="2" />
-  </svg>
-  {!mark && (
-    <span class="font-wide text-[1.35rem] font-extrabold uppercase leading-none tracking-[-0.02em]">
-      {site.name}<span class="text-signal">.</span>
-    </span>
-  )}
-</span>
+<svg
+  viewBox={views[variant]}
+  class:list={['logo text-signal', animate && 'logo-animate', cls]}
+  style={animate ? `--logo-delay:${delay}ms` : undefined}
+  role="img"
+  aria-label={site.legalName}
+>
+  {
+    variant === 'horizontal' ? (
+      <>
+        <g transform="scale(0.2169) translate(-121 0)">
+          <path class="logo-bar logo-bar-1 fill-gray" d={logo.gray} />
+          <path class="logo-bar logo-bar-2 fill-current" d={logo.navy} />
+          <path class="logo-bar logo-bar-3 fill-current" d={logo.g} fill-rule="evenodd" />
+        </g>
+        <g transform="translate(96 16) scale(0.705) translate(0 -485)">
+          <path class="logo-word fill-current" d={logo.word} fill-rule="evenodd" />
+          <path class="logo-sub fill-gray" d={logo.build} fill-rule="evenodd" />
+        </g>
+      </>
+    ) : (
+      <>
+        <path class="logo-bar logo-bar-1 fill-gray" d={logo.gray} />
+        <path class="logo-bar logo-bar-2 fill-current" d={logo.navy} />
+        <path class="logo-bar logo-bar-3 fill-current" d={logo.g} fill-rule="evenodd" />
+        {variant === 'full' && (
+          <>
+            <path class="logo-word fill-current" d={logo.word} fill-rule="evenodd" />
+            <path class="logo-sub fill-gray" d={logo.build} fill-rule="evenodd" />
+          </>
+        )}
+      </>
+    )
+  }
+</svg>
+
+<style is:global>
+  .logo-animate .logo-bar {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: logo-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .logo-animate .logo-bar-1 { animation-delay: calc(var(--logo-delay, 0ms) + 0ms); }
+  .logo-animate .logo-bar-2 { animation-delay: calc(var(--logo-delay, 0ms) + 120ms); }
+  .logo-animate .logo-bar-3 { animation-delay: calc(var(--logo-delay, 0ms) + 240ms); }
+  .logo-animate .logo-word {
+    animation: logo-wipe 0.9s cubic-bezier(0.76, 0, 0.24, 1) both;
+    animation-delay: calc(var(--logo-delay, 0ms) + 450ms);
+  }
+  .logo-animate .logo-sub {
+    animation: logo-fade 0.8s ease both;
+    animation-delay: calc(var(--logo-delay, 0ms) + 800ms);
+  }
+  @keyframes logo-rise {
+    from { transform: scaleY(0); }
+  }
+  @keyframes logo-wipe {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes logo-fade {
+    from { opacity: 0; transform: translateY(6px); }
+  }
+</style>
