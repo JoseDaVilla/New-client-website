@@ -5,7 +5,6 @@ import Base from '@/layouts/Base.astro';
 import Media from '@/components/Media.astro';
 import SplitText from '@/components/SplitText.astro';
 import NewsCard from '@/components/NewsCard.astro';
-import Icon from '@/components/Icon.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import { site } from '@/site.config';
 
@@ -29,19 +28,17 @@ const share = [
 <Base title={d.title} description={d.excerpt}>
   <article>
     <header class="relative bg-bone pt-[calc(var(--header-h)+4rem)] pb-14 text-ink md:pb-20">
-      <div class="bg-grid pointer-events-none absolute inset-0 text-signal/70 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+      <div class="bg-grid pointer-events-none absolute inset-0 text-signal/50"></div>
       <div class="container-x relative max-w-5xl">
-        <a href={u('/news')} class="eyebrow mb-10 inline-flex items-center gap-3 text-mute hover:text-ink"><Icon name="arrow-left" class="size-4" /> All news</a>
-        <p class="eyebrow flex items-center gap-3 text-mute" data-reveal>
-          <span class="text-signal-ink">{d.category}</span><span class="h-px w-6 bg-current"></span><time datetime={d.date.toISOString()}>{date}</time>
-        </p>
+        <a href={u('/news')} class="mb-10 inline-block text-sm font-semibold text-mute underline-offset-4 hover:text-ink hover:underline">Back to news</a>
+        <p class="text-mute" data-reveal><span class="font-semibold text-signal-ink">{d.category}</span>, <time datetime={d.date.toISOString()}>{date}</time></p>
         <SplitText as="h1" text={d.title} class="mt-6 font-wide text-[clamp(2.2rem,5vw,4.75rem)] font-extrabold uppercase leading-[0.95] tracking-tight" />
         <p class="mt-8 max-w-3xl text-lead text-ink/70" data-reveal style="--d:3">{d.excerpt}</p>
       </div>
     </header>
 
     <div class="container-x -mt-px max-w-6xl" data-reveal="mask">
-      <Media src={d.cover} alt={d.title} seed={post.id} variant={d.variant} eager class="aspect-[16/9] rounded-b-sm" sizes="(min-width: 1152px) 1152px, 100vw" />
+      <Media src={d.cover} alt={d.title} seed={post.id} variant={d.variant} eager class="aspect-[16/9]" sizes="(min-width: 1152px) 1152px, 100vw" />
     </div>
 
     <div class="container-x grid max-w-6xl gap-12 py-16 md:py-24 lg:grid-cols-12">

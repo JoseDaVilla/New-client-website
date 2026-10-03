@@ -28,4 +28,4 @@ gallery:
 
 New station construction at Caledonia GO for Metrolinx.
 
-*Placeholder — add scope, milestones and photos.*
+*Placeholder: add scope, milestones and photos.*

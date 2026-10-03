@@ -6,7 +6,6 @@ import Eyebrow from '@/components/Eyebrow.astro';
 import SplitText from '@/components/SplitText.astro';
 import Media from '@/components/Media.astro';
 import Button from '@/components/Button.astro';
-import Marquee from '@/components/Marquee.astro';
 import EstimatingCTA from '@/components/EstimatingCTA.astro';
 import { site, stats } from '@/site.config';
 import { values, timeline, leadership, awards } from '@/data/services';
@@ -25,23 +24,23 @@ import { values, timeline, leadership, awards } from '@/data/services';
   <section class="py-24 md:py-36">
     <div class="container-x grid gap-14 lg:grid-cols-12">
       <div class="lg:col-span-6">
-        <Eyebrow index="01" class="mb-8 text-mute">Our story</Eyebrow>
+        <Eyebrow class="mb-8 text-mute">Our story</Eyebrow>
         <SplitText text="From roadwork|to landmark|projects." accent={["projects."]} class="font-wide text-title font-extrabold uppercase" />
       </div>
       <div class="space-y-6 text-lg leading-relaxed text-ink/75 lg:col-span-5 lg:col-start-8" data-reveal>
         <p>Grascan was incorporated in 1987 by owners <strong class="text-ink">Angelo Grassa and John Balazic</strong>. The company undertook basic roadwork when it launched, but it wasn't long before the founders decided to focus on more challenging, unique projects.</p>
-        <p>By 2000, Grascan had solidified its position as captains of industry, completing some of the most high-profile jobs in the City of Toronto — including dismantling the Gardiner Expressway, something no other contractor in Ontario had done before.</p>
+        <p>By 2000, Grascan had solidified its position as captains of industry, completing some of the most high-profile jobs in the City of Toronto, including dismantling the Gardiner Expressway, something no other contractor in Ontario had done before.</p>
         <p>With over 36 years of experience completing Bid-Build projects, Grascan established an integrated Design-Build team that is successfully performing multiple major Design-Build projects for Metrolinx. <strong class="text-ink">Grascan Build</strong> now brings that experience to private construction.</p>
       </div>
     </div>
 
     <div class="container-x mt-20 grid gap-4 md:grid-cols-12">
-      <div class="md:col-span-8" data-reveal="mask"><Media seed="about-hero" variant="midrise" class="aspect-[16/10] rounded-sm" /></div>
+      <div class="md:col-span-8" data-reveal="mask"><Media seed="about-hero" variant="midrise" class="aspect-[16/10]" /></div>
       <div class="grid gap-4 md:col-span-4" data-reveal="mask" style="--d:2">
-        <Media seed="about-team" variant="campus" class="aspect-[4/3] rounded-sm md:aspect-auto" />
-        <div class="on-dark flex flex-col justify-between rounded-sm bg-ink p-8">
+        <Media seed="about-team" variant="campus" class="aspect-[4/3] md:aspect-auto" />
+        <div class="on-dark flex flex-col justify-between bg-ink p-8">
           <p class="eyebrow text-gray">Our commitment</p>
-          <p class="mt-6 font-semiwide text-2xl font-bold leading-tight">To be a model of innovation in the construction industry — delivering on time, on budget and safely.</p>
+          <p class="mt-6 font-semiwide text-2xl font-bold leading-tight">To be a model of innovation in the construction industry, delivering on time, on budget and safely.</p>
         </div>
       </div>
     </div>
@@ -66,14 +65,14 @@ import { values, timeline, leadership, awards } from '@/data/services';
   <!-- Valores -->
   <section class="on-dark bg-ink py-24 text-bone md:py-36">
     <div class="container-x">
-      <Eyebrow index="02" class="mb-8 text-bone/50">Culture</Eyebrow>
+      <Eyebrow class="mb-8 text-bone/50">Culture</Eyebrow>
       <SplitText text="What drives us." class="font-wide text-display font-extrabold uppercase" />
-      <div class="mt-16 grid gap-px overflow-hidden rounded-sm bg-bone/10 md:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-16 grid gap-px overflow-hidden bg-bone/10 md:grid-cols-2 lg:grid-cols-4">
         {
           values.map((v, i) => (
             <article class="group relative bg-ink p-8 transition-colors duration-500 hover:bg-steel md:p-10" data-reveal style={`--d:${i}`}>
-              <p class="font-wide text-6xl font-extrabold text-signal/90">0{i + 1}</p>
-              <h3 class="mt-16 font-semiwide text-2xl font-bold">{v.title}</h3>
+              <span class="block h-1 w-10 bg-signal" aria-hidden="true"></span>
+              <h3 class="mt-8 font-semiwide text-2xl font-bold">{v.title}</h3>
               <p class="mt-4 text-bone/60">{v.text}</p>
               <span class="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-signal transition-transform duration-700 ease-(--ease-expo) group-hover:scale-x-100" />
             </article>
@@ -86,14 +85,14 @@ import { values, timeline, leadership, awards } from '@/data/services';
   <!-- Timeline -->
   <section class="py-24 md:py-36">
     <div class="container-x">
-      <Eyebrow index="03" class="mb-8 text-mute">Milestones</Eyebrow>
+      <Eyebrow class="mb-8 text-mute">Milestones</Eyebrow>
       <SplitText text="Nearly four decades|of building." class="font-wide text-display font-extrabold uppercase" />
       <ol class="timeline relative mt-20 grid gap-12 sm:grid-cols-2 md:grid-cols-4 lg:gap-8 xl:grid-cols-7 xl:gap-6" data-reveal="fade">
         <span class="timeline-line absolute left-0 right-0 top-[0.55rem] hidden h-px origin-left bg-ink/20 xl:block"></span>
         {
           timeline.map((t, i) => (
             <li class="relative" data-reveal style={`--d:${i}`}>
-              <span class="relative z-10 block size-3 rounded-full border-2 border-signal bg-bone" />
+              <span class="relative z-10 block size-3 border-2 border-signal bg-bone" />
               <p class="mt-6 font-wide text-4xl font-extrabold tracking-tight">{t.year}</p>
               <p class="mt-3 font-semibold">{t.title}</p>
               <p class="mt-2 text-sm text-ink/60">{t.text}</p>
@@ -109,7 +108,7 @@ import { values, timeline, leadership, awards } from '@/data/services';
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-8">
         <div>
-          <Eyebrow index="04" class="mb-8 text-mute">Leadership</Eyebrow>
+          <Eyebrow class="mb-8 text-mute">Leadership</Eyebrow>
           <SplitText text="The people|behind the work." class="font-wide text-title font-extrabold uppercase" />
         </div>
         <div data-reveal><Button href={u('/contact#careers')} variant="dark">Join our team</Button></div>
@@ -118,7 +117,7 @@ import { values, timeline, leadership, awards } from '@/data/services';
         {
           leadership.map((p, i) => (
             <li class="group" data-reveal style={`--d:${i % 3}`}>
-              <div class="relative aspect-[4/5] overflow-hidden rounded-sm bg-bone">
+              <div class="relative aspect-[4/5] overflow-hidden bg-bone">
                 <div class="bg-grid absolute inset-0 text-signal/60" />
                 <svg viewBox="0 0 200 250" class="absolute inset-x-0 bottom-0 w-full text-gray/25 transition-transform duration-1000 ease-(--ease-expo) group-hover:scale-105" aria-hidden="true">
                   <circle cx="100" cy="95" r="42" fill="currentColor" />
@@ -138,16 +137,16 @@ import { values, timeline, leadership, awards } from '@/data/services';
   <!-- Seguridad y sostenibilidad -->
   <section class="py-24 md:py-36">
     <div class="container-x grid gap-6 lg:grid-cols-2">
-      <article id="safety" class="on-dark relative overflow-hidden rounded-sm bg-ink p-10 text-bone md:p-14" data-reveal>
+      <article id="safety" class="on-dark relative overflow-hidden bg-ink p-10 text-bone md:p-14" data-reveal>
         <p class="eyebrow text-signal">Health & safety</p>
         <h3 class="relative z-10 mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">COR™ certified since 2015.</h3>
-        <p class="relative z-10 mt-6 max-w-sm text-bone/65">During the COR audit process, overwhelming evidence of a strong safety culture was presented — all personnel expressed commitment to continual improvement, and senior management instills strong values into the fabric of our operation.</p>
+        <p class="relative z-10 mt-6 max-w-sm text-bone/65">During the COR audit process, overwhelming evidence of a strong safety culture was presented. All personnel expressed commitment to continual improvement, and senior management instills strong values into the fabric of our operation.</p>
         <svg viewBox="0 0 200 200" class="draw absolute -bottom-20 -right-20 w-64 text-signal/50" fill="none" aria-hidden="true">
           <path d="M100 20l70 30v50c0 45-30 75-70 90-40-15-70-45-70-90V50z" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" />
           <path d="M70 105l20 20 40-45" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:10" />
         </svg>
       </article>
-      <article id="recognition" class="relative overflow-hidden rounded-sm bg-concrete p-10 md:p-14" data-reveal style="--d:1">
+      <article id="recognition" class="relative overflow-hidden bg-concrete p-10 md:p-14" data-reveal style="--d:1">
         <p class="eyebrow text-signal-ink">Awards & recognition</p>
         <h3 class="relative z-10 mt-6 font-wide text-4xl font-extrabold uppercase leading-none md:text-5xl">Platinum. Best Managed.</h3>
         <p class="relative z-10 mt-6 max-w-sm text-ink/65">In 2021 Grascan reached Platinum status after 7 years as one of Canada’s Best Managed Companies, certified by Deloitte. Owner Angelo Grassa credits the work ethic, dedication and innovative mindset of Grascan’s employees.</p>
@@ -160,8 +159,13 @@ import { values, timeline, leadership, awards } from '@/data/services';
     </div>
   </section>
 
-  <section class="overflow-hidden border-y border-ink/10 bg-concrete py-8" aria-label="Awards and certifications">
-    <Marquee items={awards} class="eyebrow text-base text-signal" speed="45s" />
+  <section class="border-y border-ink/10 bg-concrete py-16 md:py-20" aria-labelledby="awards-title">
+    <div class="container-x grid gap-10 lg:grid-cols-12">
+      <h2 id="awards-title" class="font-semiwide text-2xl font-bold leading-tight lg:col-span-4 md:text-3xl" data-reveal>Awards and certifications</h2>
+      <ul class="grid border-t border-ink/10 sm:grid-cols-2 lg:col-span-8">
+        {awards.map((a, i) => <li class="border-b border-ink/10 py-4 pr-6 font-medium text-signal" data-reveal style={`--d:${i % 2}`}>{a}</li>)}
+      </ul>
+    </div>
   </section>
 
   <EstimatingCTA />

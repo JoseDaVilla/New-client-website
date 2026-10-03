@@ -1,11 +1,6 @@
 ---
+/** Etiqueta de sección: texto pequeño, sin numeración ni adornos. `index` se ignora (compatibilidad). */
 interface Props { index?: string; class?: string }
-const { index, class: cls = '' } = Astro.props;
-// Sobre fondo claro se usa el naranja oscuro para cumplir contraste AA
-const onDark = /text-bone/.test(cls);
+const { class: cls = '' } = Astro.props;
 ---
-<p class:list={['eyebrow flex items-center gap-3', cls]}>
-  {index && <span class={onDark ? 'text-signal' : 'text-signal-ink'}>{index}</span>}
-  <span class="h-px w-8 bg-current opacity-40"></span>
-  <span><slot /></span>
-</p>
+<p class:list={['eyebrow', cls]}><slot /></p>

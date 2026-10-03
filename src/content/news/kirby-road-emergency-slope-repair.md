@@ -7,6 +7,6 @@ variant: road
 # cover: ../../assets/news/kirby-road-emergency-slope-repair.jpg
 ---
 
-Grascan undertook the 2025 Kirby Road Emergency Slope Repair — continuing a long record of responding to critical infrastructure needs, from Gardiner emergency repairs to sinkholes and wash-outs.
+Grascan undertook the 2025 Kirby Road Emergency Slope Repair, continuing a long record of responding to critical infrastructure needs, from Gardiner emergency repairs to sinkholes and wash-outs.
 
-*Placeholder — add project details.*
+*Placeholder: add project details.*

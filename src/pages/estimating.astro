@@ -37,13 +37,13 @@ const formAction = site.formEndpoint || u('/thanks');
   <!-- Proceso -->
   <section class="py-20 md:py-28">
     <div class="container-x">
-      <Eyebrow index="01" class="mb-10 text-mute">How it works</Eyebrow>
-      <ol class="grid gap-px overflow-hidden rounded-sm bg-ink/10 md:grid-cols-2 lg:grid-cols-4">
+      <Eyebrow class="mb-10 text-mute">How it works</Eyebrow>
+      <ol class="grid gap-px overflow-hidden bg-ink/10 md:grid-cols-2 lg:grid-cols-4">
         {
           process.map((s, i) => (
             <li class="relative bg-bone p-8" data-reveal style={`--d:${i}`}>
-              <span class="font-wide text-5xl font-extrabold text-signal">0{i + 1}</span>
-              <h3 class="mt-10 font-semiwide text-2xl font-bold">{s.t}</h3>
+              <span class="text-sm font-semibold text-signal">Step {i + 1}</span>
+              <h3 class="mt-3 font-semiwide text-2xl font-bold">{s.t}</h3>
               <p class="mt-3 text-ink/65">{s.d}</p>
             </li>
           ))
@@ -57,7 +57,7 @@ const formAction = site.formEndpoint || u('/thanks');
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div>
-          <Eyebrow index="02" class="mb-8 text-bone/50">Current opportunities</Eyebrow>
+          <Eyebrow class="mb-8 text-bone/50">Current opportunities</Eyebrow>
           <SplitText text="Open tenders." class="font-wide text-title font-extrabold uppercase" />
         </div>
         <p class="max-w-sm text-bone/60" data-reveal>Bid documents are shared with registered partners. Contact <a class="link-u text-bone" href={`mailto:${site.estimatingEmail}`}>{site.estimatingEmail}</a> to request access.</p>
@@ -67,7 +67,7 @@ const formAction = site.formEndpoint || u('/thanks');
       <ul class="mt-12 space-y-3 md:hidden">
         {
           bids.map((b, i) => (
-            <li class="rounded-sm border border-bone/10 bg-ink-2 p-5" data-reveal style={`--d:${i}`}>
+            <li class="border border-bone/10 bg-ink-2 p-5" data-reveal style={`--d:${i}`}>
               <div class="flex items-center justify-between gap-4">
                 <span class="eyebrow text-signal">{b.id}</span>
                 <span class="eyebrow text-bone/50">Closes <time datetime={b.closes}>{fmt(b.closes)}</time></span>
@@ -75,8 +75,8 @@ const formAction = site.formEndpoint || u('/thanks');
               <p class="mt-3 font-semiwide text-xl font-bold">{b.project}</p>
               <p class="mt-1 text-sm text-bone/60">{b.location}</p>
               <p class="mt-3 text-sm text-bone/80">{b.trades}</p>
-              <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-signal px-5 text-sm font-semibold text-on-signal">
-                Request docs <Icon name="arrow" class="size-4" />
+              <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request: ${b.id} ${b.project}`)}`} class="mt-5 inline-flex min-h-11 items-center bg-signal px-5 text-sm font-semibold text-on-signal">
+                Request documents
               </a>
             </li>
           ))
@@ -106,8 +106,8 @@ const formAction = site.formEndpoint || u('/thanks');
                   <td class="py-6 pr-6 text-bone/70">{b.trades}</td>
                   <td class="py-6 pr-6"><time datetime={b.closes}>{fmt(b.closes)}</time></td>
                   <td class="py-6 text-right">
-                    <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="inline-flex items-center gap-2 rounded-full border border-bone/20 px-4 py-2 text-sm transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-on-signal">
-                      Request docs <Icon name="arrow" class="size-4" />
+                    <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request: ${b.id} ${b.project}`)}`} class="inline-flex items-center border border-bone/25 px-4 py-2 text-sm font-semibold transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-on-signal">
+                      Request documents
                     </a>
                   </td>
                 </tr>
@@ -124,7 +124,7 @@ const formAction = site.formEndpoint || u('/thanks');
     <div class="container-x grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-4">
         <div class="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
-          <Eyebrow index="03" class="mb-8 text-mute">Supplier registration</Eyebrow>
+          <Eyebrow class="mb-8 text-mute">Supplier registration</Eyebrow>
           <SplitText text="Bidding list|registration." class="font-wide text-title font-extrabold uppercase" />
           <p class="mt-6 text-ink/65" data-reveal>Complete the prequalification form. It takes about 5 minutes. Have your safety statistics, insurance certificate and WSIB clearance handy.</p>
 
@@ -132,14 +132,14 @@ const formAction = site.formEndpoint || u('/thanks');
             {
               steps.map((s, i) => (
                 <li class="step-nav flex items-center gap-4" data-step-nav={i}>
-                  <span class="step-dot grid size-9 place-items-center rounded-full border border-ink/20 font-mono text-xs">0{i + 1}</span>
+                  <span class="step-dot grid size-9 place-items-center border border-ink/20 text-sm font-semibold">{i + 1}</span>
                   <span class="font-semibold">{s}</span>
                 </li>
               ))
             }
           </ol>
 
-          <div class="mt-12 rounded-sm bg-concrete p-6 text-sm" data-reveal>
+          <div class="mt-12 bg-concrete p-6 text-sm" data-reveal>
             <p class="eyebrow text-mute">Estimating contacts</p>
             <ul class="mt-4 space-y-2">
               {offices.map((o) => <li class="flex justify-between gap-4"><span class="font-semibold">{o.city}</span><a class="link-u" href={`tel:${o.phone.replace(/[^+\d]/g, '')}`}>{o.phone}</a></li>)}
@@ -162,7 +162,7 @@ const formAction = site.formEndpoint || u('/thanks');
         <input type="hidden" name="form-name" value="supplier-registration" />
         <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
 
-        <div class="mb-12 h-1 overflow-hidden rounded-full bg-ink/10"><div class="step-progress h-full origin-left bg-signal transition-transform duration-700" style="transform: scaleX(.3333)"></div></div>
+        <div class="mb-12 h-1 overflow-hidden bg-ink/10"><div class="step-progress h-full origin-left bg-signal transition-transform duration-700" style="transform: scaleX(.3333)"></div></div>
 
         <!-- Paso 1 -->
         <fieldset class="step space-y-8" data-step="0">
@@ -203,18 +203,18 @@ const formAction = site.formEndpoint || u('/thanks');
           <legend class="mb-10 font-semiwide text-3xl font-bold">Capabilities</legend>
           <div>
             <p class="field-label mb-4">Trades / scopes * <span class="normal-case tracking-normal">(select all that apply)</span></p>
-            <div class="flex flex-wrap gap-2" data-group-required>
-              {trades.map((t) => <label class="chip"><input type="checkbox" name="trades" value={t} class="sr-only" />{t}</label>)}
+            <div class="grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3" data-group-required>
+              {trades.map((t) => <label class="check"><input type="checkbox" name="trades" value={t} /><span>{t}</span></label>)}
             </div>
           </div>
           <div>
             <p class="field-label mb-4">Regions served *</p>
-            <div class="flex flex-wrap gap-2" data-group-required>
-              {['Toronto', 'Peel', 'York', 'Durham', 'Halton', 'Hamilton / Niagara', 'Southwestern Ontario'].map((r) => <label class="chip"><input type="checkbox" name="regions" value={r} class="sr-only" />{r}</label>)}
+            <div class="grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3" data-group-required>
+              {['Toronto', 'Peel', 'York', 'Durham', 'Halton', 'Hamilton / Niagara', 'Southwestern Ontario'].map((r) => <label class="check"><input type="checkbox" name="regions" value={r} /><span>{r}</span></label>)}
             </div>
           </div>
           <div class="grid gap-8 md:grid-cols-3">
-            <div class="field"><label class="field-label" for="capacity">Single project capacity</label><select class="input" id="capacity" name="capacity"><option value="">Select…</option><option>&lt; $500K</option><option>$500K – $2M</option><option>$2M – $10M</option><option>$10M+</option></select></div>
+            <div class="field"><label class="field-label" for="capacity">Single project capacity</label><select class="input" id="capacity" name="capacity"><option value="">Select…</option><option>&lt; $500K</option><option>$500K to $2M</option><option>$2M to $10M</option><option>$10M+</option></select></div>
             <div class="field"><label class="field-label" for="bonding">Bonding capacity</label><input class="input" id="bonding" name="bonding" placeholder="$" /></div>
             <div class="field"><label class="field-label" for="employees">Employees</label><input class="input" id="employees" name="employees" type="number" min="0" inputmode="numeric" /></div>
             <div class="field"><label class="field-label" for="emr">EMR / safety rating</label><input class="input" id="emr" name="emr" inputmode="decimal" placeholder="e.g. 0.85" /></div>
@@ -227,10 +227,10 @@ const formAction = site.formEndpoint || u('/thanks');
         <!-- Paso 3 -->
         <fieldset class="step space-y-10" data-step="2">
           <legend class="mb-10 font-semiwide text-3xl font-bold">Documents</legend>
-          <label class="dropzone group relative flex cursor-pointer flex-col items-center justify-center gap-4 rounded-sm border border-dashed border-ink/25 bg-concrete/50 px-6 py-14 text-center transition-colors hover:border-signal">
-            <span class="grid size-14 place-items-center rounded-full bg-ink text-bone transition-transform duration-500 group-hover:-translate-y-1"><Icon name="upload" class="size-6" /></span>
+          <label class="dropzone group relative flex cursor-pointer flex-col items-center justify-center gap-4 border border-dashed border-ink/25 bg-concrete/50 px-6 py-14 text-center transition-colors hover:border-signal">
+            <span class="grid size-14 place-items-center bg-signal text-on-signal"><Icon name="upload" class="size-6" /></span>
             <span class="font-semibold">Drop files here or <span class="text-signal underline underline-offset-4">browse</span></span>
-            <span class="text-sm text-mute">Insurance certificate, WSIB clearance, COR™ / safety manual, company profile · PDF, max 10 MB each</span>
+            <span class="text-sm text-mute">Insurance certificate, WSIB clearance, COR™ / safety manual, company profile. PDF, up to 10 MB each.</span>
             <input type="file" name="documents" multiple accept=".pdf,.doc,.docx,.jpg,.png" class="absolute inset-0 cursor-pointer opacity-0" data-file-input />
           </label>
           <ul class="space-y-2 text-sm" data-file-list></ul>
@@ -245,8 +245,8 @@ const formAction = site.formEndpoint || u('/thanks');
           <button type="button" class="btn btn-ghost" data-prev hidden>Back</button>
           <p class="text-sm text-mute" data-step-label>Step 1 of 3</p>
           <div class="flex gap-3">
-            <button type="button" class="btn btn-dark" data-next>Continue <span class="btn-arrow"><Icon name="arrow" class="size-3.5" /></span></button>
-            <button type="submit" class="btn btn-primary" data-submit hidden>Submit registration <span class="btn-arrow"><Icon name="arrow" class="size-3.5" /></span></button>
+            <button type="button" class="btn btn-dark" data-next>Continue</button>
+            <button type="submit" class="btn btn-primary" data-submit hidden>Submit registration</button>
           </div>
         </div>
         <p class="mt-4 text-sm text-danger" data-form-error role="alert" hidden></p>
@@ -358,7 +358,7 @@ const formAction = site.formEndpoint || u('/thanks');
       list.innerHTML = '';
       [...(input.files || [])].forEach((f) => {
         const li = document.createElement('li');
-        li.className = 'flex items-center justify-between gap-4 rounded-sm bg-concrete px-4 py-3';
+        li.className = 'flex items-center justify-between gap-4 bg-concrete px-4 py-3';
         li.innerHTML = `<span class="truncate font-medium"></span><span class="eyebrow text-mute">${(f.size / 1024 / 1024).toFixed(1)} MB</span>`;
         li.firstElementChild!.textContent = f.name;
         list.append(li);

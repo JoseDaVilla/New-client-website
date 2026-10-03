@@ -9,11 +9,9 @@ import Button from '@/components/Button.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import NewsCard from '@/components/NewsCard.astro';
 import ServiceIcon from '@/components/ServiceIcon.astro';
-import Marquee from '@/components/Marquee.astro';
 import EstimatingCTA from '@/components/EstimatingCTA.astro';
 import LocationsMap from '@/components/LocationsMap.astro';
 import VideoFacade from '@/components/VideoFacade.astro';
-import Icon from '@/components/Icon.astro';
 import { stats, offices, clients } from '@/site.config';
 import { services } from '@/data/services';
 
@@ -27,12 +25,12 @@ const homeServices = services.slice(0, 6);
 ---
 
 <Base intro>
-  <Hero featured={lead && { title: lead.data.title, href: `/projects/${lead.id}`, meta: `${lead.data.location} · ${lead.data.year}` }} />
+  <Hero featured={lead && { title: lead.data.title, href: `/projects/${lead.id}`, meta: `${lead.data.location}, ${lead.data.year}` }} />
 
   <!-- Statement + cifras -->
   <section id="discover" class="relative py-24 md:py-40">
     <div class="container-x">
-      <Eyebrow index="01" class="mb-10 text-mute">Who we are</Eyebrow>
+      <Eyebrow class="mb-10 text-mute">Who we are</Eyebrow>
       <p class="max-w-6xl font-semiwide text-[clamp(1.6rem,3.4vw,3.4rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink">
         {statement.split(' ').map((w) => <span class="scrub-word">{w} </span>)}
       </p>
@@ -65,7 +63,7 @@ const homeServices = services.slice(0, 6);
     <div class="container-x relative">
       <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
         <div class="lg:col-span-7">
-          <Eyebrow index="02" class="mb-8 text-bone/60">Services</Eyebrow>
+          <Eyebrow class="mb-8 text-bone/60">Services</Eyebrow>
           <SplitText text="Full-service.|From the ground up." class="font-wide text-display font-extrabold uppercase" />
         </div>
         <p class="text-lead text-bone/70 lg:col-span-5" data-reveal>From bridges and rapid transit to underground services and landscaping, Grascan self-performs and coordinates every phase of complex construction.</p>
@@ -75,26 +73,20 @@ const homeServices = services.slice(0, 6);
         {
           homeServices.map((s, i) => (
             <li data-reveal style={`--d:${i % 3}`}>
-              <a href={u(`/services#${s.slug}`)} class="service-row group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-bone/12 py-7 md:grid-cols-[5rem_auto_1fr_auto] md:gap-10 md:py-9">
-                <span class="eyebrow hidden text-bone/40 md:inline">{String(i + 1).padStart(2, '0')}</span>
-                <ServiceIcon name={s.icon} class="size-11 text-signal md:size-14" />
+              <a href={u(`/services#${s.slug}`)} class="service-row group grid grid-cols-[auto_1fr] items-center gap-5 border-b border-bone/12 py-7 transition-colors hover:bg-ink-2 md:grid-cols-[auto_1fr_auto] md:gap-10 md:px-4 md:py-9">
+                                <ServiceIcon name={s.icon} class="size-11 text-signal md:size-14" />
                 <span>
                   <span class="block font-semiwide text-[clamp(1.4rem,3vw,2.8rem)] font-bold leading-none tracking-tight transition-transform duration-700 ease-(--ease-expo) group-hover:translate-x-3">{s.title}</span>
                   <span class="mt-3 block max-w-xl text-bone/55 md:hidden">{s.short}</span>
                 </span>
-                <span class="flex items-center gap-8">
-                  <span class="hidden max-w-xs text-right text-bone/55 transition-colors group-hover:text-bone xl:block">{s.short}</span>
-                  <span class="grid size-12 shrink-0 place-items-center rounded-full border border-bone/20 transition-all duration-500 ease-(--ease-expo) group-hover:rotate-[-45deg] group-hover:border-signal group-hover:bg-signal group-hover:text-on-signal">
-                    <Icon name="arrow" class="size-5" />
-                  </span>
-                </span>
+                <span class="hidden max-w-xs text-right text-bone/55 transition-colors group-hover:text-bone xl:block">{s.short}</span>
               </a>
             </li>
           ))
         }
       </ul>
       <div class="mt-12 flex flex-wrap items-center justify-between gap-6" data-reveal>
-        <p class="max-w-2xl text-bone/60">+ {services.length - homeServices.length} more: {services.slice(homeServices.length).map((s) => s.title).join(' · ')}</p>
+        <p class="max-w-2xl text-bone/60">+ {services.length - homeServices.length} more: {services.slice(homeServices.length).map((s) => s.title).join(', ')}.</p>
         <Button href={u('/services')}>All {services.length} services</Button>
       </div>
     </div>
@@ -105,7 +97,7 @@ const homeServices = services.slice(0, 6);
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-8">
         <div>
-          <Eyebrow index="03" class="mb-8 text-mute">Featured projects</Eyebrow>
+          <Eyebrow class="mb-8 text-mute">Featured projects</Eyebrow>
           <SplitText text="Landmarks|we've delivered." accent={["delivered."]} class="font-wide text-display font-extrabold uppercase" />
         </div>
         <div data-reveal><Button href={u('/projects')} variant="dark">All projects</Button></div>
@@ -121,25 +113,34 @@ const homeServices = services.slice(0, 6);
   </section>
 
   <!-- Organizaciones que invitan a licitar -->
-  <section class="overflow-hidden border-y border-ink/10 bg-concrete py-10 md:py-14" aria-label="Invited to tender by">
-    <p class="eyebrow mb-6 text-center text-mute">Invited to tender by</p>
-    <Marquee items={clients} class="font-wide text-[clamp(1.6rem,4vw,3.4rem)] font-extrabold uppercase leading-none tracking-tight text-signal" speed="55s" />
+  <section class="border-y border-ink/10 bg-concrete py-16 md:py-24" aria-labelledby="clients-title">
+    <div class="container-x grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <h2 id="clients-title" class="font-semiwide text-2xl font-bold leading-tight text-ink md:text-3xl" data-reveal>Invited to tender by Ontario's leading public owners.</h2>
+        <p class="mt-4 max-w-sm text-ink/70" data-reveal>One of the few approved Metrolinx (GO Transit), CN Rail and TTC contractors.</p>
+      </div>
+      <ul class="grid grid-cols-2 border-l border-t border-ink/10 bg-bone sm:grid-cols-3 lg:col-span-8">
+        {clients.map((c, i) => (
+          <li class="flex min-h-24 items-center border-b border-r border-ink/10 px-5 py-6 font-semiwide text-base font-bold leading-tight text-signal md:min-h-28 md:text-lg" data-reveal style={`--d:${i % 3}`}>{c}</li>
+        ))}
+      </ul>
+    </div>
   </section>
 
   <!-- Seguridad y cultura con vídeo -->
   <section class="py-24 md:py-36">
     <div class="container-x grid gap-14 lg:grid-cols-12 lg:items-center">
       <div class="lg:col-span-5">
-        <Eyebrow index="04" class="mb-8 text-mute">Safety & culture</Eyebrow>
+        <Eyebrow class="mb-8 text-mute">Safety & culture</Eyebrow>
         <SplitText text="Safety is|built into|everything." accent={['everything.']} class="font-wide text-title font-extrabold uppercase" />
         <p class="mt-8 max-w-md text-lg text-ink/70" data-reveal>Grascan has developed a reputation for adopting leading-edge safety practices. Our COR™ audit found overwhelming evidence of a strong safety culture, with every person committed to continual improvement.</p>
         <ul class="mt-10 grid grid-cols-2 gap-6" data-reveal style="--d:2">
-          <li class="border-l-2 border-signal pl-4"><p class="font-wide text-3xl font-extrabold text-signal">COR™</p><p class="text-sm text-mute">Certified since 2015 · ISO 45001</p></li>
+          <li class="border-l-2 border-signal pl-4"><p class="font-wide text-3xl font-extrabold text-signal">COR™</p><p class="text-sm text-mute">Certified since 2015, ISO 45001</p></li>
           <li class="border-l-2 border-gray pl-4"><p class="font-wide text-3xl font-extrabold text-signal">Platinum</p><p class="text-sm text-mute">Canada’s Best Managed Companies</p></li>
         </ul>
       </div>
       <div class="lg:col-span-7" data-reveal="mask">
-        <VideoFacade title="Grascan — Building since 1987" seed="company-film" variant="bridge" duration="02:00" />
+        <VideoFacade title="Building Southern Ontario since 1987" seed="company-film" variant="bridge" duration="02:00" />
       </div>
     </div>
   </section>
@@ -151,7 +152,7 @@ const homeServices = services.slice(0, 6);
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-8">
         <div>
-          <Eyebrow index="05" class="mb-8 text-mute">News & updates</Eyebrow>
+          <Eyebrow class="mb-8 text-mute">News & updates</Eyebrow>
           <SplitText text="Latest news." class="font-wide text-display font-extrabold uppercase" />
         </div>
         <div data-reveal><Button href={u('/news')} variant="dark">All news</Button></div>
@@ -166,14 +167,14 @@ const homeServices = services.slice(0, 6);
   <section class="relative overflow-hidden bg-concrete py-24 md:py-36">
     <div class="container-x grid gap-14 xl:grid-cols-12">
       <div class="xl:col-span-4">
-        <Eyebrow index="06" class="mb-8 text-mute">Locations</Eyebrow>
+        <Eyebrow class="mb-8 text-mute">Locations</Eyebrow>
         <SplitText text="Rooted in|the GTA." class="font-wide text-title font-extrabold uppercase" />
         <p class="mt-6 max-w-sm text-ink/70" data-reveal>Our main office and facility in Toronto and our Brampton facility support projects across Southern Ontario.</p>
         <div class="mt-10" data-reveal><Button href={u('/contact')} variant="dark">Contact us</Button></div>
       </div>
       <div class="xl:col-span-8">
-        <div data-reveal="fade" class="rounded-sm border border-ink/10 bg-bone p-4 text-ink md:p-6"><LocationsMap /></div>
-        <ul class="mt-6 grid gap-px overflow-hidden rounded-sm bg-ink/10 sm:grid-cols-2">
+        <div data-reveal="fade" class="border border-ink/10 bg-bone p-4 text-ink md:p-6"><LocationsMap /></div>
+        <ul class="mt-6 grid gap-px overflow-hidden bg-ink/10 sm:grid-cols-2">
           {
             offices.map((o, i) => (
               <li class="bg-bone p-6" data-reveal style={`--d:${i}`}>

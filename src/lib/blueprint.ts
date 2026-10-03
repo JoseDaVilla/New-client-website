@@ -114,7 +114,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
       facade(x - 90, 90, G - 110, 26, 3);
       facade(x + w, 120, G - 80, 26, 4);
       crane(x + w + 60, top - 40, 220, -1);
-      label = 'Tower · North elevation';
+      label = 'Tower North elevation';
       break;
     }
     case 'midrise': {
@@ -129,7 +129,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
       }
       tree(60, 16);
       tree(x + 30, 20);
-      label = 'Mixed-use · Street elevation';
+      label = 'Mixed-use Street elevation';
       break;
     }
     case 'bridge': {
@@ -148,7 +148,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
       for (let x = 20; x < W; x += 40) waves += `M${x} ${G + 20}q10 -6 20 0t20 0`;
       add(waves, 'thin');
       dims.push({ x1: p1, x2: p2, y: deck - 40, text: `${Math.round((p2 - p1) * 0.6)} m span` });
-      label = 'Cable-stayed bridge · Profile';
+      label = 'Cable-stayed bridge Profile';
       break;
     }
     case 'warehouse': {
@@ -166,7 +166,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
       for (let i = 0; i < docks; i++) rect(x + 40 + i * 70, G - 60, 50, 60, i === 2 ? 'accent-fill' : 'main');
       hline(x, top + 28, w);
       dims.push({ x1: x, x2: x + w, y: G + 34, text: `${int(180, 320)},000 sq ft` });
-      label = 'Distribution centre · South elevation';
+      label = 'Distribution centre South elevation';
       break;
     }
     case 'campus': {
@@ -182,7 +182,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
         tree(x - between(10, 22), between(10, 16));
       }
       rect(330, G - 60, 70, 60, 'accent-fill');
-      label = 'Campus · Site section';
+      label = 'Campus Site section';
       break;
     }
     case 'hospital': {
@@ -192,7 +192,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
       rect(385, 180, 30, 80, 'accent');
       rect(360, 205, 80, 30, 'accent');
       add(`M300 290L300 250H500V290`, 'thin');
-      label = 'Healthcare · Front elevation';
+      label = 'Healthcare Front elevation';
       break;
     }
     case 'plant': {
@@ -214,7 +214,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
       }
       add(`M80 ${G - 120}H700M80 ${G - 108}H700`, 'accent');
       rect(560, G - 160, 160, 160);
-      label = 'Process facility · Section A-A';
+      label = 'Process facility Section A-A';
       break;
     }
     case 'road': {
@@ -228,7 +228,7 @@ export function blueprint(seed: string, variant: BlueprintVariant = variantFor(s
       add(`M0 300C200 320 300 200 400 210S650 330 800 280`, 'main');
       add(`M0 314C200 334 300 214 400 224S650 344 800 294`, 'thin');
       for (let x = 60; x < W; x += 90) vline(x, 290 + Math.sin(x / 120) * 30, G - 290, 'thin');
-      label = 'Interchange · Perspective';
+      label = 'Interchange Perspective';
       break;
     }
   }

@@ -3,7 +3,6 @@ import { u } from '@/lib/url';
 import { nav, site, offices } from '@/site.config';
 import { services } from '@/data/services';
 import { logo } from '@/lib/logo';
-import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 const year = new Date().getFullYear();
 ---
@@ -16,12 +15,7 @@ const year = new Date().getFullYear();
       <div class="lg:col-span-4">
         <Logo variant="full" class="w-40 text-bone md:w-48" />
         <p class="mt-8 max-w-sm text-bone/70">{site.tagline} Delivering time-sensitive, complicated and high-profile construction for nearly four decades.</p>
-        <a href={u('/contact')} class="group mt-8 inline-flex items-center gap-4 font-semibold">
-          <span class="link-u">Start a conversation</span>
-          <span class="grid size-11 place-items-center rounded-full bg-signal text-on-signal transition-transform duration-500 ease-(--ease-expo) group-hover:-rotate-45">
-            <Icon name="arrow" />
-          </span>
-        </a>
+        <a href={u('/contact')} class="btn btn-primary mt-8"><span>Start a conversation</span></a>
       </div>
 
       <div class="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-8">

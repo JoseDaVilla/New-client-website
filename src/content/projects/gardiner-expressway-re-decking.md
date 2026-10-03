@@ -1,6 +1,6 @@
 ---
 title: "Gardiner Expressway Re-decking"
-summary: "Re-decking of the Gardiner Expressway from the CNE to Grand Magazine — delivered 3 months ahead of schedule and $2,000,000 under budget."
+summary: "Re-decking of the Gardiner Expressway from the CNE to Grand Magazine, delivered 3 months ahead of schedule and $2,000,000 under budget."
 sector: Roads & Highways
 location: "Toronto, ON"
 client: "City of Toronto"
@@ -29,7 +29,7 @@ gallery:
 
 ## The challenge
 
-Grascan was awarded the Gardiner Expressway Re-decking from the CNE to Grand Magazine, a $75,000,000 contract on one of Toronto's busiest corridors. The first step involved learning how to dismantle the elevated expressway — something no other contractor in Ontario had done before.
+Grascan was awarded the Gardiner Expressway Re-decking from the CNE to Grand Magazine, a $75,000,000 contract on one of Toronto's busiest corridors. The first step involved learning how to dismantle the elevated expressway, something no other contractor in Ontario had done before.
 
 ## Our approach
 

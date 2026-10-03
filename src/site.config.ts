@@ -9,7 +9,7 @@ export const site = {
   legalName: 'Grascan Build',
   tagline: 'Building Southern Ontario since 1987.',
   description:
-    'Grascan Build brings nearly four decades of Grascan experience — time-sensitive, complex and high-profile construction across Southern Ontario — to private-sector clients.',
+    'Grascan Build brings nearly four decades of Grascan experience in complex, high-profile construction across Southern Ontario to private-sector clients.',
   founded: 1987,
   email: 'info@grascanbuild.com', // TODO: confirmar email general
   phone: '416-644-8858',
@@ -57,7 +57,7 @@ export const offices = [
       { label: 'Toll free', value: '1-888-929-4727' },
     ],
     email: 'info@grascanbuild.com', // TODO: confirmar
-    hours: 'Mon–Fri · 7:00–17:00', // TODO: confirmar horario
+    hours: 'Monday to Friday, 7 am to 5 pm', // TODO: confirmar horario
     // posición relativa (0–100) en el mapa estilizado del GTA
     map: { x: 46, y: 40 },
     coords: '43.7440° N, 79.5940° W',
@@ -69,7 +69,7 @@ export const offices = [
     phone: '416-213-8766',
     phones: [{ label: 'Tel', value: '416-213-8766' }],
     email: 'safety@grascan.com',
-    hours: 'Mon–Fri · 7:00–17:00', // TODO: confirmar horario
+    hours: 'Monday to Friday, 7 am to 5 pm', // TODO: confirmar horario
     map: { x: 30, y: 30 },
     coords: '43.7110° N, 79.7000° W',
   },

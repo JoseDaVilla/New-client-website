@@ -7,7 +7,6 @@ import PageHero from '@/components/PageHero.astro';
 import Media from '@/components/Media.astro';
 import VideoFacade from '@/components/VideoFacade.astro';
 import Lightbox from '@/components/Lightbox.astro';
-import Icon from '@/components/Icon.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import SplitText from '@/components/SplitText.astro';
 
@@ -20,8 +19,8 @@ const photos = projects.flatMap((p) =>
 
 // TODO: reemplazar VIDEO_ID por los vídeos reales del cliente (YouTube / Vimeo embed URLs)
 const videos = [
-  { title: 'Grascan — Building Southern Ontario since 1987', duration: '02:00', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'bridge' as const },
-  { title: 'West Toronto Diamond — Bridge slide', duration: '01:30', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'bridge' as const },
+  { title: 'Building Southern Ontario since 1987', duration: '02:00', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'bridge' as const },
+  { title: 'West Toronto Diamond bridge slide', duration: '01:30', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'bridge' as const },
   { title: 'Gardiner Expressway re-decking', duration: '03:00', embed: 'https://www.youtube-nocookie.com/embed/VIDEO_ID', variant: 'road' as const },
 ];
 const sectorsUsed = [...new Set(photos.map((p) => p.sector))];
@@ -33,7 +32,7 @@ const sectorsUsed = [...new Set(photos.map((p) => p.sector))];
   <!-- Vídeos -->
   <section class="py-20 md:py-28">
     <div class="container-x">
-      <Eyebrow index="01" class="mb-8 text-mute">Videos</Eyebrow>
+      <Eyebrow class="mb-8 text-mute">Videos</Eyebrow>
       <SplitText text="In motion." class="font-wide text-title font-extrabold uppercase" />
       <div class="mt-14 grid gap-6 lg:grid-cols-2">
         <div class="lg:row-span-2" data-reveal="mask"><VideoFacade {...videos[0]} seed="v0" class="h-full lg:aspect-auto lg:min-h-full" /></div>
@@ -47,7 +46,7 @@ const sectorsUsed = [...new Set(photos.map((p) => p.sector))];
     <div class="container-x">
       <div class="flex flex-wrap items-end justify-between gap-8">
         <div>
-          <Eyebrow index="02" class="mb-8 text-bone/50">Photography</Eyebrow>
+          <Eyebrow class="mb-8 text-bone/50">Photography</Eyebrow>
           <SplitText text="Project gallery." class="font-wide text-title font-extrabold uppercase" />
         </div>
         <FilterBar target="photo-grid" label="Filter photos" tone="dark" items={sectorsUsed.map((s) => ({ value: s, label: s }))} class="w-full md:w-auto" />
@@ -57,14 +56,13 @@ const sectorsUsed = [...new Set(photos.map((p) => p.sector))];
         {
           photos.map((ph, i) => (
             <div class="mb-3 break-inside-avoid md:mb-4" data-tags={ph.sector}>
-              <button type="button" class="group relative block w-full overflow-hidden rounded-sm text-left" data-lightbox="photos" data-caption={`${ph.project} — ${ph.caption}`} data-reveal style={`--d:${i % 3}`}>
-                <Media src={ph.src} alt={`${ph.project} — ${ph.caption}`} seed={ph.seed} variant={ph.variant} label={false} class:list={[['aspect-[4/5]', 'aspect-[4/3]', 'aspect-square'][i % 3]]} imgClass="transition-transform duration-[1.2s] ease-(--ease-expo) group-hover:scale-105" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
-                <span class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-ink/85 via-transparent p-3 transition-opacity md:p-5 duration-500 can-hover:opacity-0 can-hover:group-hover:opacity-100">
+              <button type="button" class="group relative block w-full overflow-hidden text-left" data-lightbox="photos" data-caption={`${ph.project}, ${ph.caption}`} data-reveal style={`--d:${i % 3}`}>
+                <Media src={ph.src} alt={`${ph.project}, ${ph.caption}`} seed={ph.seed} variant={ph.variant} label={false} class:list={[['aspect-[4/5]', 'aspect-[4/3]', 'aspect-square'][i % 3]]} imgClass="transition-transform duration-[1.2s] ease-(--ease-expo) group-hover:scale-105" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
+                <span class="absolute inset-x-0 bottom-0 flex flex-col bg-ink px-3 py-2.5 transition-opacity duration-500 can-hover:opacity-0 can-hover:group-hover:opacity-100 md:px-4 md:py-3">
                   <span class="eyebrow hidden text-signal sm:block">{ph.sector}</span>
                   <span class="mt-1 text-sm leading-tight font-semibold md:text-base">{ph.project}</span>
                   <span class="hidden text-sm text-bone/70 md:block">{ph.caption}</span>
                 </span>
-                <span class="absolute right-4 top-4 hidden size-10 place-items-center md:grid rounded-full bg-bone text-ink transition-all duration-500 can-hover:opacity-0 can-hover:group-hover:opacity-100"><Icon name="plus" class="size-4" /></span>
               </button>
             </div>
           ))
@@ -80,9 +78,7 @@ const sectorsUsed = [...new Set(photos.map((p) => p.sector))];
         <Eyebrow class="mb-6 text-mute">Press & media kit</Eyebrow>
         <h2 class="max-w-2xl font-wide text-title font-extrabold uppercase" data-reveal>Need logos or high-res images?</h2>
       </div>
-      <a href={u('/contact')} class="btn btn-dark" data-reveal style="--d:2">
-        <span>Contact communications</span><span class="btn-arrow"><Icon name="download" class="size-3.5" /></span>
-      </a>
+      <a href={u('/contact')} class="btn btn-dark" data-reveal style="--d:2"><span>Contact us</span></a>
     </div>
   </section>
 

@@ -16,7 +16,7 @@ const isActive = (href: string) => {
   <div class="progress-bar absolute inset-x-0 top-0 h-0.5 origin-left bg-signal"></div>
   <div class="header-bg absolute inset-0 -z-10 border-b border-ink/0 transition-all duration-500"></div>
   <div class="container-x flex h-(--header-h) items-center justify-between gap-6">
-    <a href={u('/')} class="relative z-10" aria-label={`${site.legalName} — Home`}>
+    <a href={u('/')} class="relative z-10" aria-label={`${site.legalName}, home`}>
       <Logo variant="horizontal" animate delay={150} class="header-logo h-10 w-auto md:h-11" />
     </a>
 
@@ -39,7 +39,7 @@ const isActive = (href: string) => {
       <button
         id="menu-toggle"
         type="button"
-        class="relative z-10 grid size-12 place-items-center rounded-full border border-current/25 transition-colors hover:border-current lg:hidden"
+        class="relative z-10 grid size-12 place-items-center border border-current/25 transition-colors hover:border-current lg:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label="Open menu"
@@ -60,9 +60,8 @@ const isActive = (href: string) => {
         {
           nav.map((item, i) => (
             <li class="overflow-hidden">
-              <a href={u(item.href)} class="mm-item flex items-baseline gap-4 py-1.5 font-wide text-[clamp(2.2rem,9vw,3.5rem)] font-bold uppercase leading-none tracking-tight" style={`--i:${i}`} aria-current={isActive(item.href) ? 'page' : undefined}>
-                <span class="eyebrow text-signal">0{i + 1}</span>
-                {item.label}
+              <a href={u(item.href)} class="mm-item block py-1.5 font-wide text-[clamp(2.2rem,9vw,3.5rem)] font-bold uppercase leading-none tracking-tight" style={`--i:${i}`} aria-current={isActive(item.href) ? 'page' : undefined}>
+                                {item.label}
               </a>
             </li>
           ))
@@ -98,10 +97,6 @@ const isActive = (href: string) => {
   #site-header.header-dark:not(.is-scrolled) :global(.header-logo),
   #site-header.menu-open :global(.header-logo) {
     color: var(--color-bone);
-  }
-  #site-header.header-dark:not(.is-scrolled) :global(.btn-ghost .btn-arrow svg),
-  #site-header.menu-open :global(.btn-ghost .btn-arrow svg) {
-    color: var(--color-ink);
   }
   #site-header.header-dark:not(.is-scrolled) :global(.btn-ghost),
   #site-header.menu-open :global(.btn-ghost) {

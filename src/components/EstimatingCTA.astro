@@ -3,16 +3,18 @@ import { u } from '@/lib/url';
 import Button from './Button.astro';
 import SplitText from './SplitText.astro';
 import { bids } from '@/data/services';
+import { logo } from '@/lib/logo';
 ---
 <section class="relative overflow-hidden bg-signal">
-  <svg class="draw pointer-events-none absolute inset-0 h-full w-full text-bone/10" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
-    {Array.from({ length: 12 }, (_, i) => <path d={`M${-200 + i * 140} 600L${300 + i * 140} 0`} stroke="currentColor" pathLength="1" class="ln" style={`--i:${i}`} />)}
-    <circle cx="1180" cy="300" r="220" stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:6" />
-    <circle cx="1180" cy="300" r="140" stroke="currentColor" pathLength="1" class="ln" style="--i:8" />
+  <svg viewBox="100 -30 400 520" class="draw pointer-events-none absolute -bottom-10 right-[-6rem] hidden h-[120%] w-auto text-bone/15 md:block lg:right-[3%]" fill="none" aria-hidden="true">
+    <path d="M60 461H540" stroke="currentColor" pathLength="1" class="ln" style="--i:0" />
+    <path d={logo.gray} stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:2" />
+    <path d={logo.navy} stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:4" />
+    <path d={logo.g} stroke="currentColor" stroke-width="1.5" pathLength="1" class="ln" style="--i:6" />
   </svg>
   <div class="on-dark container-x relative grid gap-12 py-24 md:py-32 lg:grid-cols-12 lg:items-end">
     <div class="lg:col-span-12">
-      <p class="eyebrow mb-6 text-gray">Trade partners & suppliers</p>
+      <p class="eyebrow mb-6 text-gray">Subcontractors and suppliers</p>
       <SplitText text="Bid with us.|Build with us." class="font-wide text-display font-extrabold uppercase" />
     </div>
     <div class="lg:col-span-6 lg:col-start-7" data-reveal style="--d:3">

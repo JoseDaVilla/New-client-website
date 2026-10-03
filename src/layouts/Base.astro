@@ -19,7 +19,7 @@ interface Props {
 }
 
 const { title, description = site.description, image = '/og.png', intro = false, noindex = false, darkHero = false } = Astro.props;
-const fullTitle = title ? `${title} — ${site.legalName}` : `${site.legalName} — ${site.tagline}`;
+const fullTitle = title ? `${title} | ${site.legalName}` : `${site.legalName} | ${site.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(u(image), Astro.site);
 
@@ -77,7 +77,7 @@ const jsonLd = {
     </script>
   </head>
   <body class="min-h-dvh overflow-x-clip">
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-signal focus:px-5 focus:py-3 focus:text-on-signal">Skip to content</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-signal focus:px-5 focus:py-3 focus:text-on-signal">Skip to content</a>
     {intro && <Intro />}
     <Header darkHero={darkHero} />
     <main id="main">

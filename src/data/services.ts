@@ -65,7 +65,7 @@ export const services: Service[] = [
     title: 'Grading and Paving',
     short: 'Fully equipped crews for any size job, from roads to parking lots.',
     description:
-      'Grascan has successfully provided grading and paving services throughout the Greater Toronto Area, with crews fully equipped to handle any size job — from roads to bridges, parking lots to channel stabilization.',
+      'Grascan has successfully provided grading and paving services throughout the Greater Toronto Area, with crews fully equipped to handle any size job, from roads to bridges, parking lots to channel stabilization.',
     icon: 'paving',
     capabilities: ['Site grading', 'Asphalt paving', 'Parking lots', 'Bridge approaches'],
   },
@@ -119,7 +119,7 @@ export const services: Service[] = [
     title: 'Underground Infrastructure',
     short: 'Sanitary, storm and water services to specialized systems.',
     description:
-      'Grascan is at the forefront of underground infrastructure projects, completing contracts with sanitary, storm and water services — from large transmission services to specialized snow-melting systems for Metrolinx platforms.',
+      'Grascan is at the forefront of underground infrastructure projects, completing contracts with sanitary, storm and water services, from large transmission services to specialized snow-melting systems for Metrolinx platforms.',
     icon: 'underground',
     capabilities: ['Sanitary & storm sewers', 'Watermains & transmission', 'Snow-melting systems', 'Utility relocation'],
   },
@@ -132,7 +132,7 @@ export const values = [
   },
   {
     title: 'Our people',
-    text: 'Grascan places a premium on creating a comfortable and desirable work environment — a priority since the company was incorporated in 1987.',
+    text: 'Grascan places a premium on creating a comfortable and desirable work environment, a priority since the company was incorporated in 1987.',
   },
   {
     title: 'Innovation',
@@ -150,7 +150,7 @@ export const timeline = [
   { year: '2011', title: 'West Toronto Diamond', text: 'Rail-to-rail grade separation for Metrolinx.' },
   { year: '2014', title: 'Gardiner re-decking', text: '$75M contract delivered 3 months early and $2M under budget. Named one of Canada’s Best Managed Companies.' },
   { year: '2015', title: 'COR™ certified', text: 'Certificate of Recognition for health & safety.' },
-  { year: '2019', title: 'Gold Certified', text: 'Best Managed Gold status · Early Stations design-build for Metrolinx.' },
+  { year: '2019', title: 'Gold Certified', text: 'Best Managed Gold status, and the Early Stations design-build for Metrolinx.' },
   { year: '2021', title: 'Platinum Member', text: 'Platinum status after 7 years as one of Canada’s Best Managed Companies.' },
 ];
 
@@ -164,8 +164,8 @@ export const leadership = [
 ];
 
 export const awards = [
-  'Canada’s Best Managed Companies · Platinum Member (2021)',
-  'Best Managed · Gold Certified (2019)',
+  'Canada’s Best Managed Companies, Platinum Member (2021)',
+  'Best Managed, Gold Certified (2019)',
   'Canada’s Best Managed Companies (2014, 2016)',
   'COR™ / ISO 45001 Certified',
   'Structural Design Innovation',
@@ -174,10 +174,10 @@ export const awards = [
 
 /** Oportunidades de licitación abiertas (página Estimating). TODO: reemplazar por licitaciones reales. */
 export const bids = [
-  { id: 'GB-0101', project: 'Sample — Commercial Site Works', location: 'Vaughan, ON', trades: 'Excavation, Underground Services', closes: '2026-10-21' },
-  { id: 'GB-0102', project: 'Sample — Private Bridge Crossing', location: 'Mississauga, ON', trades: 'Rebar, Formwork, Structural Steel', closes: '2026-10-28' },
-  { id: 'GB-0103', project: 'Sample — Industrial Campus Paving', location: 'Brampton, ON', trades: 'Grading, Asphalt Paving', closes: '2026-11-04' },
-  { id: 'GB-0104', project: 'Sample — Mixed-Use Landscape Package', location: 'Toronto, ON', trades: 'Landscaping, Granite Pavers', closes: '2026-11-12' },
+  { id: 'GB-0101', project: 'Sample: Commercial Site Works', location: 'Vaughan, ON', trades: 'Excavation, Underground Services', closes: '2026-10-21' },
+  { id: 'GB-0102', project: 'Sample: Private Bridge Crossing', location: 'Mississauga, ON', trades: 'Rebar, Formwork, Structural Steel', closes: '2026-10-28' },
+  { id: 'GB-0103', project: 'Sample: Industrial Campus Paving', location: 'Brampton, ON', trades: 'Grading, Asphalt Paving', closes: '2026-11-04' },
+  { id: 'GB-0104', project: 'Sample: Mixed-Use Landscape Package', location: 'Toronto, ON', trades: 'Landscaping, Granite Pavers', closes: '2026-11-12' },
 ];
 
 export const trades = [
