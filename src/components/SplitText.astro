@@ -8,9 +8,13 @@ interface Props { text: string; as?: HTMLTag; class?: string; delay?: number; ac
 const { text, as: Tag = 'h2', class: cls = '', delay = 0, accent = [], afterIntro = false } = Astro.props;
 const base = afterIntro ? `calc(var(--intro-delay, 0ms) + ${delay}ms)` : `${delay}ms`;
 const lines = text.split('|').map((l) => l.trim().split(/\s+/));
+// Ancho aproximado (en em, tipografía display) de la palabra más larga: el CSS limita
+// el tamaño para que nunca se corte en pantallas estrechas.
+const charEm = (c: string) => (/[MW]/i.test(c) ? 1.2 : /[I1.,'’:;!]/i.test(c) ? 0.38 : 0.88);
+const longest = Math.max(...lines.flat().map((w) => [...w].reduce((sum, c) => sum + charEm(c), 0)));
 let i = 0;
 ---
-<Tag class={cls} data-split style={`--base:${base}`} aria-label={text.replaceAll('|', ' ')}>
+<Tag class={cls} data-split style={`--base:${base};--lw:${longest.toFixed(2)}`} aria-label={text.replaceAll('|', ' ')}>
   {lines.map((words) => (
     <span class="split-line" aria-hidden="true">
       {words.map((w, wi) => (

@@ -38,20 +38,19 @@ const {
 
 const bp = !src ? blueprint(seed, variant) : null;
 const dark = tone === 'dark';
-const c = {
-  bg: dark ? 'var(--color-ink-2)' : 'var(--color-concrete)',
-  main: dark ? 'rgb(246 245 241 / .82)' : 'rgb(11 13 16 / .78)',
-  thin: dark ? 'rgb(246 245 241 / .28)' : 'rgb(11 13 16 / .28)',
-  text: dark ? 'rgb(246 245 241 / .55)' : 'rgb(11 13 16 / .55)',
+// Colores 100% de la paleta: el trazo usa currentColor (bone u ink según el tono) con opacidad.
+const strokeClass: Record<string, string> = {
+  main: 'stroke-current/80',
+  thin: 'stroke-current/30',
+  dash: 'stroke-current/30',
+  accent: 'stroke-signal',
 };
-const stroke = (k: string) =>
-  k === 'main' ? c.main : k === 'thin' || k === 'dash' ? c.thin : k === 'accent' ? 'var(--color-signal)' : 'none';
 const width = (k: string) => (k === 'main' ? 1.6 : k === 'accent' ? 1.8 : 1);
 const pos = /\b(absolute|fixed)\b/.test(cls) ? '' : 'relative';
 const fig = String((seed.length * 7) % 97).padStart(2, '0');
 ---
 
-<div class:list={[pos, 'overflow-hidden', cls]} style={bp ? `background:${c.bg};color:${dark ? 'var(--color-bone)' : 'var(--color-ink)'}` : undefined}>
+<div class:list={[pos, 'overflow-hidden', cls, bp && (dark ? 'bg-ink-2 text-bone' : 'bg-concrete text-ink')]}>
   {
     src ? (
       typeof src === 'string' ? (
@@ -81,13 +80,12 @@ const fig = String((seed.length * 7) % 97).padStart(2, '0');
             <g fill="none" stroke-linecap="square">
               {bp.strokes.map((st, i) =>
                 st.kind === 'fill' || st.kind === 'accent-fill' ? (
-                  <path d={st.d} class="draw-fill" fill={st.kind === 'accent-fill' ? 'rgb(255 79 23 / .22)' : c.thin} stroke="var(--color-signal)" stroke-width="1" vector-effect="non-scaling-stroke" style={`--i:${Math.min(i, 40)}`} />
+                  <path d={st.d} class:list={['draw-fill stroke-signal', st.kind === 'accent-fill' ? 'fill-signal/20' : 'fill-current/30']} stroke-width="1" vector-effect="non-scaling-stroke" style={`--i:${Math.min(i, 40)}`} />
                 ) : (
                   <path
                     d={st.d}
                     pathLength={st.kind === 'dash' ? undefined : '1'}
-                    class={st.kind === 'dash' ? undefined : 'ln'}
-                    stroke={stroke(st.kind)}
+                    class:list={[st.kind !== 'dash' && 'ln', strokeClass[st.kind]]}
                     stroke-width={width(st.kind)}
                     stroke-dasharray={st.kind === 'dash' ? '4 4' : undefined}
                     style={`--i:${Math.min(i, 40)}`}
@@ -95,16 +93,16 @@ const fig = String((seed.length * 7) % 97).padStart(2, '0');
                 ),
               )}
               {bp.dims.map((d) => (
-                <g stroke={c.thin}>
+                <g class="stroke-current/30">
                   <path d={`M${d.x1} ${d.y}H${d.x2}M${d.x1} ${d.y - 6}v12M${d.x2} ${d.y - 6}v12`} vector-effect="non-scaling-stroke" />
-                  <text x={(d.x1 + d.x2) / 2} y={d.y - 8} fill={c.text} stroke="none" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">{d.text}</text>
+                  <text x={(d.x1 + d.x2) / 2} y={d.y - 8} class="fill-current/55" stroke="none" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">{d.text}</text>
                 </g>
               ))}
             </g>
             {label && (
-              <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.2" fill={c.text}>
+              <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.2" class="fill-current/55">
                 <text x="24" y="556">FIG. {fig}</text>
-                <text x="24" y="574" fill="var(--color-signal)">{bp.label.toUpperCase()}</text>
+                <text x="24" y="574" class="fill-signal">{bp.label.toUpperCase()}</text>
                 <text x="776" y="34" text-anchor="end">SCALE 1:{200 + (seed.length % 5) * 50}</text>
                 <text x="776" y="574" text-anchor="end">PHOTO PLACEHOLDER</text>
               </g>

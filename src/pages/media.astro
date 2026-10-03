@@ -1,4 +1,5 @@
 ---
+import FilterBar from '@/components/FilterBar.astro';
 import { u } from '@/lib/url';
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
@@ -49,10 +50,7 @@ const sectorsUsed = [...new Set(photos.map((p) => p.sector))];
           <Eyebrow index="02" class="mb-8 text-bone/50">Photography</Eyebrow>
           <SplitText text="Project gallery." class="font-wide text-title font-extrabold uppercase" />
         </div>
-        <div class="flex flex-wrap gap-2" data-filter-group="photo-grid" role="toolbar" aria-label="Filter photos">
-          <button type="button" class="chip border-white/20 aria-pressed:!bg-bone aria-pressed:!text-ink" data-filter="all" aria-pressed="true">All</button>
-          {sectorsUsed.map((s) => <button type="button" class="chip border-white/20 aria-pressed:!bg-bone aria-pressed:!text-ink" data-filter={s} aria-pressed="false">{s}</button>)}
-        </div>
+        <FilterBar target="photo-grid" label="Filter photos" tone="dark" items={sectorsUsed.map((s) => ({ value: s, label: s }))} class="w-full md:w-auto" />
       </div>
 
       <div id="photo-grid" class="mt-10 columns-2 gap-3 md:mt-14 md:gap-4 lg:columns-3">

@@ -1,0 +1,64 @@
+---
+/**
+ * Barra de filtros reutilizable (proyectos, noticias, media).
+ * Mobile-first: en móvil es una fila con scroll horizontal; desde md se ajusta en varias líneas.
+ */
+interface Item { value: string; label: string; count?: number }
+interface Props { target: string; items: Item[]; label: string; tone?: 'light' | 'dark'; sticky?: boolean; allCount?: number; class?: string }
+const { target, items, label, tone = 'light', sticky = false, allCount, class: cls = '' } = Astro.props;
+const all: Item = { value: 'all', label: 'All', count: allCount };
+const dark = tone === 'dark';
+---
+<div
+  class:list={[
+    'filter-bar -mx-4 px-4 md:mx-0 md:px-0',
+    sticky && 'sticky top-[calc(var(--header-h)+0.5rem)] z-20',
+    cls,
+  ]}
+>
+  <div
+    class:list={[
+      'flex w-max max-w-none gap-1.5 overflow-x-auto rounded-full p-1.5 md:w-fit md:max-w-full md:flex-wrap',
+      dark ? 'border border-bone/10 bg-ink-2/80' : 'border border-ink/10 bg-bone/85 shadow-[0_8px_30px_-12px] shadow-ink/20',
+      'backdrop-blur-md',
+    ]}
+    data-filter-group={target}
+    role="toolbar"
+    aria-label={label}
+  >
+    {
+      [all, ...items].map((it, i) => (
+        <button
+          type="button"
+          class:list={[
+            'chip shrink-0 border-transparent',
+            dark
+              ? 'text-bone/75 aria-pressed:bg-bone aria-pressed:text-ink can-hover:hover:text-bone'
+              : 'text-ink/75 aria-pressed:bg-ink aria-pressed:text-bone can-hover:hover:text-ink',
+          ]}
+          data-filter={it.value}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+        >
+          {it.label}
+          {it.count !== undefined && <sup class="text-[0.65em] opacity-60">{it.count}</sup>}
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .filter-bar {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 48rem) {
+    .filter-bar {
+      overflow: visible;
+    }
+  }
+</style>

@@ -70,7 +70,7 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
     <div class="container-x">
       <Eyebrow index="02" class="mb-8 text-bone/50">Values</Eyebrow>
       <SplitText text="What we stand on." class="font-wide text-display font-extrabold uppercase" />
-      <div class="mt-16 grid gap-px overflow-hidden rounded-sm bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-16 grid gap-px overflow-hidden rounded-sm bg-bone/10 md:grid-cols-2 lg:grid-cols-4">
         {
           values.map((v, i) => (
             <article class="group relative bg-ink p-8 transition-colors duration-500 hover:bg-steel md:p-10" data-reveal style={`--d:${i}`}>
@@ -116,7 +116,7 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
         </div>
         <div data-reveal><Button href={u('/contact#careers')} variant="dark">Join our team</Button></div>
       </div>
-      <ul class="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:mt-16 md:grid-cols-3 md:gap-x-6 md:gap-y-12">
         {
           leadership.map((p, i) => (
             <li class="group" data-reveal style={`--d:${i % 3}`}>
@@ -126,10 +126,10 @@ const certifications = ['COR™ Certified', 'ISO 9001', 'ISO 45001', 'LEED® Acc
                   <circle cx="100" cy="95" r="42" fill="currentColor" />
                   <path d="M20 250c0-55 36-90 80-90s80 35 80 90z" fill="currentColor" />
                 </svg>
-                <span class="eyebrow absolute bottom-4 left-4 text-bone/40">Portrait placeholder</span>
+                <span class="eyebrow absolute bottom-3 left-3 hidden text-bone/40 sm:block">Portrait placeholder</span>
               </div>
-              <p class="mt-5 font-semiwide text-xl font-bold">{p.name}</p>
-              <p class="text-mute">{p.role}</p>
+              <p class="mt-4 font-semiwide text-base font-bold sm:text-xl md:mt-5">{p.name}</p>
+              <p class="text-sm text-mute sm:text-base">{p.role}</p>
             </li>
           ))
         }

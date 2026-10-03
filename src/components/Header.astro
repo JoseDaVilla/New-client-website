@@ -12,7 +12,7 @@ const isActive = (href: string) => {
 
 <header id="site-header" class="group/header fixed inset-x-0 top-0 z-50 text-bone transition-[transform,background-color] duration-500 ease-(--ease-expo)">
   <div class="progress-bar absolute inset-x-0 top-0 h-0.5 origin-left bg-signal"></div>
-  <div class="header-bg absolute inset-0 -z-10 border-b border-white/0 transition-all duration-500"></div>
+  <div class="header-bg absolute inset-0 -z-10 border-b border-bone/0 transition-all duration-500"></div>
   <div class="container-x flex h-(--header-h) items-center justify-between gap-6">
     <a href={u('/')} class="relative z-10" aria-label={`${site.name} — Home`}>
       <Logo />
@@ -37,7 +37,7 @@ const isActive = (href: string) => {
       <button
         id="menu-toggle"
         type="button"
-        class="relative z-10 grid size-12 place-items-center rounded-full border border-white/25 transition-colors hover:border-white lg:hidden"
+        class="relative z-10 grid size-12 place-items-center rounded-full border border-bone/25 transition-colors hover:border-bone lg:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label="Open menu"
@@ -67,7 +67,7 @@ const isActive = (href: string) => {
         }
       </ul>
     </nav>
-    <div class="container-x relative grid grid-cols-2 gap-6 border-t border-white/10 py-8 text-sm text-bone/70">
+    <div class="container-x relative grid grid-cols-2 gap-6 border-t border-bone/10 py-8 text-sm text-bone/70">
       <div>
         <p class="eyebrow mb-2 text-bone/40">Head office</p>
         <p>{offices[0].address[0]}<br />{offices[0].address[1]}</p>
@@ -83,9 +83,9 @@ const isActive = (href: string) => {
 
 <style>
   #site-header.is-scrolled .header-bg {
-    background: rgb(11 13 16 / 0.82);
+    background: color-mix(in oklab, var(--color-ink) 82%, transparent);
     backdrop-filter: blur(14px) saturate(1.4);
-    border-color: rgb(255 255 255 / 0.08);
+    border-color: color-mix(in oklab, var(--color-bone) 8%, transparent);
   }
   #site-header.is-hidden {
     transform: translateY(-100%);

@@ -18,8 +18,8 @@ for (let y = 0; y < 22; y++) {
     </g>
     {offices.map((o, i) => (
       <g transform={`translate(${o.map.x * 6} ${o.map.y * 2.2})`}>
-        <circle r="18" fill="var(--color-signal)" opacity=".18" class="pulse" style={`animation-delay:${i * 0.6}s`} />
-        <circle r="4.5" fill="var(--color-signal)" />
+        <circle r="18" opacity=".18" class="pulse fill-signal" style={`animation-delay:${i * 0.6}s`} />
+        <circle class="fill-signal" r="4.5" />
         <text y="-14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1" fill="currentColor">{o.city.toUpperCase()}</text>
       </g>
     ))}

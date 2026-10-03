@@ -13,8 +13,8 @@ const { eyebrow, title, lead, index, accent = [] } = Astro.props;
       <circle cx="200" cy="200" r="196" stroke="currentColor" pathLength="1" class="ln" style="--i:0" />
       <circle cx="200" cy="200" r="140" stroke="currentColor" pathLength="1" class="ln" style="--i:3" />
       <path d="M0 200h400M200 0v400" stroke="currentColor" pathLength="1" class="ln" style="--i:5" />
-      <path d="M200 200L60 340" stroke="var(--color-signal)" stroke-width="1.5" pathLength="1" class="ln" style="--i:10" />
-      <circle cx="60" cy="340" r="5" fill="var(--color-signal)" class="draw-fill" style="--i:14" />
+      <path d="M200 200L60 340" stroke-width="1.5" pathLength="1" class="ln stroke-signal" style="--i:10" />
+      <circle cx="60" cy="340" r="5" class="draw-fill fill-signal" style="--i:14" />
       <circle cx="200" cy="200" r="4" fill="currentColor" class="draw-fill" style="--i:6" />
     </svg>
     <svg viewBox="0 0 400 400" class="survey-spin absolute inset-0 h-full w-full text-bone/20" fill="none">

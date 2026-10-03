@@ -56,10 +56,10 @@ const facts = [
       </a>
       <div class="mb-6 flex flex-wrap gap-2" data-reveal style="--d:1">
         <span class="eyebrow rounded-full bg-bone px-3 py-1.5 text-ink">{p.sector}</span>
-        <span class="eyebrow rounded-full border border-white/25 px-3 py-1.5">{p.location}</span>
+        <span class="eyebrow rounded-full border border-bone/25 px-3 py-1.5">{p.location}</span>
         {p.status !== 'Completed' && <span class="eyebrow rounded-full bg-signal px-3 py-1.5 text-ink">{p.status}</span>}
       </div>
-      <SplitText as="h1" text={p.title} class="max-w-5xl font-wide text-display font-extrabold uppercase" />
+      <SplitText as="h1" text={p.title} class="max-w-6xl font-wide text-display font-extrabold uppercase" />
       <p class="mt-8 max-w-2xl text-lead text-bone/75" data-reveal style="--d:3">{p.summary}</p>
     </div>
   </section>

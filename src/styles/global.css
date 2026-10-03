@@ -19,22 +19,38 @@
   src: url("../assets/fonts/jetbrains-mono-500.woff2") format("woff2");
 }
 
-/* ------------------------------------------------------------------ */
-/*  Design tokens                                                      */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/*  PALETA DE COLORES — ÚNICA FUENTE DE VERDAD                         */
+/*                                                                     */
+/*  Cambia un valor aquí y se actualiza TODO el sitio: utilidades      */
+/*  Tailwind (bg-*, text-*, border-*, stroke-*, fill-*, con opacidad   */
+/*  /10…/90), ilustraciones SVG, intro, escena del hero, favicon,      */
+/*  imagen Open Graph y <meta name="theme-color">.                     */
+/*  Usa siempre valores HEX (#rrggbb): el favicon y la imagen OG los   */
+/*  leen de este archivo en build (src/lib/palette.ts).                */
+/* ================================================================== */
 @theme static {
-  --color-ink: #0b0d10;
-  --color-ink-2: #12161b;
-  --color-steel: #1c2229;
-  --color-graphite: #2b323b;
-  --color-mute: #656c76;
-  --color-fog: #c9ccd0;
-  --color-concrete: #e9e7e1;
-  --color-bone: #f6f5f1;
-  --color-signal: #ff4f17;
-  --color-signal-soft: #ff8a5c;
-  --color-signal-ink: #c2410c; /* naranja para texto pequeño sobre fondos claros (AA) */
+  /* Neutros oscuros (fondos de secciones oscuras, texto principal) */
+  --color-ink: #0b0d10; /* fondo oscuro principal / texto sobre claro */
+  --color-ink-2: #12161b; /* superficies sobre ink (tarjetas, placeholders) */
+  --color-steel: #1c2229; /* hover sobre superficies oscuras */
+  --color-graphite: #2b323b; /* reservado: bordes/superficies oscuras */
 
+  /* Neutros claros (fondos claros, texto sobre oscuro) */
+  --color-bone: #f6f5f1; /* fondo claro principal / texto sobre oscuro */
+  --color-concrete: #e9e7e1; /* secciones claras alternas */
+  --color-fog: #c9ccd0; /* reservado: neutro medio */
+  --color-mute: #656c76; /* texto secundario (AA sobre bone) */
+
+  /* Acento de marca */
+  --color-signal: #ff4f17; /* acento principal: botones, líneas, detalles */
+  --color-signal-soft: #ff8a5c; /* variante clara del acento */
+  --color-signal-ink: #c2410c; /* acento para texto pequeño sobre fondos claros (AA) */
+
+  /* Estados */
+  --color-danger: #d93a1e; /* errores de formulario */
+
+  /* ---------------- Tipografía, tamaños y curvas ---------------- */
   --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -190,6 +206,8 @@
 /* Split words / lines (generado en build por <SplitText/>) */
 .split-line {
   display: block;
+  /* nunca más ancho que el viewport; --fit-scale lo ajusta el JS si la columna es más estrecha */
+  font-size: calc(min(1em, (100vw - 2 * clamp(1rem, 4vw, 3.5rem)) / var(--lw, 1)) * var(--fit-scale, 1));
   overflow: hidden;
   padding-bottom: 0.08em;
   margin-bottom: -0.08em;
@@ -384,6 +402,7 @@
   display: flex;
   gap: var(--gap);
   overflow: hidden;
+  /* máscara de opacidad (no es un color de la paleta) */
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 .marquee-track {
@@ -541,13 +560,18 @@
   border-color: var(--color-signal);
 }
 .input:user-invalid {
-  border-color: #d93a1e;
+  border-color: var(--color-danger);
 }
 select.input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230b0d10' stroke-width='1.5'/%3E%3C/svg%3E");
+  /* Flecha dibujada con gradientes: hereda el color del texto (paleta) */
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 0.6rem) 55%,
+    calc(100% - 0.25rem) 55%;
+  background-size: 0.35rem 0.35rem;
   background-repeat: no-repeat;
-  background-position: right 0.25rem center;
-  background-size: 12px;
   padding-right: 1.75rem;
 }
 textarea.input {

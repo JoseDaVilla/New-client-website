@@ -67,7 +67,7 @@ const formAction = site.formEndpoint || u('/thanks');
       <ul class="mt-12 space-y-3 md:hidden">
         {
           bids.map((b, i) => (
-            <li class="rounded-sm border border-white/10 bg-ink-2 p-5" data-reveal style={`--d:${i}`}>
+            <li class="rounded-sm border border-bone/10 bg-ink-2 p-5" data-reveal style={`--d:${i}`}>
               <div class="flex items-center justify-between gap-4">
                 <span class="eyebrow text-signal">{b.id}</span>
                 <span class="eyebrow text-bone/50">Closes <time datetime={b.closes}>{fmt(b.closes)}</time></span>
@@ -87,7 +87,7 @@ const formAction = site.formEndpoint || u('/thanks');
       <div class="mt-14 hidden overflow-x-auto md:block" data-reveal>
         <table class="w-full text-left">
           <thead>
-            <tr class="eyebrow border-b border-white/15 text-bone/45">
+            <tr class="eyebrow border-b border-bone/15 text-bone/45">
               <th class="py-4 pr-6 font-medium">Ref.</th>
               <th class="py-4 pr-6 font-medium">Project</th>
               <th class="py-4 pr-6 font-medium">Location</th>
@@ -99,14 +99,14 @@ const formAction = site.formEndpoint || u('/thanks');
           <tbody>
             {
               bids.map((b) => (
-                <tr class="group border-b border-white/10 transition-colors hover:bg-white/[0.03]">
+                <tr class="group border-b border-bone/10 transition-colors hover:bg-bone/[0.03]">
                   <td class="eyebrow py-6 pr-6 text-signal">{b.id}</td>
                   <td class="py-6 pr-6 font-semiwide text-lg font-bold">{b.project}</td>
                   <td class="py-6 pr-6 text-bone/70">{b.location}</td>
                   <td class="py-6 pr-6 text-bone/70">{b.trades}</td>
                   <td class="py-6 pr-6"><time datetime={b.closes}>{fmt(b.closes)}</time></td>
                   <td class="py-6 text-right">
-                    <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
+                    <a href={`mailto:${site.estimatingEmail}?subject=${encodeURIComponent(`Bid documents request — ${b.id} ${b.project}`)}`} class="inline-flex items-center gap-2 rounded-full border border-bone/20 px-4 py-2 text-sm transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
                       Request docs <Icon name="arrow" class="size-4" />
                     </a>
                   </td>
@@ -249,7 +249,7 @@ const formAction = site.formEndpoint || u('/thanks');
             <button type="submit" class="btn btn-primary" data-submit hidden>Submit registration <span class="btn-arrow"><Icon name="arrow" class="size-3.5" /></span></button>
           </div>
         </div>
-        <p class="mt-4 text-sm text-[#d93a1e]" data-form-error role="alert" hidden></p>
+        <p class="mt-4 text-sm text-danger" data-form-error role="alert" hidden></p>
       </form>
     </div>
   </section>

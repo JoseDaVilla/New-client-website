@@ -23,7 +23,7 @@ const related = (title: string) => projects.filter((p) => p.data.services.some((
     lead="Whether you need early cost certainty, an integrated design-build team or a builder for critical infrastructure, we tailor the delivery model to your project."
   >
     <nav aria-label="Services" class="mt-14 flex flex-wrap gap-2" data-reveal style="--d:5">
-      {services.map((s) => <a href={`#${s.slug}`} class="chip border-white/20 text-bone/80 hover:text-bone">{s.title}</a>)}
+      {services.map((s) => <a href={`#${s.slug}`} class="chip border-bone/20 text-bone/80 hover:text-bone">{s.title}</a>)}
     </nav>
   </PageHero>
 
@@ -57,7 +57,7 @@ const related = (title: string) => projects.filter((p) => p.data.services.some((
               )}
             </div>
             <div class:list={['lg:col-span-5', flip ? 'lg:order-1 lg:col-start-1' : 'lg:col-start-8']} data-reveal="mask">
-              <Media seed={`service-${s.slug}`} variant={variants[(i * 3 + 1) % variants.length]} class="aspect-[4/5] rounded-sm" tone={i % 2 ? 'dark' : 'light'} />
+              <Media seed={`service-${s.slug}`} variant={variants[(i * 3 + 1) % variants.length]} class="aspect-[4/3] rounded-sm sm:aspect-[16/10] lg:aspect-[4/5]" tone={i % 2 ? 'dark' : 'light'} />
             </div>
           </div>
         </section>

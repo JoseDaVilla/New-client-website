@@ -70,11 +70,11 @@ const lead = featured[0];
         <p class="text-lead text-bone/65 lg:col-span-5" data-reveal>From the first conceptual estimate to the day we hand over the keys, we bring the expertise to plan, build and deliver with certainty.</p>
       </div>
 
-      <ul class="mt-20 border-t border-white/12">
+      <ul class="mt-20 border-t border-bone/12">
         {
           services.map((s, i) => (
             <li data-reveal style={`--d:${i % 3}`}>
-              <a href={u(`/services#${s.slug}`)} class="service-row group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-white/12 py-7 md:grid-cols-[5rem_auto_1fr_auto] md:gap-10 md:py-9">
+              <a href={u(`/services#${s.slug}`)} class="service-row group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-bone/12 py-7 md:grid-cols-[5rem_auto_1fr_auto] md:gap-10 md:py-9">
                 <span class="eyebrow hidden text-bone/40 md:inline">0{i + 1}</span>
                 <ServiceIcon name={s.icon} class="size-11 text-signal md:size-14" />
                 <span>
@@ -83,7 +83,7 @@ const lead = featured[0];
                 </span>
                 <span class="flex items-center gap-8">
                   <span class="hidden max-w-xs text-right text-bone/55 transition-colors group-hover:text-bone xl:block">{s.short}</span>
-                  <span class="grid size-12 shrink-0 place-items-center rounded-full border border-white/20 transition-all duration-500 ease-(--ease-expo) group-hover:rotate-[-45deg] group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
+                  <span class="grid size-12 shrink-0 place-items-center rounded-full border border-bone/20 transition-all duration-500 ease-(--ease-expo) group-hover:rotate-[-45deg] group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
                     <Icon name="arrow" class="size-5" />
                   </span>
                 </span>
@@ -150,21 +150,21 @@ const lead = featured[0];
         </div>
         <div data-reveal><Button href={u('/news')} variant="dark">All news</Button></div>
       </div>
-      <div class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
-        {news.map((post, i) => <NewsCard post={post} index={i} />)}
+      <div class="mt-12 grid gap-12 sm:grid-cols-2 sm:gap-x-6 md:mt-16 lg:grid-cols-3 lg:gap-8">
+        {news.map((post, i) => <div class:list={[i === 0 && 'sm:col-span-2 lg:col-span-1']}><NewsCard post={post} index={i} /></div>)}
       </div>
     </div>
   </section>
 
   <!-- Ubicaciones -->
   <section class="relative overflow-hidden bg-concrete py-24 md:py-36">
-    <div class="container-x grid gap-14 lg:grid-cols-12">
-      <div class="lg:col-span-4">
+    <div class="container-x grid gap-14 xl:grid-cols-12">
+      <div class="xl:col-span-4">
         <Eyebrow index="06" class="mb-8 text-mute">Locations</Eyebrow>
         <SplitText text="Local teams.|National reach." class="font-wide text-title font-extrabold uppercase" />
         <div class="mt-10" data-reveal><Button href={u('/contact')} variant="dark">Contact an office</Button></div>
       </div>
-      <div class="lg:col-span-8">
+      <div class="xl:col-span-8">
         <div data-reveal="fade" class="text-ink"><LocationsMap /></div>
         <ul class="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/10 sm:grid-cols-2">
           {

@@ -20,7 +20,7 @@ const date = d.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'short
     sizes="(min-width: 1024px) 33vw, 100vw"
   />
   <div class:list={['mt-6', feature && 'md:col-span-5 md:mt-0']}>
-    <p class="eyebrow flex items-center gap-3 text-mute">
+    <p class="eyebrow flex items-center gap-3 whitespace-nowrap text-mute">
       <span class="text-signal-ink">{d.category}</span><span class="h-px w-6 bg-current"></span><time datetime={d.date.toISOString()}>{date}</time>
     </p>
     <h3 class:list={['mt-4 font-semiwide font-bold leading-[1.1] tracking-tight', feature ? 'text-3xl md:text-5xl' : 'text-2xl']}>

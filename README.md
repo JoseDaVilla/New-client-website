@@ -40,9 +40,28 @@ Para volver a ver la **intro** (sale una vez por sesión): abrir `/?intro`.
 | Servicios, valores, timeline, liderazgo, licitaciones, oficios | `src/data/services.ts` |
 | Proyectos (un `.md` por proyecto) | `src/content/projects/` |
 | Noticias (un `.md` por noticia) | `src/content/news/` |
-| Colores y tipografías | `src/styles/global.css` (bloque `@theme`) |
-| Logo | `src/components/Logo.astro`, `public/favicon.svg`, `public/og.png` |
+| **Paleta de colores** | `src/styles/global.css` → bloque `@theme` (ver abajo) |
+| Tipografías y tamaños | `src/styles/global.css` (mismo bloque `@theme`) |
+| Logo | `src/components/Logo.astro` (favicon e imagen OG se generan solos: `src/pages/favicon.svg.ts`, `src/pages/og.png.ts`) |
 | Dominio | `astro.config.mjs` (`site`) y `public/robots.txt` |
+
+### Paleta de colores
+
+Toda la paleta vive en **un solo sitio**: el bloque `@theme` al inicio de `src/styles/global.css`.
+Cambiar un HEX ahí actualiza el sitio entero: utilidades Tailwind (`bg-ink`, `text-signal`, `border-bone/20`…),
+ilustraciones SVG, escena del hero, intro, favicon, imagen Open Graph y `theme-color` del navegador.
+
+| Token | Uso |
+| --- | --- |
+| `ink` / `ink-2` / `steel` / `graphite` | Fondos oscuros, superficies y texto principal sobre claro |
+| `bone` / `concrete` / `fog` / `mute` | Fondos claros, texto sobre oscuro y texto secundario |
+| `signal` / `signal-soft` / `signal-ink` | Color de marca (acento); `signal-ink` es la versión accesible para texto pequeño sobre claro |
+| `danger` | Errores de formulario |
+
+Reglas para mantenerlo así:
+- No escribir colores HEX/RGB en componentes: usar las clases (`text-signal`, `fill-bone/40`, `stroke-ink`) o `var(--color-…)` en CSS.
+- Para transparencias usar el modificador de Tailwind (`bg-ink/80`) o `color-mix(in oklab, var(--color-ink) 80%, transparent)`.
+- Mantener los valores en formato HEX (el favicon y la imagen OG los leen en build).
 
 ### Añadir fotos a un proyecto
 
@@ -75,6 +94,7 @@ Si se despliega en otro hosting, poner la URL de Formspree / Basin / API propia 
 
 ## Rendimiento y técnica
 
+- **Responsive verificado** de 320 px a 2560 px (sin scroll horizontal ni titulares cortados). Los titulares se ajustan solos para que la palabra más larga siempre quepa.
 - **Mobile first**: estilos base pensados para móvil y ampliados con `sm/md/lg/xl`; el contenido que en escritorio aparece al pasar el cursor está siempre visible en táctil; titulares con menor anchura tipográfica en móvil; licitaciones en tarjetas en móvil y tabla en escritorio; objetivos táctiles ≥ 44 px.
 
 - Lighthouse (móvil, home): **Performance 99 · Best Practices 100 · SEO 100 · Accesibilidad 96**, CLS 0.

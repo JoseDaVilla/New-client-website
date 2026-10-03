@@ -25,12 +25,12 @@ const letters = site.name.toUpperCase().split('');
 
     <div class="intro-center">
       <svg viewBox="0 0 120 120" class="intro-mark" fill="none" stroke-linecap="square">
-        <circle cx="60" cy="60" r="56" stroke="rgb(246 245 241 / .14)" stroke-width="1" pathLength="1" class="ln" style="--i:0" />
-        <path d="M4 60h112M60 4v112" stroke="rgb(246 245 241 / .14)" stroke-width="1" pathLength="1" class="ln" style="--i:1" />
-        <path d="M32 104V16" stroke="#f6f5f1" stroke-width="12" pathLength="1" class="ln" style="--i:3" />
-        <path d="M88 104V16" stroke="#f6f5f1" stroke-width="12" pathLength="1" class="ln" style="--i:4" />
-        <path d="M32 60h56" stroke="var(--color-signal)" stroke-width="12" pathLength="1" class="ln" style="--i:8" />
-        <path d="M32 16h10M78 16h10M32 104h10M78 104h10" stroke="#f6f5f1" stroke-width="3" pathLength="1" class="ln" style="--i:10" />
+        <circle cx="60" cy="60" r="56" stroke-width="1" pathLength="1" class="ln stroke-bone/14" style="--i:0" />
+        <path d="M4 60h112M60 4v112" stroke-width="1" pathLength="1" class="ln stroke-bone/14" style="--i:1" />
+        <path d="M32 104V16" stroke-width="12" pathLength="1" class="ln stroke-bone" style="--i:3" />
+        <path d="M88 104V16" stroke-width="12" pathLength="1" class="ln stroke-bone" style="--i:4" />
+        <path d="M32 60h56" stroke-width="12" pathLength="1" class="ln stroke-signal" style="--i:8" />
+        <path d="M32 16h10M78 16h10M32 104h10M78 104h10" stroke-width="3" pathLength="1" class="ln stroke-bone" style="--i:10" />
       </svg>
       <p class="intro-word font-wide">
         {letters.map((l, i) => <span style={`--i:${i}`}>{l}</span>)}
@@ -96,7 +96,7 @@ const letters = site.name.toUpperCase().split('');
   .intro-grid span,
   .intro-grid i {
     position: absolute;
-    background: rgb(246 245 241 / 0.08);
+    background: color-mix(in oklab, var(--color-bone) 8%, transparent);
   }
   .intro-grid span {
     top: 0;
@@ -124,7 +124,7 @@ const letters = site.name.toUpperCase().split('');
   .intro-meta > span {
     position: absolute;
     opacity: 0;
-    color: rgb(246 245 241 / 0.6);
+    color: color-mix(in oklab, var(--color-bone) 60%, transparent);
     animation: intro-fade 0.8s ease 0.3s forwards;
   }
   .intro-tl { top: 1.5rem; left: 1.5rem; }

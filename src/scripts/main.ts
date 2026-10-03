@@ -59,6 +59,30 @@ toggle?.addEventListener('click', () => setMenu(!menuOpen));
 addEventListener('keydown', (e) => e.key === 'Escape' && menuOpen && setMenu(false));
 matchMedia('(min-width: 1024px)').addEventListener('change', (e) => e.matches && setMenu(false));
 
+/* ---------------- Fit headlines ---------------- */
+// Red de seguridad: si una palabra no cabe en su columna, se reduce el titular lo justo.
+const fitHeadlines = () => {
+  document.querySelectorAll<HTMLElement>('[data-split]').forEach((h) => {
+    h.style.removeProperty('--fit-scale');
+    let scale = 1;
+    h.querySelectorAll<HTMLElement>('.split-line').forEach((line) => {
+      const available = line.clientWidth;
+      line.querySelectorAll<HTMLElement>('.split-word').forEach((word) => {
+        const width = word.getBoundingClientRect().width;
+        if (width > available) scale = Math.min(scale, (available / width) * 0.98);
+      });
+    });
+    if (scale < 1) h.style.setProperty('--fit-scale', scale.toFixed(3));
+  });
+};
+fitHeadlines();
+document.fonts?.ready.then(fitHeadlines);
+let fitTimer: number | undefined;
+addEventListener('resize', () => {
+  clearTimeout(fitTimer);
+  fitTimer = window.setTimeout(fitHeadlines, 150);
+});
+
 /* ---------------- Reveal on scroll ---------------- */
 const io = new IntersectionObserver(
   (entries) => {
@@ -151,7 +175,7 @@ if (lightbox) {
       iframe.src = video + (video.includes('?') ? '&' : '?') + 'autoplay=1';
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       iframe.title = item.dataset.caption || 'Video';
-      iframe.className = 'aspect-video w-full max-h-[80vh] bg-black';
+      iframe.className = 'aspect-video w-full max-h-[80vh] bg-ink';
       stage.append(iframe);
     } else {
       const media = item.querySelector('img, svg');

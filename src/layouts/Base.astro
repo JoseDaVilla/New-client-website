@@ -3,6 +3,7 @@ import { u } from '@/lib/url';
 import '@/styles/global.css';
 import archivoUrl from '@/assets/fonts/archivo.woff2?url';
 import { site } from '@/site.config';
+import { palette } from '@/lib/palette';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Intro from '@/components/Intro.astro';
@@ -40,7 +41,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#0b0d10" />
+    <meta name="theme-color" content={palette.ink} />
     <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
     <link rel="sitemap" href={u('/sitemap-index.xml')} />
     <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
